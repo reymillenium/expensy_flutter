@@ -37,7 +37,7 @@ class TransactionsData {
     for (int i = 0; i < 5; i++) {
       Transaction newTransaction = Transaction(
         id: 't$i',
-        title: _getRandomString(6),
+        title: _getRandomString(12),
         // amount: randomDoubleInRange(min: 1.0, max: 100.0),
         amount: _roundDouble(_randomDoubleInRange(min: 1.0, max: 99.0), 2),
         createAt: now,

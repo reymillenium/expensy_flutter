@@ -29,6 +29,7 @@ class TransactionsTile extends StatelessWidget {
 
     return Card(
       // shadowColor: Colors.purpleAccent,
+      elevation: 2,
       color: Colors.white70,
       // margin: EdgeInsets.all(10),
       shape: RoundedRectangleBorder(
@@ -49,23 +50,35 @@ class TransactionsTile extends StatelessWidget {
           children: [
             // Leading
             CircleAvatar(
-              radius: 30,
+              radius: 32,
               child: Container(
-                child: Text('${transaction.amount.toString()}'),
+                child: Text(
+                  '${transaction.amount.toString()}',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
               ),
             ),
 
             // Title
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   transaction.title,
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text(formattedDate),
+                Text(
+                  formattedDate,
+                  style: TextStyle(
+                    color: Colors.black54,
+                  ),
+                ),
               ],
             ),
 
