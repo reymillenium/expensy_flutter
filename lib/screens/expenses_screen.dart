@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math'; // Allows to use: random
 import 'dart:convert'; // Allows to use: base64UrlEncode
+import 'package:intl/intl.dart'; // Allows to use: DateFormat
 
 // Screens:
 
@@ -75,10 +76,29 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
 
   List<ListTile> getTransactionList() {
     return transactions.map((transaction) {
+      final DateFormat formatter = DateFormat('MM/dd/yyyy');
+      final String formattedDate = formatter.format(transaction.createAt);
+
       return ListTile(
         key: Key(transaction.id),
-        leading: Text('${transaction.amount.toString()} USD'),
-        title: Text(transaction.title),
+        leading: CircleAvatar(
+          radius: 30,
+          child: Container(
+            child: Text('${transaction.amount.toString()}'),
+          ),
+        ),
+        title: Column(
+          children: [
+            Text(
+              transaction.title,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(formattedDate),
+          ],
+        ),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -91,6 +111,60 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
               onPressed: () {},
             ),
           ],
+        ),
+      );
+    }).toList();
+  }
+
+  List<Card> getTransactionList2() {
+    return transactions.map((transaction) {
+      final DateFormat formatter = DateFormat('MM/dd/yyyy');
+      final String formattedDate = formatter.format(transaction.createAt);
+
+      return Card(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Leading
+              CircleAvatar(
+                radius: 30,
+                child: Container(
+                  child: Text('${transaction.amount.toString()}'),
+                ),
+              ),
+
+              // Title
+              Column(
+                children: [
+                  Text(
+                    transaction.title,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(formattedDate),
+                ],
+              ),
+
+              //  Trailing
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () {},
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.edit),
+                    onPressed: () {},
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       );
     }).toList();
@@ -125,7 +199,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
           Expanded(
             child: Container(
               child: ListView(
-                children: getTransactionList(),
+                children: getTransactionList2(),
               ),
             ),
           ),
