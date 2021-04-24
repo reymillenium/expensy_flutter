@@ -1,3 +1,16 @@
+// Packages:
+import 'package:flutter/material.dart';
+
+// Screens:
+
+// Models:
+
+// Components:
+
+// Helpers:
+
+// Utilities:
+
 class Transaction {
   String id;
   String title;
@@ -6,10 +19,10 @@ class Transaction {
   DateTime updatedAt;
 
   Transaction({
-    this.id,
-    this.title,
-    this.amount,
-    this.createAt,
-    this.updatedAt,
+    @required this.id,
+    @required this.title,
+    @required this.amount,
+    @required this.createAt,
+    @required this.updatedAt,
   });
 }
