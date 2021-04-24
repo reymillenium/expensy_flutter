@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Screens:
-import 'package:expensy_flutter/screens/expenses_screen.dart';
+import 'package:expensy_flutter/screens/transactions_screen.dart';
 
 // Models:
 
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ExpensesScreen(title: 'Expensy'),
+      home: TransactionsScreen(title: 'Expensy'),
     );
   }
 }

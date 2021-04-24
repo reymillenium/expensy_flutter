@@ -17,18 +17,18 @@ import 'package:expensy_flutter/components/transactions_list.dart';
 
 // Utilities:
 
-class ExpensesScreen extends StatefulWidget {
+class TransactionsScreen extends StatefulWidget {
   // Properties
   final String title;
 
   // Constructor:
-  ExpensesScreen({Key key, this.title}) : super(key: key);
+  TransactionsScreen({Key key, this.title}) : super(key: key);
 
   @override
-  _ExpensesScreenState createState() => _ExpensesScreenState();
+  _TransactionsScreenState createState() => _TransactionsScreenState();
 }
 
-class _ExpensesScreenState extends State<ExpensesScreen> {
+class _TransactionsScreenState extends State<TransactionsScreen> {
   // Properties:
   final TransactionsData transactionsData = TransactionsData();
 
