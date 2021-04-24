@@ -28,6 +28,20 @@ class TransactionsTile extends StatelessWidget {
     final String formattedDate = formatter.format(transaction.createAt);
 
     return Card(
+      // shadowColor: Colors.purpleAccent,
+      color: Colors.white70,
+      // margin: EdgeInsets.all(10),
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: Colors.white70, width: 1),
+        // side: BorderSide(color: Colors.red, width: 1),
+        // borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+          bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20),
+        ),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
@@ -60,11 +74,17 @@ class TransactionsTile extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
-                  icon: Icon(Icons.delete),
+                  icon: Icon(
+                    Icons.delete,
+                    // color: Colors.purple,
+                  ),
                   onPressed: () {},
                 ),
                 IconButton(
-                  icon: Icon(Icons.edit),
+                  icon: Icon(
+                    Icons.edit,
+                    // color: Colors.purple,
+                  ),
                   onPressed: () {},
                 ),
               ],
