@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 // Screens:
 
 // Models:
+import 'package:expensy_flutter/models/transaction.dart';
 
 // Components:
 
@@ -12,43 +13,48 @@ import 'package:flutter/material.dart';
 // Utilities:
 
 class ExpensesScreen extends StatefulWidget {
-  ExpensesScreen({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
+  // Properties
   final String title;
+
+  // Constructor:
+  ExpensesScreen({Key key, this.title}) : super(key: key);
 
   @override
   _ExpensesScreenState createState() => _ExpensesScreenState();
 }
 
 class _ExpensesScreenState extends State<ExpensesScreen> {
+  // Properties:
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Blah',
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Container(
+            width: double.infinity,
+            child: Card(
+              color: Colors.blue,
+              elevation: 5,
+              child: Text(
+                'CHART',
+                style: TextStyle(
+                  color: Colors.red,
+                  backgroundColor: Colors.green,
+                ),
+              ),
             ),
-            Text(
-              'test',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+          ),
+          Card(
+            color: Colors.red,
+            child: Text('LIST OF EXPENSES'),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
