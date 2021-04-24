@@ -43,15 +43,27 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
+            padding: const EdgeInsets.only(left: 0, top: 10, right: 0),
             width: double.infinity,
             child: Card(
-              color: Colors.blue,
-              elevation: 5,
-              child: Text(
-                'CHART',
-                style: TextStyle(
-                  color: Colors.red,
-                  backgroundColor: Colors.green,
+              elevation: 3,
+              color: Colors.white70,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(color: Colors.white70, width: 1),
+                // side: BorderSide(color: Colors.red, width: 1),
+                // borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 80,
+                  child: Text(
+                    'Transactions Chart',
+                    style: TextStyle(
+                        // color: Colors.white,
+                        ),
+                  ),
                 ),
               ),
             ),
