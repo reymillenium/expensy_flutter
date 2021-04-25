@@ -26,6 +26,10 @@ class TransactionTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final DateFormat formatter = DateFormat('MM/dd/yyyy');
     final String formattedDate = formatter.format(transaction.createAt);
+    final currencyFormat = new NumberFormat("#,##0.00", "en_US");
+    final String amountLabel = '\$${currencyFormat.format(transaction.amount).toString()}';
+    // final double amountFontSize = 14;
+    final double amountFontSize = (84 / amountLabel.length);
 
     return Card(
       // shadowColor: Colors.purpleAccent,
@@ -53,10 +57,11 @@ class TransactionTile extends StatelessWidget {
               radius: 32,
               child: Container(
                 child: Text(
-                  '${transaction.amount.toString()}',
+                  amountLabel,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                    fontStyle: FontStyle.italic,
+                    fontSize: amountFontSize,
                   ),
                 ),
               ),
