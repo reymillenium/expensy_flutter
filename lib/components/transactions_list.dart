@@ -24,9 +24,9 @@ class TransactionsList extends StatelessWidget {
   // Constructor:
   TransactionsList({this.transactions});
 
-  List<TransactionsTile> getTransactionList2() {
+  List<TransactionTile> getTransactionList2() {
     return transactions.map((transaction) {
-      return TransactionsTile(transaction: transaction);
+      return TransactionTile(transaction: transaction);
     }).toList();
   }
 
@@ -41,7 +41,7 @@ class TransactionsList extends StatelessWidget {
       padding: const EdgeInsets.only(left: 0, top: 20, right: 0),
       controller: _listViewScrollController,
       itemBuilder: (context, index) {
-        return TransactionsTile(
+        return TransactionTile(
           transaction: transactions[index],
         );
       },

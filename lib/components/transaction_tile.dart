@@ -15,12 +15,12 @@ import 'package:expensy_flutter/models/transaction.dart';
 
 // Utilities:
 
-class TransactionsTile extends StatelessWidget {
+class TransactionTile extends StatelessWidget {
   // Properties:
   final Transaction transaction;
 
   // Constructor:
-  TransactionsTile({this.transaction});
+  TransactionTile({this.transaction});
 
   @override
   Widget build(BuildContext context) {
