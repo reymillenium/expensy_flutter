@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:math'; // Allows to use: random
 import 'dart:convert'; // Allows to use: base64UrlEncode
 import 'package:intl/intl.dart'; // Allows to use: DateFormat
+import 'package:uuid/uuid.dart'; // Allows to use: Uuid
 
 // Screens:
 
@@ -23,7 +24,7 @@ class TransactionsData {
   // Constructor:
   TransactionsData() {
     DateTime now = DateTime.now();
-
+    var uuid = Uuid();
     // transactions = List<Transaction>.generate(5, (index) {
     //   return Transaction(
     //     id: 't$index',
@@ -36,10 +37,12 @@ class TransactionsData {
 
     for (int i = 0; i < 5; i++) {
       Transaction newTransaction = Transaction(
-        id: 't$i',
+        // id: 't$i',
+        id: '${uuid.v1()}',
         title: _getRandomString(12),
         // amount: randomDoubleInRange(min: 1.0, max: 100.0),
         amount: _roundDouble(_randomDoubleInRange(min: 1.0, max: 99.0), 2),
+        executionDate: now,
         createAt: now,
         updatedAt: now,
       );
@@ -69,5 +72,17 @@ class TransactionsData {
   }
 
   // Public methods:
-
+  void addTransaction({String title, double amount, DateTime executionDate}) {
+    DateTime now = DateTime.now();
+    var uuid = Uuid();
+    Transaction newTransaction = Transaction(
+      id: uuid.v1(),
+      title: title,
+      amount: amount,
+      executionDate: executionDate,
+      createAt: now,
+      updatedAt: now,
+    );
+    _transactions.add(newTransaction);
+  }
 }

@@ -5,6 +5,7 @@ import 'dart:convert'; // Allows to use: base64UrlEncode
 import 'package:intl/intl.dart'; // Allows to use: DateFormat
 
 // Screens:
+import 'package:expensy_flutter/screens/add_transaction_screen.dart';
 
 // Models:
 import 'package:expensy_flutter/models/transaction.dart';
@@ -84,9 +85,16 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
         tooltip: 'Increment',
         child: Icon(Icons.add),
+        onPressed: () {
+          showModalBottomSheet(
+            backgroundColor: Colors.transparent,
+            isScrollControlled: true,
+            context: context,
+            builder: (context) => AddTransactionScreen(),
+          );
+        },
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
