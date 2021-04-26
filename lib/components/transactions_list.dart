@@ -38,7 +38,7 @@ class TransactionsList extends StatelessWidget {
     // );
 
     return ListView.builder(
-      padding: const EdgeInsets.only(left: 0, top: 20, right: 0),
+      padding: const EdgeInsets.only(left: 0, top: 0, right: 0),
       controller: _listViewScrollController,
       itemBuilder: (context, index) {
         return TransactionTile(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:math'; // Allows to use: random
 import 'dart:convert'; // Allows to use: base64UrlEncode
 import 'package:intl/intl.dart'; // Allows to use: DateFormat
+import 'package:date_time_picker/date_time_picker.dart';
 
 // Screens:
 
@@ -110,6 +111,35 @@ class AddTransactionScreen extends StatelessWidget {
                   // Allows
                   amount = newText == '' ? 0 : double.parse(newText.replaceAll(new RegExp(r'[^0-9\.]'), ''));
                 },
+              ),
+
+              // DateTime picker
+              DateTimePicker(
+                type: DateTimePickerType.dateTimeSeparate,
+                dateMask: 'd MMM, yyyy',
+                initialValue: DateTime.now().toString(),
+                firstDate: DateTime(2000),
+                lastDate: DateTime(2100),
+                icon: Icon(Icons.event),
+                dateLabelText: 'Date',
+                timeLabelText: "Hour",
+                selectableDayPredicate: (date) {
+                  // Disable weekend days to select from the calendar
+                  // if (date.weekday == 6 || date.weekday == 7) {
+                  //   return false;
+                  // }
+
+                  return true;
+                },
+                onChanged: (val) {
+                  print('onChanged $val');
+                  executionDate = DateTime.parse(val);
+                },
+                validator: (val) {
+                  print(val);
+                  return null;
+                },
+                // onSaved: (val) => print(val),
               ),
 
               // Add button:
