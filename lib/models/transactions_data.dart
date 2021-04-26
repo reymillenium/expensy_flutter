@@ -164,6 +164,13 @@ class TransactionsData {
 
   void deleteTransactionWithConfirm(int index, BuildContext context) {
     // _showDialog(index, context);
-    _createAlert(index: index, context: context).show();
+    // _createAlert(index: index, context: context).show();
+    _createAlert(index: index, context: context).show().then((value) {
+      (context as Element).reassemble();
+    });
+  }
+
+  void deleteTransactionWithoutConfirm(int index) {
+    _removeTransaction(index);
   }
 }

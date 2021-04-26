@@ -46,7 +46,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     });
   }
 
-  void onDeleteTransactionHandler(int index, BuildContext context) {
+  void onDeleteTransactionHandler(int index) {
     setState(() {
       transactionsData.deleteTransactionWithConfirm(index, context);
     });
