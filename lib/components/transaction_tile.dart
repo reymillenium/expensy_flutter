@@ -21,12 +21,14 @@ class TransactionTile extends StatelessWidget {
   final Transaction transaction;
   final int index;
   final Function onUpdateTransactionHandler;
+  final Function onDeleteTransactionHandler;
 
   // Constructor:
   TransactionTile({
     this.transaction,
     this.index,
     this.onUpdateTransactionHandler,
+    this.onDeleteTransactionHandler,
   });
 
   @override
@@ -104,7 +106,7 @@ class TransactionTile extends StatelessWidget {
                     Icons.delete,
                     // color: Colors.purple,
                   ),
-                  onPressed: () {},
+                  onPressed: onDeleteTransactionHandler,
                 ),
                 IconButton(
                   icon: Icon(

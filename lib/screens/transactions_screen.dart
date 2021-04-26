@@ -46,6 +46,12 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     });
   }
 
+  void onDeleteTransactionHandler(int index, BuildContext context) {
+    setState(() {
+      transactionsData.deleteTransactionWithConfirm(index, context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // void Function(String, double, DateTime) onAddTransactionHandler = (title, amount, executionDate) => transactionsData.addTransaction(title, amount, executionDate);
@@ -95,6 +101,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
               child: TransactionsList(
                 transactions: transactionsData.transactions,
                 onUpdateTransactionHandler: onUpdateTransactionHandler,
+                onDeleteTransactionHandler: onDeleteTransactionHandler,
               ),
             ),
           ),

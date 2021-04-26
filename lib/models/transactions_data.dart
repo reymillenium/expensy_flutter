@@ -4,6 +4,7 @@ import 'dart:math'; // Allows to use: random
 import 'dart:convert'; // Allows to use: base64UrlEncode
 import 'package:intl/intl.dart'; // Allows to use: DateFormat
 import 'package:uuid/uuid.dart'; // Allows to use: Uuid
+import 'package:rflutter_alert/rflutter_alert.dart'; // Allows to use: Alert
 
 // Screens:
 
@@ -71,6 +72,72 @@ class TransactionsData {
     return ((value * mod).round().toDouble() / mod);
   }
 
+  // Private methods:
+  void _removeTransaction(int index) {
+    _transactions.removeAt(index);
+  }
+
+  void _showDialog(int index, BuildContext context) {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Removal Alert"),
+          content: new Text("Are you sure?"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new TextButton(
+              child: new Text("OK"),
+              onPressed: () {
+                _removeTransaction(index);
+                Navigator.of(context).pop();
+              },
+            ),
+            // usually buttons at the bottom of the dialog
+            new TextButton(
+              child: new Text("Cancel"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Alert _createAlert({int index, BuildContext context, String message = ''}) {
+    return (Alert(
+      context: context,
+      type: AlertType.warning,
+      title: "Are you sure?",
+      // desc: message,
+      buttons: [
+        DialogButton(
+          child: Text(
+            "OK",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () {
+            _removeTransaction(index);
+            Navigator.of(context).pop();
+          },
+          width: 120,
+        ),
+        DialogButton(
+          child: Text(
+            "CANCEL",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () => Navigator.pop(context),
+          width: 120,
+        ),
+      ],
+    ));
+  }
+
   // Public methods:
   void addTransaction(String title, double amount, DateTime executionDate) {
     DateTime now = DateTime.now();
@@ -93,5 +160,10 @@ class TransactionsData {
     updatingTransaction.amount = amount;
     updatingTransaction.executionDate = executionDate;
     updatingTransaction.updatedAt = now;
+  }
+
+  void deleteTransactionWithConfirm(int index, BuildContext context) {
+    // _showDialog(index, context);
+    _createAlert(index: index, context: context).show();
   }
 }
