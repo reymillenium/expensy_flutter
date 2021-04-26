@@ -5,6 +5,7 @@ import 'dart:convert'; // Allows to use: base64UrlEncode
 import 'package:intl/intl.dart'; // Allows to use: DateFormat
 import 'package:uuid/uuid.dart'; // Allows to use: Uuid
 import 'package:rflutter_alert/rflutter_alert.dart'; // Allows to use: Alert
+import 'package:faker/faker.dart'; // Allows to use: fake data generation (Fake)
 
 // Screens:
 
@@ -24,31 +25,7 @@ class TransactionsData {
 
   // Constructor:
   TransactionsData() {
-    DateTime now = DateTime.now();
-    var uuid = Uuid();
-    // transactions = List<Transaction>.generate(5, (index) {
-    //   return Transaction(
-    //     id: 't$index',
-    //     title: _getRandomString(6),
-    //     amount: _roundDouble(_randomDoubleInRange(min: 1.0, max: 99.0), 2),
-    //     createAt: now,
-    //     updatedAt: now,
-    //   );
-    // });
-
-    for (int i = 0; i < 5; i++) {
-      Transaction newTransaction = Transaction(
-        // id: 't$i',
-        id: '${uuid.v1()}',
-        title: _getRandomString(12),
-        // amount: randomDoubleInRange(min: 1.0, max: 100.0),
-        amount: _roundDouble(_randomDoubleInRange(min: 1.0, max: 99.0), 2),
-        executionDate: now,
-        createAt: now,
-        updatedAt: now,
-      );
-      _transactions.add(newTransaction);
-    }
+    generateDummyData();
   }
 
   // Getters:
@@ -64,7 +41,11 @@ class TransactionsData {
   }
 
   double _randomDoubleInRange({double min = 0.0, double max = 1.0}) {
-    return Random().nextDouble() * (max - min + 1) + min;
+    return (Random().nextDouble() * (max - min)) + min;
+  }
+
+  int _randomIntegerInRange({int min = 0, int max = 1}) {
+    return Random().nextInt(max - min + 1) + min;
   }
 
   double _roundDouble(double value, int places) {
@@ -73,6 +54,40 @@ class TransactionsData {
   }
 
   // Private methods:
+  void generateDummyData() {
+    final DateTime now = DateTime.now();
+    final uuid = Uuid();
+
+    // transactions = List<Transaction>.generate(5, (index) {
+    //   var uuid = Uuid();
+    //   DateTime onTheLastWeek = now.subtract(new Duration(days: _randomIntegerInRange(min: 0, max: 6)));
+    //
+    //   return Transaction(
+    //     id: '${uuid.v4()}',
+    //     title: faker.food.dish(),
+    //     amount: _roundDouble(_randomDoubleInRange(min: 0.99, max: 10.00), 2),
+    //     executionDate: onTheLastWeek,
+    //     createAt: now,
+    //     updatedAt: now,
+    //   );
+    // });
+
+    for (int i = 0; i < 40; i++) {
+      DateTime onTheLastWeek = now.subtract(new Duration(days: _randomIntegerInRange(min: 0, max: 6)));
+
+      Transaction newTransaction = Transaction(
+        id: '${uuid.v4()}',
+        title: faker.food.dish(),
+        amount: _roundDouble(_randomDoubleInRange(min: 0.99, max: 10.00), 2),
+        executionDate: onTheLastWeek,
+        createAt: now,
+        updatedAt: now,
+      );
+      _transactions.add(newTransaction);
+      // print(_randomDoubleInRange(min: 9.97, max: 9.99));
+    }
+  }
+
   void _removeTransaction(int index) {
     _transactions.removeAt(index);
   }
