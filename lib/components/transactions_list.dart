@@ -20,13 +20,20 @@ class TransactionsList extends StatelessWidget {
   // Properties:
   final List<Transaction> transactions;
   final _listViewScrollController = ScrollController();
+  final Function onUpdateTransactionHandler;
 
   // Constructor:
-  TransactionsList({this.transactions});
+  TransactionsList({
+    this.transactions,
+    this.onUpdateTransactionHandler,
+  });
 
   List<TransactionTile> getTransactionList2() {
     return transactions.map((transaction) {
-      return TransactionTile(transaction: transaction);
+      return TransactionTile(
+        transaction: transaction,
+        onUpdateTransactionHandler: onUpdateTransactionHandler,
+      );
     }).toList();
   }
 
@@ -42,7 +49,9 @@ class TransactionsList extends StatelessWidget {
       controller: _listViewScrollController,
       itemBuilder: (context, index) {
         return TransactionTile(
+          index: index,
           transaction: transactions[index],
+          onUpdateTransactionHandler: onUpdateTransactionHandler,
         );
       },
       itemCount: transactions.length,

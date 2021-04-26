@@ -5,6 +5,7 @@ import 'dart:convert'; // Allows to use: base64UrlEncode
 import 'package:intl/intl.dart'; // Allows to use: DateFormat
 
 // Screens:
+import 'package:expensy_flutter/screens/update_transaction_screen.dart';
 
 // Models:
 import 'package:expensy_flutter/models/transaction.dart';
@@ -18,9 +19,15 @@ import 'package:expensy_flutter/models/transaction.dart';
 class TransactionTile extends StatelessWidget {
   // Properties:
   final Transaction transaction;
+  final int index;
+  final Function onUpdateTransactionHandler;
 
   // Constructor:
-  TransactionTile({this.transaction});
+  TransactionTile({
+    this.transaction,
+    this.index,
+    this.onUpdateTransactionHandler,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +111,20 @@ class TransactionTile extends StatelessWidget {
                     Icons.edit,
                     // color: Colors.purple,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    showModalBottomSheet(
+                      backgroundColor: Colors.transparent,
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (context) => UpdateTransactionScreen(
+                        index: index,
+                        title: transaction.title,
+                        amount: transaction.amount,
+                        executionDate: transaction.executionDate,
+                        onUpdateTransactionHandler: onUpdateTransactionHandler,
+                      ),
+                    );
+                  },
                 ),
               ],
             )

@@ -85,4 +85,13 @@ class TransactionsData {
     );
     _transactions.add(newTransaction);
   }
+
+  void updateTransaction(int index, String title, double amount, DateTime executionDate) {
+    DateTime now = DateTime.now();
+    Transaction updatingTransaction = _transactions[index];
+    updatingTransaction.title = title;
+    updatingTransaction.amount = amount;
+    updatingTransaction.executionDate = executionDate;
+    updatingTransaction.updatedAt = now;
+  }
 }

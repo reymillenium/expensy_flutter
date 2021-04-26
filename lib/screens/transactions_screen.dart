@@ -40,6 +40,12 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     });
   }
 
+  void onUpdateTransactionHandler(int index, String title, double amount, DateTime executionDate) {
+    setState(() {
+      transactionsData.updateTransaction(index, title, amount, executionDate);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // void Function(String, double, DateTime) onAddTransactionHandler = (title, amount, executionDate) => transactionsData.addTransaction(title, amount, executionDate);
@@ -88,6 +94,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             child: Container(
               child: TransactionsList(
                 transactions: transactionsData.transactions,
+                onUpdateTransactionHandler: onUpdateTransactionHandler,
               ),
             ),
           ),
