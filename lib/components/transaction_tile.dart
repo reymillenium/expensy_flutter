@@ -59,78 +59,147 @@ class TransactionTile extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            // Leading
-            CircleAvatar(
-              radius: 32,
-              child: Container(
-                child: Text(
-                  amountLabel,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.italic,
-                    fontSize: amountFontSize,
-                  ),
+        // child: Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //   children: [
+        //     // Leading
+        //     CircleAvatar(
+        //       radius: 32,
+        //       child: Container(
+        //         child: Text(
+        //           amountLabel,
+        //           style: TextStyle(
+        //             fontWeight: FontWeight.bold,
+        //             fontStyle: FontStyle.italic,
+        //             fontSize: amountFontSize,
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //
+        //     // Title
+        //     Column(
+        //       crossAxisAlignment: CrossAxisAlignment.start,
+        //       children: [
+        //         Text(
+        //           transaction.title,
+        //           style: TextStyle(
+        //             fontSize: 18,
+        //             fontWeight: FontWeight.bold,
+        //           ),
+        //         ),
+        //         Text(
+        //           formattedDate,
+        //           style: TextStyle(
+        //             color: Colors.black54,
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //
+        //     //  Trailing
+        //     Row(
+        //       mainAxisSize: MainAxisSize.min,
+        //       children: [
+        //         IconButton(
+        //           icon: Icon(
+        //             Icons.delete,
+        //             // color: Colors.purple,
+        //           ),
+        //           onPressed: onDeleteTransactionHandler,
+        //         ),
+        //         IconButton(
+        //           icon: Icon(
+        //             Icons.edit,
+        //             // color: Colors.purple,
+        //           ),
+        //           onPressed: () {
+        //             showModalBottomSheet(
+        //               backgroundColor: Colors.transparent,
+        //               isScrollControlled: true,
+        //               context: context,
+        //               builder: (context) => UpdateTransactionScreen(
+        //                 index: index,
+        //                 title: transaction.title,
+        //                 amount: transaction.amount,
+        //                 executionDate: transaction.executionDate,
+        //                 onUpdateTransactionHandler: onUpdateTransactionHandler,
+        //               ),
+        //             );
+        //           },
+        //         ),
+        //       ],
+        //     )
+        //   ],
+        // ),
+
+        child: ListTile(
+          // visualDensity: VisualDensity.standard,
+          leading: CircleAvatar(
+            radius: 32,
+            child: Container(
+              child: Text(
+                amountLabel,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic,
+                  fontSize: amountFontSize,
                 ),
               ),
             ),
+          ),
 
-            // Title
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  transaction.title,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                transaction.title,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
-                Text(
-                  formattedDate,
-                  style: TextStyle(
-                    color: Colors.black54,
-                  ),
+              ),
+              Text(
+                formattedDate,
+                style: TextStyle(
+                  color: Colors.black54,
                 ),
-              ],
-            ),
+              ),
+            ],
+          ),
 
-            //  Trailing
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: Icon(
-                    Icons.delete,
-                    // color: Colors.purple,
-                  ),
-                  onPressed: onDeleteTransactionHandler,
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                icon: Icon(
+                  Icons.delete,
+                  color: Colors.black,
                 ),
-                IconButton(
-                  icon: Icon(
-                    Icons.edit,
-                    // color: Colors.purple,
-                  ),
-                  onPressed: () {
-                    showModalBottomSheet(
-                      backgroundColor: Colors.transparent,
-                      isScrollControlled: true,
-                      context: context,
-                      builder: (context) => UpdateTransactionScreen(
-                        index: index,
-                        title: transaction.title,
-                        amount: transaction.amount,
-                        executionDate: transaction.executionDate,
-                        onUpdateTransactionHandler: onUpdateTransactionHandler,
-                      ),
-                    );
-                  },
+                onPressed: onDeleteTransactionHandler,
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.edit,
+                  color: Colors.black,
                 ),
-              ],
-            )
-          ],
+                onPressed: () {
+                  showModalBottomSheet(
+                    backgroundColor: Colors.transparent,
+                    isScrollControlled: true,
+                    context: context,
+                    builder: (context) => UpdateTransactionScreen(
+                      index: index,
+                      title: transaction.title,
+                      amount: transaction.amount,
+                      executionDate: transaction.executionDate,
+                      onUpdateTransactionHandler: onUpdateTransactionHandler,
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
