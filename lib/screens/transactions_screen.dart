@@ -106,10 +106,22 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             ),
           ),
 
-          SizedBox(
-            height: 90,
-          )
+          // SizedBox(
+          //   height: 90,
+          // ),
         ],
+      ),
+
+      // Navigation Bar (without nav links)
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          children: [
+            IconButton(icon: Icon(null), onPressed: () {}),
+            // Spacer(),
+            // IconButton(icon: Icon(Icons.search), onPressed: () {}),
+            // IconButton(icon: Icon(Icons.more_vert), onPressed: () {}),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         tooltip: 'Increment',
@@ -124,7 +136,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             ),
           );
         },
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 }
