@@ -1,4 +1,5 @@
 // Packages:
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'dart:math'; // Allows to use: random
 import 'dart:convert'; // Allows to use: base64UrlEncode
@@ -18,11 +19,17 @@ import 'package:expensy_flutter/components/transactions_list.dart';
 // Utilities:
 
 class AddTransactionScreen extends StatelessWidget {
+  // Properties:
+  final Function onAddTransactionHandler;
+
+  // Constructor:
+  AddTransactionScreen({this.onAddTransactionHandler});
+
   @override
   Widget build(BuildContext context) {
-    String title;
-    double amount;
-    DateTime executionDate;
+    String title = '';
+    double amount = 0;
+    DateTime executionDate = DateTime.now();
 
     return SingleChildScrollView(
       child: Container(
@@ -53,6 +60,7 @@ class AddTransactionScreen extends StatelessWidget {
                 autofocus: true,
                 autocorrect: false,
                 decoration: InputDecoration(
+                  hintText: 'Title',
                   border: UnderlineInputBorder(
                     borderSide: BorderSide(
                       // color: kLightBlueBackground,
@@ -82,6 +90,28 @@ class AddTransactionScreen extends StatelessWidget {
                 },
               ),
 
+              // Amount Input
+              TextField(
+                decoration: InputDecoration(hintText: 'USD(\$) '),
+                inputFormatters: [
+                  CurrencyTextInputFormatter(
+                    // turnOffGrouping: false,
+                    locale: 'en_US',
+                    decimalDigits: 2,
+                    symbol: 'USD(\$) ', // or to remove symbol set ''.
+                    // symbol: '', // or to remove symbol set ''.
+                  )
+                ],
+                keyboardType: TextInputType.number,
+                onChanged: (String newText) {
+                  // amount = double.parse(newText);
+                  // Allows only numbers:
+                  // amount = newText == '' ? 0 : double.parse(newText.replaceAll(new RegExp(r'[^0-9]'), ''));
+                  // Allows
+                  amount = newText == '' ? 0 : double.parse(newText.replaceAll(new RegExp(r'[^0-9\.]'), ''));
+                },
+              ),
+
               // Add button:
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 30.0),
@@ -91,6 +121,7 @@ class AddTransactionScreen extends StatelessWidget {
                   elevation: 5.0,
                   child: MaterialButton(
                     onPressed: () {
+                      onAddTransactionHandler(title, amount, executionDate);
                       Navigator.pop(context);
                     },
                     // minWidth: 300.0,

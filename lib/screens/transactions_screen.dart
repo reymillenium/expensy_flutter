@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:math'; // Allows to use: random
 import 'dart:convert'; // Allows to use: base64UrlEncode
 import 'package:intl/intl.dart'; // Allows to use: DateFormat
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 
 // Screens:
 import 'package:expensy_flutter/screens/add_transaction_screen.dart';
@@ -33,8 +34,16 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   // Properties:
   final TransactionsData transactionsData = TransactionsData();
 
+  void onAddTransactionHandler(String title, double amount, DateTime executionDate) {
+    setState(() {
+      transactionsData.addTransaction(title, amount, executionDate);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    // void Function(String, double, DateTime) onAddTransactionHandler = (title, amount, executionDate) => transactionsData.addTransaction(title, amount, executionDate);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -82,6 +91,10 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
               ),
             ),
           ),
+
+          SizedBox(
+            height: 90,
+          )
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -92,7 +105,9 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             backgroundColor: Colors.transparent,
             isScrollControlled: true,
             context: context,
-            builder: (context) => AddTransactionScreen(),
+            builder: (context) => AddTransactionScreen(
+              onAddTransactionHandler: onAddTransactionHandler,
+            ),
           );
         },
       ), // This trailing comma makes auto-formatting nicer for build methods.

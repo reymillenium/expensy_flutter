@@ -72,7 +72,7 @@ class TransactionsData {
   }
 
   // Public methods:
-  void addTransaction({String title, double amount, DateTime executionDate}) {
+  void addTransaction(String title, double amount, DateTime executionDate) {
     DateTime now = DateTime.now();
     var uuid = Uuid();
     Transaction newTransaction = Transaction(
