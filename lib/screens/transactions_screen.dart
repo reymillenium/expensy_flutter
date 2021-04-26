@@ -122,7 +122,12 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             // IconButton(icon: Icon(Icons.more_vert), onPressed: () {}),
           ],
         ),
+        shape: CircularNotchedRectangle(),
+        //color of the BottomAppBar
+        color: Colors.purple,
       ),
+
+      // FAB
       floatingActionButton: FloatingActionButton(
         tooltip: 'Increment',
         child: Icon(Icons.add),
