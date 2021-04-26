@@ -30,7 +30,10 @@ class AddTransactionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     String title = '';
     double amount = 0;
-    DateTime executionDate = DateTime.now();
+    DateTime now = DateTime.now();
+    final oneHundredYearsAgo = now.subtract(new Duration(days: 365 * 100));
+    final oneHundredYearsFromNow = now.add(new Duration(days: 365 * 100));
+    DateTime executionDate = now;
 
     return SingleChildScrollView(
       child: Container(
@@ -108,18 +111,19 @@ class AddTransactionScreen extends StatelessWidget {
                   // amount = double.parse(newText);
                   // Allows only numbers:
                   // amount = newText == '' ? 0 : double.parse(newText.replaceAll(new RegExp(r'[^0-9]'), ''));
-                  // Allows
+                  // Allows numbers and a dot
                   amount = newText == '' ? 0 : double.parse(newText.replaceAll(new RegExp(r'[^0-9\.]'), ''));
                 },
               ),
 
               // DateTime picker
               DateTimePicker(
-                type: DateTimePickerType.dateTimeSeparate,
+                // type: DateTimePickerType.dateTimeSeparate,
+                type: DateTimePickerType.date,
                 dateMask: 'd MMM, yyyy',
-                initialValue: DateTime.now().toString(),
-                firstDate: DateTime(2000),
-                lastDate: DateTime(2100),
+                initialValue: now.toString(),
+                firstDate: oneHundredYearsAgo,
+                lastDate: oneHundredYearsFromNow,
                 icon: Icon(Icons.event),
                 dateLabelText: 'Date',
                 timeLabelText: "Hour",
@@ -151,7 +155,9 @@ class AddTransactionScreen extends StatelessWidget {
                   elevation: 5.0,
                   child: MaterialButton(
                     onPressed: () {
-                      onAddTransactionHandler(title, amount, executionDate);
+                      if (title != '' && amount != 0) {
+                        onAddTransactionHandler(title, amount, executionDate);
+                      }
                       Navigator.pop(context);
                     },
                     // minWidth: 300.0,

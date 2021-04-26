@@ -25,7 +25,7 @@ class TransactionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final DateFormat formatter = DateFormat('MM/dd/yyyy').add_jm();
-    final DateFormat formatter = DateFormat().add_yMMMMd().add_jm();
+    final DateFormat formatter = DateFormat().add_yMMMMd();
     final String formattedDate = formatter.format(transaction.executionDate);
     final currencyFormat = new NumberFormat("#,##0.00", "en_US");
     final String amountLabel = '\$${currencyFormat.format(transaction.amount)}';
