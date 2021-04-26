@@ -47,6 +47,7 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
   double _amount;
   DateTime _executionDate;
   Function _onUpdateTransactionHandler;
+
   // void Function(int, String, double, DateTime) _onUpdateTransactionHandler;
 
   @override
@@ -65,6 +66,8 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
     DateTime now = DateTime.now();
     final oneHundredYearsAgo = now.subtract(new Duration(days: 365 * 100));
     final oneHundredYearsFromNow = now.add(new Duration(days: 365 * 100));
+    final currencyFormat = new NumberFormat("#,##0.00", "en_US");
+    final String initialAmountLabel = 'USD(\$) ${currencyFormat.format(_amount)}';
 
     return SingleChildScrollView(
       child: Container(
@@ -128,7 +131,7 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
 
               // Amount Input
               TextFormField(
-                initialValue: _amount.toString(),
+                initialValue: initialAmountLabel,
                 decoration: InputDecoration(hintText: 'USD(\$) '),
                 inputFormatters: [
                   CurrencyTextInputFormatter(
