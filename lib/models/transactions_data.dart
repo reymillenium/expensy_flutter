@@ -16,6 +16,7 @@ import 'package:expensy_flutter/models/transaction.dart';
 import 'package:expensy_flutter/components/transactions_list.dart';
 
 // Helpers:
+import 'package:expensy_flutter/helpers/numeric_helper.dart';
 
 // Utilities:
 
@@ -85,7 +86,8 @@ class TransactionsData {
       );
       _transactions.add(newTransaction);
       // print(_randomDoubleInRange(min: 9.97, max: 9.99));
-      print(newTransaction.amount);
+      // print(newTransaction.amount);
+      // print(NumericHelper.roundDouble(newTransaction.amount, 2));
     }
   }
 
@@ -196,13 +198,16 @@ class TransactionsData {
 
     for (int i = 0; i < _transactions.length; i++) {
       int daysAgo = now.difference(_transactions[i].executionDate).inDays;
-      result[daysAgo] += _transactions[i].amount;
+      if (daysAgo <= 6) {
+        result[daysAgo] += _transactions[i].amount;
+      }
     }
 
     for (int j = 0; j < result.length; j++) {
       result[j] = _roundDouble(result[j], 2);
     }
 
+    print(result);
     return result;
   }
 }

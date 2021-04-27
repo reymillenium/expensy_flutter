@@ -18,6 +18,7 @@ import 'package:expensy_flutter/models/transactions_data.dart';
 import 'package:expensy_flutter/components/transactions_list.dart';
 
 // Helpers:
+import 'package:expensy_flutter/helpers/numeric_helper.dart';
 
 // Utilities:
 
@@ -59,20 +60,25 @@ class TransactionsChart extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  Text(
-                    'Weekly',
-                    style: TextStyle(
-                      color: const Color(0xff0f4a3c),
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  // Text(
+                  //   'Last Week Transactions',
+                  //   style: TextStyle(
+                  //     color: const Color(0xff0f4a3c),
+                  //     fontSize: 24,
+                  //     fontWeight: FontWeight.bold,
+                  //   ),
+                  // ),
                   const SizedBox(
                     height: 4,
                   ),
                   Text(
-                    'Transactions Chart',
-                    style: TextStyle(color: const Color(0xff379982), fontSize: 18, fontWeight: FontWeight.bold),
+                    'Last Week Transactions',
+                    style: TextStyle(
+                      // color: const Color(0xff379982),
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(
                     height: 38,
@@ -128,25 +134,32 @@ class TransactionsChart extends StatelessWidget {
         switch (i) {
           case 0:
             // return makeGroupData(0, 5, isTouched: i == touchedIndex);
-            return makeGroupData(0, groupedAmountLastWeek[0], isTouched: i == touchedIndex);
+            // return makeGroupData(0, groupedAmountLastWeek[0], isTouched: i == touchedIndex);
+            return makeGroupData(0, NumericHelper.roundDouble(groupedAmountLastWeek[0], 1), isTouched: i == touchedIndex);
           case 1:
             // return makeGroupData(1, 6.5, isTouched: i == touchedIndex);
-            return makeGroupData(1, groupedAmountLastWeek[1], isTouched: i == touchedIndex);
+            // return makeGroupData(1, groupedAmountLastWeek[1], isTouched: i == touchedIndex);
+            return makeGroupData(1, NumericHelper.roundDouble(groupedAmountLastWeek[1], 1), isTouched: i == touchedIndex);
           case 2:
             // return makeGroupData(2, 5, isTouched: i == touchedIndex);
-            return makeGroupData(2, groupedAmountLastWeek[2], isTouched: i == touchedIndex);
+            // return makeGroupData(2, groupedAmountLastWeek[2], isTouched: i == touchedIndex);
+            return makeGroupData(2, NumericHelper.roundDouble(groupedAmountLastWeek[2], 1), isTouched: i == touchedIndex);
           case 3:
             // return makeGroupData(3, 7.5, isTouched: i == touchedIndex);
-            return makeGroupData(3, groupedAmountLastWeek[3], isTouched: i == touchedIndex);
+            // return makeGroupData(3, groupedAmountLastWeek[3], isTouched: i == touchedIndex);
+            return makeGroupData(3, NumericHelper.roundDouble(groupedAmountLastWeek[3], 1), isTouched: i == touchedIndex);
           case 4:
             // return makeGroupData(4, 9, isTouched: i == touchedIndex);
-            return makeGroupData(4, groupedAmountLastWeek[4], isTouched: i == touchedIndex);
+            // return makeGroupData(4, groupedAmountLastWeek[4], isTouched: i == touchedIndex);
+            return makeGroupData(4, NumericHelper.roundDouble(groupedAmountLastWeek[4], 1), isTouched: i == touchedIndex);
           case 5:
             // return makeGroupData(5, 11.5, isTouched: i == touchedIndex);
-            return makeGroupData(5, groupedAmountLastWeek[5], isTouched: i == touchedIndex);
+            // return makeGroupData(5, groupedAmountLastWeek[5], isTouched: i == touchedIndex);
+            return makeGroupData(5, NumericHelper.roundDouble(groupedAmountLastWeek[5], 1), isTouched: i == touchedIndex);
           case 6:
             // return makeGroupData(6, 6.5, isTouched: i == touchedIndex);
-            return makeGroupData(6, groupedAmountLastWeek[6], isTouched: i == touchedIndex);
+            // return makeGroupData(6, groupedAmountLastWeek[6], isTouched: i == touchedIndex);
+            return makeGroupData(6, NumericHelper.roundDouble(groupedAmountLastWeek[6], 1), isTouched: i == touchedIndex);
           default:
             return null;
         }
