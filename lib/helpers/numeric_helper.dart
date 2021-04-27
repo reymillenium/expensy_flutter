@@ -31,4 +31,12 @@ class NumericHelper {
     double mod = pow(10.0, places);
     return ((value * mod).round().toDouble() / mod);
   }
+
+  static double roundRandomDoubleInRange({double min = 0, double max = 1, int places = 0}) {
+    return roundDouble(randomDoubleInRange(min: min, max: max), places);
+  }
+
+  static double biggestDoubleFromList(List<double> list) {
+    return list.reduce(max);
+  }
 }

@@ -17,6 +17,7 @@ import 'package:expensy_flutter/components/transactions_list.dart';
 
 // Helpers:
 import 'package:expensy_flutter/helpers/numeric_helper.dart';
+import 'package:expensy_flutter/helpers/date_helper.dart';
 
 // Utilities:
 
@@ -26,7 +27,7 @@ class TransactionsData {
 
   // Constructor:
   TransactionsData() {
-    generateDummyData();
+    _generateDummyData();
   }
 
   // Getters:
@@ -35,38 +36,18 @@ class TransactionsData {
   }
 
   // Private methods:
-  String _getRandomString(int len) {
-    var random = Random.secure();
-    var values = List<int>.generate(len, (i) => random.nextInt(255));
-    return base64UrlEncode(values);
-  }
-
-  double _randomDoubleInRange({double min = 0.0, double max = 1.0}) {
-    return (Random().nextDouble() * (max - min)) + min;
-  }
-
-  int _randomIntegerInRange({int min = 0, int max = 1}) {
-    return Random().nextInt(max - min + 1) + min;
-  }
-
-  double _roundDouble(double value, int places) {
-    double mod = pow(10.0, places);
-    return ((value * mod).round().toDouble() / mod);
-  }
-
-  // Private methods:
-  void generateDummyData() {
+  void _generateDummyData() {
     final DateTime now = DateTime.now();
     final uuid = Uuid();
 
-    // transactions = List<Transaction>.generate(5, (index) {
+    // transactions = List<Transaction>.generate(40, (index) {
     //   var uuid = Uuid();
-    //   DateTime onTheLastWeek = now.subtract(new Duration(days: _randomIntegerInRange(min: 0, max: 6)));
+    //   DateTime onTheLastWeek = now.subtract(new Duration(days: NumericHelper.randomIntegerInRange(min: 0, max: 6)));
     //
     //   return Transaction(
     //     id: '${uuid.v4()}',
     //     title: faker.food.dish(),
-    //     amount: _roundDouble(_randomDoubleInRange(min: 0.99, max: 10.00), 2),
+    //     amount: NumericHelper.roundDouble(NumericHelper.randomDoubleInRange(min: 0.99, max: 10.00), 2),
     //     executionDate: onTheLastWeek,
     //     createAt: now,
     //     updatedAt: now,
@@ -74,20 +55,17 @@ class TransactionsData {
     // });
 
     for (int i = 0; i < 40; i++) {
-      DateTime onTheLastWeek = now.subtract(new Duration(days: _randomIntegerInRange(min: 0, max: 6)));
+      DateTime onTheLastWeek = DateHelper.randomDateTimeOnTheLastWeek();
 
       Transaction newTransaction = Transaction(
         id: '${uuid.v4()}',
         title: faker.food.dish(),
-        amount: _roundDouble(_randomDoubleInRange(min: 0.99, max: 10.00), 2),
+        amount: NumericHelper.roundRandomDoubleInRange(min: 0.99, max: 10.00, places: 2),
         executionDate: onTheLastWeek,
         createAt: now,
         updatedAt: now,
       );
       _transactions.add(newTransaction);
-      // print(_randomDoubleInRange(min: 9.97, max: 9.99));
-      // print(newTransaction.amount);
-      // print(NumericHelper.roundDouble(newTransaction.amount, 2));
     }
   }
 
@@ -193,75 +171,65 @@ class TransactionsData {
   }
 
   List<Map> groupedAmountLastWeek() {
-    final DateTime now = DateTime.now();
-    final oneDayAgo = now.subtract(new Duration(days: 1));
-    final twoDaysAgo = now.subtract(new Duration(days: 2));
-    final threeDaysAgo = now.subtract(new Duration(days: 3));
-    final fourDaysAgo = now.subtract(new Duration(days: 4));
-    final fiveDaysAgo = now.subtract(new Duration(days: 5));
-    final sixDaysAgo = now.subtract(new Duration(days: 6));
-
     List<Map> result = [
       {
-        'day': DateFormat('EEEE').format(now),
+        'day': DateHelper.weekDayNow(),
         'amount': 0,
       },
       {
-        'day': DateFormat('EEEE').format(oneDayAgo),
+        'day': DateHelper.weekDayOneDayAgo(),
         'amount': 0,
       },
       {
-        'day': DateFormat('EEEE').format(twoDaysAgo),
+        'day': DateHelper.weekDayTwoDaysAgo(),
         'amount': 0,
       },
       {
-        'day': DateFormat('EEEE').format(threeDaysAgo),
+        'day': DateHelper.weekDayThreeDaysAgo(),
         'amount': 0,
       },
       {
-        'day': DateFormat('EEEE').format(fourDaysAgo),
+        'day': DateHelper.weekDayFourDaysAgo(),
         'amount': 0,
       },
       {
-        'day': DateFormat('EEEE').format(fiveDaysAgo),
+        'day': DateHelper.weekDayFiveDaysAgo(),
         'amount': 0,
       },
       {
-        'day': DateFormat('EEEE').format(sixDaysAgo),
+        'day': DateHelper.weekDaySixDaysAgo(),
         'amount': 0,
       }
     ];
 
-    for (int i = 0; i < _transactions.length; i++) {
-      int daysAgo = now.difference(_transactions[i].executionDate).inDays;
-      if (daysAgo <= 6) {
-        result[daysAgo]['amount'] += _transactions[i].amount;
-      }
+    List<double> lastWeekAmounts = this.lastWeekAmounts();
+    for (int i = 0; i < lastWeekAmounts.length; i++) {
+      result[i]['amount'] += lastWeekAmounts[i];
     }
 
-    for (int j = 0; j < result.length; j++) {
-      result[j]['amount'] = _roundDouble(result[j]['amount'], 2);
-    }
-
-    print(result);
+    // print(result);
     return result;
   }
 
   double biggestAmountLastWeek() {
+    return NumericHelper.biggestDoubleFromList(lastWeekAmounts());
+  }
+
+  List<double> lastWeekAmounts() {
     final DateTime now = DateTime.now();
-    List<double> groupedAmountLastWeek = [0, 0, 0, 0, 0, 0, 0];
+    List<double> result = [0, 0, 0, 0, 0, 0, 0];
 
     for (int i = 0; i < _transactions.length; i++) {
       int daysAgo = now.difference(_transactions[i].executionDate).inDays;
       if (daysAgo <= 6) {
-        groupedAmountLastWeek[daysAgo] += _transactions[i].amount;
+        result[daysAgo] += _transactions[i].amount;
       }
     }
 
-    for (int j = 0; j < groupedAmountLastWeek.length; j++) {
-      groupedAmountLastWeek[j] = _roundDouble(groupedAmountLastWeek[j], 2);
+    for (int j = 0; j < result.length; j++) {
+      result[j] = NumericHelper.roundDouble(result[j], 2);
     }
 
-    return groupedAmountLastWeek.reduce(max);
+    return result;
   }
 }
