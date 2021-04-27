@@ -21,6 +21,7 @@ import 'package:expensy_flutter/components/transactions_list.dart';
 import 'package:expensy_flutter/helpers/numeric_helper.dart';
 
 // Utilities:
+import 'package:expensy_flutter/utilities/constants.dart';
 
 class TransactionsChart extends StatelessWidget {
   // Properties:
@@ -29,9 +30,6 @@ class TransactionsChart extends StatelessWidget {
   final List<Map> groupedAmountLastWeek;
   final double biggestAmountLastWeek;
 
-  // Constants:
-  final Color barBackgroundColor = const Color(0xff72d8bf);
-  final Duration animDuration = const Duration(milliseconds: 250);
   // bool isPlaying = false;
 
   // Constructor:

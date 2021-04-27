@@ -21,6 +21,7 @@ import 'package:expensy_flutter/components/transactions_chart.dart';
 // Helpers:
 
 // Utilities:
+import 'package:expensy_flutter/utilities/constants.dart';
 
 class TransactionsScreen extends StatefulWidget {
   // Properties
@@ -44,9 +45,6 @@ class TransactionsScreen extends StatefulWidget {
 class _TransactionsScreenState extends State<TransactionsScreen> {
   // Properties:
   final TransactionsData transactionsData = TransactionsData();
-  // final ChartsHelper chartsHelper = ChartsHelper();
-  // final Color barBackgroundColor = const Color(0xff72d8bf);
-  // final Duration animDuration = const Duration(milliseconds: 250);
   int touchedIndex;
   // bool isPlaying = false;
 
