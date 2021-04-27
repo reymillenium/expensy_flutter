@@ -95,6 +95,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             touchCallbackHandler: touchCallbackHandler,
             touchedIndex: touchedIndex,
             groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
+            biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
           ),
 
           // Transaction List:

@@ -246,4 +246,22 @@ class TransactionsData {
     print(result);
     return result;
   }
+
+  double biggestAmountLastWeek() {
+    final DateTime now = DateTime.now();
+    List<double> groupedAmountLastWeek = [0, 0, 0, 0, 0, 0, 0];
+
+    for (int i = 0; i < _transactions.length; i++) {
+      int daysAgo = now.difference(_transactions[i].executionDate).inDays;
+      if (daysAgo <= 6) {
+        groupedAmountLastWeek[daysAgo] += _transactions[i].amount;
+      }
+    }
+
+    for (int j = 0; j < groupedAmountLastWeek.length; j++) {
+      groupedAmountLastWeek[j] = _roundDouble(groupedAmountLastWeek[j], 2);
+    }
+
+    return groupedAmountLastWeek.reduce(max);
+  }
 }
