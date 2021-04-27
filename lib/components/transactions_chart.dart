@@ -45,7 +45,7 @@ class TransactionsChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 1.4,
+      aspectRatio: 1.5,
       child: Card(
         elevation: 3,
         color: Colors.white70,
@@ -58,7 +58,7 @@ class TransactionsChart extends StatelessWidget {
         child: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -72,9 +72,9 @@ class TransactionsChart extends StatelessWidget {
                   //     fontWeight: FontWeight.bold,
                   //   ),
                   // ),
-                  const SizedBox(
-                    height: 4,
-                  ),
+                  // const SizedBox(
+                  //   height: 4,
+                  // ),
                   Text(
                     'Last Week Transactions',
                     style: TextStyle(
@@ -85,7 +85,7 @@ class TransactionsChart extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 38,
+                    height: 24,
                   ),
                   Expanded(
                     child: Padding(
@@ -96,9 +96,9 @@ class TransactionsChart extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 12,
-                  ),
+                  // const SizedBox(
+                  //   height: 12,
+                  // ),
                 ],
               ),
             ),
