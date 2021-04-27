@@ -250,31 +250,33 @@ class TransactionsChart extends StatelessWidget {
           ),
           margin: 16,
           getTitles: (double value) {
-            switch (value.toInt()) {
-              case 0:
-                // return 'M';
-                return groupedAmountLastWeek[0]['day'][0];
-              case 1:
-                // return 'T';
-                return groupedAmountLastWeek[1]['day'][0];
-              case 2:
-                // return 'W';
-                return groupedAmountLastWeek[2]['day'][0];
-              case 3:
-                // return 'T';
-                return groupedAmountLastWeek[3]['day'][0];
-              case 4:
-                // return 'F';
-                return groupedAmountLastWeek[4]['day'][0];
-              case 5:
-                // return 'S';
-                return groupedAmountLastWeek[5]['day'][0];
-              case 6:
-                // return 'S';
-                return groupedAmountLastWeek[6]['day'][0];
-              default:
-                return '';
-            }
+            int integerValue = value.toInt();
+            // switch (value.toInt()) {
+            //   case 0:
+            //     // return 'M';
+            //     return groupedAmountLastWeek[0]['day'].substring(0, 2);
+            //   case 1:
+            //     // return 'T';
+            //     return groupedAmountLastWeek[1]['day'].substring(0, 2);
+            //   case 2:
+            //     // return 'W';
+            //     return groupedAmountLastWeek[2]['day'].substring(0, 2);
+            //   case 3:
+            //     // return 'T';
+            //     return groupedAmountLastWeek[3]['day'].substring(0, 2);
+            //   case 4:
+            //     // return 'F';
+            //     return groupedAmountLastWeek[4]['day'].substring(0, 2);
+            //   case 5:
+            //     // return 'S';
+            //     return groupedAmountLastWeek[5]['day'].substring(0, 2);
+            //   case 6:
+            //     // return 'S';
+            //     return groupedAmountLastWeek[6]['day'].substring(0, 2);
+            //   default:
+            //     return '';
+            // }
+            return groupedAmountLastWeek[integerValue]['day'].substring(0, 2);
           },
         ),
         leftTitles: SideTitles(
