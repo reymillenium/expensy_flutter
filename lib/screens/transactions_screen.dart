@@ -25,14 +25,14 @@ import 'package:expensy_flutter/components/transactions_chart.dart';
 class TransactionsScreen extends StatefulWidget {
   // Properties
   final String title;
-  final List<Color> availableColors = [
-    Colors.purpleAccent,
-    Colors.yellow,
-    Colors.lightBlue,
-    Colors.orange,
-    Colors.pink,
-    Colors.redAccent,
-  ];
+  // final List<Color> availableColors = [
+  //   Colors.purpleAccent,
+  //   Colors.yellow,
+  //   Colors.lightBlue,
+  //   Colors.orange,
+  //   Colors.pink,
+  //   Colors.redAccent,
+  // ];
 
   // Constructor:
   TransactionsScreen({Key key, this.title}) : super(key: key);
@@ -94,6 +94,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
           TransactionsChart(
             touchCallbackHandler: touchCallbackHandler,
             touchedIndex: touchedIndex,
+            groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
           ),
 
           // Transaction List:

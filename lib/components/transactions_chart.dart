@@ -24,15 +24,17 @@ import 'package:expensy_flutter/components/transactions_list.dart';
 class TransactionsChart extends StatelessWidget {
   // Properties:
   final Function touchCallbackHandler;
+  final int touchedIndex;
+  final List<double> groupedAmountLastWeek;
   final Color barBackgroundColor = const Color(0xff72d8bf);
   final Duration animDuration = const Duration(milliseconds: 250);
-  final int touchedIndex;
   // bool isPlaying = false;
 
   // Constructor:
   TransactionsChart({
     this.touchCallbackHandler,
     this.touchedIndex,
+    this.groupedAmountLastWeek,
   });
 
   @override
@@ -59,7 +61,11 @@ class TransactionsChart extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'Weekly',
-                    style: TextStyle(color: const Color(0xff0f4a3c), fontSize: 24, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      color: const Color(0xff0f4a3c),
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(
                     height: 4,
@@ -109,7 +115,7 @@ class TransactionsChart extends StatelessWidget {
           width: width,
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
-            y: 20,
+            y: groupedAmountLastWeek.reduce(max) + 2,
             colors: [barBackgroundColor],
           ),
         ),
@@ -121,19 +127,26 @@ class TransactionsChart extends StatelessWidget {
   List<BarChartGroupData> showingGroups() => List.generate(7, (i) {
         switch (i) {
           case 0:
-            return makeGroupData(0, 5, isTouched: i == touchedIndex);
+            // return makeGroupData(0, 5, isTouched: i == touchedIndex);
+            return makeGroupData(0, groupedAmountLastWeek[0], isTouched: i == touchedIndex);
           case 1:
-            return makeGroupData(1, 6.5, isTouched: i == touchedIndex);
+            // return makeGroupData(1, 6.5, isTouched: i == touchedIndex);
+            return makeGroupData(1, groupedAmountLastWeek[1], isTouched: i == touchedIndex);
           case 2:
-            return makeGroupData(2, 5, isTouched: i == touchedIndex);
+            // return makeGroupData(2, 5, isTouched: i == touchedIndex);
+            return makeGroupData(2, groupedAmountLastWeek[2], isTouched: i == touchedIndex);
           case 3:
-            return makeGroupData(3, 7.5, isTouched: i == touchedIndex);
+            // return makeGroupData(3, 7.5, isTouched: i == touchedIndex);
+            return makeGroupData(3, groupedAmountLastWeek[3], isTouched: i == touchedIndex);
           case 4:
-            return makeGroupData(4, 9, isTouched: i == touchedIndex);
+            // return makeGroupData(4, 9, isTouched: i == touchedIndex);
+            return makeGroupData(4, groupedAmountLastWeek[4], isTouched: i == touchedIndex);
           case 5:
-            return makeGroupData(5, 11.5, isTouched: i == touchedIndex);
+            // return makeGroupData(5, 11.5, isTouched: i == touchedIndex);
+            return makeGroupData(5, groupedAmountLastWeek[5], isTouched: i == touchedIndex);
           case 6:
-            return makeGroupData(6, 6.5, isTouched: i == touchedIndex);
+            // return makeGroupData(6, 6.5, isTouched: i == touchedIndex);
+            return makeGroupData(6, groupedAmountLastWeek[6], isTouched: i == touchedIndex);
           default:
             return null;
         }
@@ -203,7 +216,11 @@ class TransactionsChart extends StatelessWidget {
         show: true,
         bottomTitles: SideTitles(
           showTitles: true,
-          getTextStyles: (value) => const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+          getTextStyles: (value) => const TextStyle(
+            color: Colors.purple,
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+          ),
           margin: 16,
           getTitles: (double value) {
             switch (value.toInt()) {

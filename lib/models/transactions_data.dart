@@ -85,6 +85,7 @@ class TransactionsData {
       );
       _transactions.add(newTransaction);
       // print(_randomDoubleInRange(min: 9.97, max: 9.99));
+      print(newTransaction.amount);
     }
   }
 
@@ -187,5 +188,21 @@ class TransactionsData {
 
   void deleteTransactionWithoutConfirm(int index) {
     _removeTransaction(index);
+  }
+
+  List<double> groupedAmountLastWeek() {
+    List<double> result = [0, 0, 0, 0, 0, 0, 0];
+    final DateTime now = DateTime.now();
+
+    for (int i = 0; i < _transactions.length; i++) {
+      int daysAgo = now.difference(_transactions[i].executionDate).inDays;
+      result[daysAgo] += _transactions[i].amount;
+    }
+
+    for (int j = 0; j < result.length; j++) {
+      result[j] = _roundDouble(result[j], 2);
+    }
+
+    return result;
   }
 }
