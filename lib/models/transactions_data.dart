@@ -192,19 +192,55 @@ class TransactionsData {
     _removeTransaction(index);
   }
 
-  List<double> groupedAmountLastWeek() {
-    List<double> result = [0, 0, 0, 0, 0, 0, 0];
+  List<Map> groupedAmountLastWeek() {
     final DateTime now = DateTime.now();
+    final oneDayAgo = now.subtract(new Duration(days: 1));
+    final twoDaysAgo = now.subtract(new Duration(days: 2));
+    final threeDaysAgo = now.subtract(new Duration(days: 3));
+    final fourDaysAgo = now.subtract(new Duration(days: 4));
+    final fiveDaysAgo = now.subtract(new Duration(days: 5));
+    final sixDaysAgo = now.subtract(new Duration(days: 6));
+
+    List<Map> result = [
+      {
+        'day': DateFormat('EEEE').format(now),
+        'amount': 0,
+      },
+      {
+        'day': DateFormat('EEEE').format(oneDayAgo),
+        'amount': 0,
+      },
+      {
+        'day': DateFormat('EEEE').format(twoDaysAgo),
+        'amount': 0,
+      },
+      {
+        'day': DateFormat('EEEE').format(threeDaysAgo),
+        'amount': 0,
+      },
+      {
+        'day': DateFormat('EEEE').format(fourDaysAgo),
+        'amount': 0,
+      },
+      {
+        'day': DateFormat('EEEE').format(fiveDaysAgo),
+        'amount': 0,
+      },
+      {
+        'day': DateFormat('EEEE').format(sixDaysAgo),
+        'amount': 0,
+      }
+    ];
 
     for (int i = 0; i < _transactions.length; i++) {
       int daysAgo = now.difference(_transactions[i].executionDate).inDays;
       if (daysAgo <= 6) {
-        result[daysAgo] += _transactions[i].amount;
+        result[daysAgo]['amount'] += _transactions[i].amount;
       }
     }
 
     for (int j = 0; j < result.length; j++) {
-      result[j] = _roundDouble(result[j], 2);
+      result[j]['amount'] = _roundDouble(result[j]['amount'], 2);
     }
 
     print(result);

@@ -26,7 +26,7 @@ class TransactionsChart extends StatelessWidget {
   // Properties:
   final Function touchCallbackHandler;
   final int touchedIndex;
-  final List<double> groupedAmountLastWeek;
+  final List<Map> groupedAmountLastWeek;
   final Color barBackgroundColor = const Color(0xff72d8bf);
   final Duration animDuration = const Duration(milliseconds: 250);
   // bool isPlaying = false;
@@ -121,7 +121,8 @@ class TransactionsChart extends StatelessWidget {
           width: width,
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
-            y: groupedAmountLastWeek.reduce(max) + 2,
+            // y: groupedAmountLastWeek.reduce(max) + 2,
+            y: 80,
             colors: [barBackgroundColor],
           ),
         ),
@@ -135,31 +136,32 @@ class TransactionsChart extends StatelessWidget {
           case 0:
             // return makeGroupData(0, 5, isTouched: i == touchedIndex);
             // return makeGroupData(0, groupedAmountLastWeek[0], isTouched: i == touchedIndex);
-            return makeGroupData(0, NumericHelper.roundDouble(groupedAmountLastWeek[0], 1), isTouched: i == touchedIndex);
+            // return makeGroupData(0, NumericHelper.roundDouble(groupedAmountLastWeek[0], 1), isTouched: i == touchedIndex);
+            return makeGroupData(0, NumericHelper.roundDouble(groupedAmountLastWeek[0]['amount'], 1), isTouched: i == touchedIndex);
           case 1:
             // return makeGroupData(1, 6.5, isTouched: i == touchedIndex);
             // return makeGroupData(1, groupedAmountLastWeek[1], isTouched: i == touchedIndex);
-            return makeGroupData(1, NumericHelper.roundDouble(groupedAmountLastWeek[1], 1), isTouched: i == touchedIndex);
+            return makeGroupData(1, NumericHelper.roundDouble(groupedAmountLastWeek[1]['amount'], 1), isTouched: i == touchedIndex);
           case 2:
             // return makeGroupData(2, 5, isTouched: i == touchedIndex);
             // return makeGroupData(2, groupedAmountLastWeek[2], isTouched: i == touchedIndex);
-            return makeGroupData(2, NumericHelper.roundDouble(groupedAmountLastWeek[2], 1), isTouched: i == touchedIndex);
+            return makeGroupData(2, NumericHelper.roundDouble(groupedAmountLastWeek[2]['amount'], 1), isTouched: i == touchedIndex);
           case 3:
             // return makeGroupData(3, 7.5, isTouched: i == touchedIndex);
             // return makeGroupData(3, groupedAmountLastWeek[3], isTouched: i == touchedIndex);
-            return makeGroupData(3, NumericHelper.roundDouble(groupedAmountLastWeek[3], 1), isTouched: i == touchedIndex);
+            return makeGroupData(3, NumericHelper.roundDouble(groupedAmountLastWeek[3]['amount'], 1), isTouched: i == touchedIndex);
           case 4:
             // return makeGroupData(4, 9, isTouched: i == touchedIndex);
             // return makeGroupData(4, groupedAmountLastWeek[4], isTouched: i == touchedIndex);
-            return makeGroupData(4, NumericHelper.roundDouble(groupedAmountLastWeek[4], 1), isTouched: i == touchedIndex);
+            return makeGroupData(4, NumericHelper.roundDouble(groupedAmountLastWeek[4]['amount'], 1), isTouched: i == touchedIndex);
           case 5:
             // return makeGroupData(5, 11.5, isTouched: i == touchedIndex);
             // return makeGroupData(5, groupedAmountLastWeek[5], isTouched: i == touchedIndex);
-            return makeGroupData(5, NumericHelper.roundDouble(groupedAmountLastWeek[5], 1), isTouched: i == touchedIndex);
+            return makeGroupData(5, NumericHelper.roundDouble(groupedAmountLastWeek[5]['amount'], 1), isTouched: i == touchedIndex);
           case 6:
             // return makeGroupData(6, 6.5, isTouched: i == touchedIndex);
             // return makeGroupData(6, groupedAmountLastWeek[6], isTouched: i == touchedIndex);
-            return makeGroupData(6, NumericHelper.roundDouble(groupedAmountLastWeek[6], 1), isTouched: i == touchedIndex);
+            return makeGroupData(6, NumericHelper.roundDouble(groupedAmountLastWeek[6]['amount'], 1), isTouched: i == touchedIndex);
           default:
             return null;
         }
@@ -174,25 +176,32 @@ class TransactionsChart extends StatelessWidget {
               String weekDay;
               switch (group.x.toInt()) {
                 case 0:
-                  weekDay = 'Monday';
+                  // weekDay = 'Monday';
+                  weekDay = groupedAmountLastWeek[0]['day'];
                   break;
                 case 1:
-                  weekDay = 'Tuesday';
+                  // weekDay = 'Tuesday';
+                  weekDay = groupedAmountLastWeek[1]['day'];
                   break;
                 case 2:
-                  weekDay = 'Wednesday';
+                  // weekDay = 'Wednesday';
+                  weekDay = groupedAmountLastWeek[2]['day'];
                   break;
                 case 3:
-                  weekDay = 'Thursday';
+                  // weekDay = 'Thursday';
+                  weekDay = groupedAmountLastWeek[3]['day'];
                   break;
                 case 4:
-                  weekDay = 'Friday';
+                  // weekDay = 'Friday';
+                  weekDay = groupedAmountLastWeek[4]['day'];
                   break;
                 case 5:
-                  weekDay = 'Saturday';
+                  // weekDay = 'Saturday';
+                  weekDay = groupedAmountLastWeek[5]['day'];
                   break;
                 case 6:
-                  weekDay = 'Sunday';
+                  // weekDay = 'Sunday';
+                  weekDay = groupedAmountLastWeek[6]['day'];
                   break;
               }
               return BarTooltipItem(
@@ -238,19 +247,26 @@ class TransactionsChart extends StatelessWidget {
           getTitles: (double value) {
             switch (value.toInt()) {
               case 0:
-                return 'M';
+                // return 'M';
+                return groupedAmountLastWeek[0]['day'][0];
               case 1:
-                return 'T';
+                // return 'T';
+                return groupedAmountLastWeek[1]['day'][0];
               case 2:
-                return 'W';
+                // return 'W';
+                return groupedAmountLastWeek[2]['day'][0];
               case 3:
-                return 'T';
+                // return 'T';
+                return groupedAmountLastWeek[3]['day'][0];
               case 4:
-                return 'F';
+                // return 'F';
+                return groupedAmountLastWeek[4]['day'][0];
               case 5:
-                return 'S';
+                // return 'S';
+                return groupedAmountLastWeek[5]['day'][0];
               case 6:
-                return 'S';
+                // return 'S';
+                return groupedAmountLastWeek[6]['day'][0];
               default:
                 return '';
             }
