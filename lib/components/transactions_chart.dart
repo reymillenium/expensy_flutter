@@ -176,38 +176,41 @@ class TransactionsChart extends StatelessWidget {
       barTouchData: BarTouchData(
         touchTooltipData: BarTouchTooltipData(
             tooltipBgColor: Colors.blueGrey,
+            tooltipPadding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
             getTooltipItem: (group, groupIndex, rod, rodIndex) {
-              String weekDay;
-              switch (group.x.toInt()) {
-                case 0:
-                  // weekDay = 'Monday';
-                  weekDay = groupedAmountLastWeek[0]['day'];
-                  break;
-                case 1:
-                  // weekDay = 'Tuesday';
-                  weekDay = groupedAmountLastWeek[1]['day'];
-                  break;
-                case 2:
-                  // weekDay = 'Wednesday';
-                  weekDay = groupedAmountLastWeek[2]['day'];
-                  break;
-                case 3:
-                  // weekDay = 'Thursday';
-                  weekDay = groupedAmountLastWeek[3]['day'];
-                  break;
-                case 4:
-                  // weekDay = 'Friday';
-                  weekDay = groupedAmountLastWeek[4]['day'];
-                  break;
-                case 5:
-                  // weekDay = 'Saturday';
-                  weekDay = groupedAmountLastWeek[5]['day'];
-                  break;
-                case 6:
-                  // weekDay = 'Sunday';
-                  weekDay = groupedAmountLastWeek[6]['day'];
-                  break;
-              }
+              // String weekDay;
+              // switch (group.x.toInt()) {
+              //   case 0:
+              //     // weekDay = 'Monday';
+              //     weekDay = groupedAmountLastWeek[0]['day'];
+              //     break;
+              //   case 1:
+              //     // weekDay = 'Tuesday';
+              //     weekDay = groupedAmountLastWeek[1]['day'];
+              //     break;
+              //   case 2:
+              //     // weekDay = 'Wednesday';
+              //     weekDay = groupedAmountLastWeek[2]['day'];
+              //     break;
+              //   case 3:
+              //     // weekDay = 'Thursday';
+              //     weekDay = groupedAmountLastWeek[3]['day'];
+              //     break;
+              //   case 4:
+              //     // weekDay = 'Friday';
+              //     weekDay = groupedAmountLastWeek[4]['day'];
+              //     break;
+              //   case 5:
+              //     // weekDay = 'Saturday';
+              //     weekDay = groupedAmountLastWeek[5]['day'];
+              //     break;
+              //   case 6:
+              //     // weekDay = 'Sunday';
+              //     weekDay = groupedAmountLastWeek[6]['day'];
+              //     break;
+              // }
+              String weekDay = groupedAmountLastWeek[group.x]['day'];
+
               return BarTooltipItem(
                 weekDay + '\n',
                 TextStyle(
@@ -221,11 +224,12 @@ class TransactionsChart extends StatelessWidget {
                     text: NumericHelper.roundDouble((rod.y - 1.0), 2).toString(),
                     style: TextStyle(
                       color: Colors.yellow,
-                      fontSize: 11,
+                      fontSize: 10,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                 ],
+                // textAlign: TextAlign.center,
               );
             }),
         // touchCallback: (barTouchResponse) {
