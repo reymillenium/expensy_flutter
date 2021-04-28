@@ -21,10 +21,12 @@ import 'package:expensy_flutter/helpers/numeric_helper.dart';
 // Utilities:
 
 class DateHelper {
+  // Returns the current DateTime:
   static DateTime now() {
     return DateTime.now();
   }
 
+  // Returns a DateTime object a given amount of time ago:
   static DateTime timeAgo({
     int microseconds = 0,
     int milliseconds = 0,
@@ -45,6 +47,7 @@ class DateHelper {
     ));
   }
 
+  // Returns a DateTime object a given amount of time into the future:
   static DateTime timeFromNow({
     int microseconds = 0,
     int milliseconds = 0,
@@ -65,6 +68,12 @@ class DateHelper {
     ));
   }
 
+  // Returns the current day of the week::
+  static String weekDayNow() {
+    return DateFormat('EEEE').format(DateTime.now());
+  }
+
+  // Returns the day of the week from a given amount of time ago:
   static String weekDayTimeAgo({
     int microseconds = 0,
     int milliseconds = 0,
@@ -85,6 +94,7 @@ class DateHelper {
     ));
   }
 
+  // Returns the day of the week from a given amount of time into the future:
   static String weekDayTimeFromNow({
     int microseconds = 0,
     int milliseconds = 0,
@@ -105,10 +115,7 @@ class DateHelper {
     ));
   }
 
-  static String weekDayNow() {
-    return DateFormat('EEEE').format(DateTime.now());
-  }
-
+  // Returns a random DateTime object localized on the last week:
   static DateTime randomDateTimeOnTheLastWeek() {
     final DateTime now = DateTime.now();
     return now.subtract(new Duration(days: NumericHelper.randomIntegerInRange(min: 0, max: 6)));
