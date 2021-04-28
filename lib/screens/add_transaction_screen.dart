@@ -1,5 +1,6 @@
 // Packages:
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
+import 'package:expensy_flutter/helpers/date_helper.dart';
 import 'package:flutter/material.dart';
 import 'dart:math'; // Allows to use: random
 import 'dart:convert'; // Allows to use: base64UrlEncode
@@ -32,7 +33,9 @@ class AddTransactionScreen extends StatelessWidget {
     String title = '';
     double amount = 0;
     DateTime now = DateTime.now();
-    final oneHundredYearsAgo = now.subtract(new Duration(days: 365 * 100));
+    // final oneHundredYearsAgo = now.subtract(new Duration(days: 365 * 100));
+    final oneHundredYearsAgo = DateHelper.timeAgo(years: 100);
+    // final oneHundredYearsFromNow = now.add(new Duration(days: 365 * 100));
     final oneHundredYearsFromNow = now.add(new Duration(days: 365 * 100));
     DateTime executionDate = now;
 

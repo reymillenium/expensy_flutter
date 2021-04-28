@@ -26,27 +26,47 @@ class DateHelper {
   }
 
   static DateTime oneDayAgo() {
-    return now().subtract(new Duration(days: 1));
+    return DateTime.now().subtract(new Duration(days: 1));
   }
 
   static DateTime twoDaysAgo() {
-    return now().subtract(new Duration(days: 2));
+    return DateTime.now().subtract(new Duration(days: 2));
   }
 
   static DateTime threeDaysAgo() {
-    return now().subtract(new Duration(days: 3));
+    return DateTime.now().subtract(new Duration(days: 3));
   }
 
   static DateTime fourDaysAgo() {
-    return now().subtract(new Duration(days: 4));
+    return DateTime.now().subtract(new Duration(days: 4));
   }
 
   static DateTime fiveDaysAgo() {
-    return now().subtract(new Duration(days: 5));
+    return DateTime.now().subtract(new Duration(days: 5));
   }
 
   static DateTime sixDaysAgo() {
-    return now().subtract(new Duration(days: 6));
+    return DateTime.now().subtract(new Duration(days: 6));
+  }
+
+  static DateTime timeAgo({
+    int microseconds = 0,
+    int milliseconds = 0,
+    int seconds = 0,
+    int minutes = 0,
+    int hours = 0,
+    int days = 0,
+    int years = 0,
+  }) {
+    int accumulatedDays = days + (years * 365);
+    return DateTime.now().subtract(new Duration(
+      microseconds: microseconds,
+      milliseconds: milliseconds,
+      seconds: seconds,
+      minutes: minutes,
+      hours: hours,
+      days: accumulatedDays,
+    ));
   }
 
   static String weekDayNow() {
