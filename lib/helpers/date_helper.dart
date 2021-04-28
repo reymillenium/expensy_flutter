@@ -65,32 +65,48 @@ class DateHelper {
     ));
   }
 
+  static String weekDayTimeAgo({
+    int microseconds = 0,
+    int milliseconds = 0,
+    int seconds = 0,
+    int minutes = 0,
+    int hours = 0,
+    int days = 0,
+    int years = 0,
+  }) {
+    return DateFormat('EEEE').format(timeAgo(
+      microseconds: microseconds,
+      milliseconds: milliseconds,
+      seconds: seconds,
+      minutes: minutes,
+      hours: hours,
+      days: days,
+      years: years,
+    ));
+  }
+
+  static String weekDayTimeFromNow({
+    int microseconds = 0,
+    int milliseconds = 0,
+    int seconds = 0,
+    int minutes = 0,
+    int hours = 0,
+    int days = 0,
+    int years = 0,
+  }) {
+    return DateFormat('EEEE').format(timeFromNow(
+      microseconds: microseconds,
+      milliseconds: milliseconds,
+      seconds: seconds,
+      minutes: minutes,
+      hours: hours,
+      days: days,
+      years: years,
+    ));
+  }
+
   static String weekDayNow() {
     return DateFormat('EEEE').format(DateTime.now());
-  }
-
-  static String weekDayOneDayAgo() {
-    return DateFormat('EEEE').format(timeAgo(days: 1));
-  }
-
-  static String weekDayTwoDaysAgo() {
-    return DateFormat('EEEE').format(timeAgo(days: 2));
-  }
-
-  static String weekDayThreeDaysAgo() {
-    return DateFormat('EEEE').format(timeAgo(days: 3));
-  }
-
-  static String weekDayFourDaysAgo() {
-    return DateFormat('EEEE').format(timeAgo(days: 4));
-  }
-
-  static String weekDayFiveDaysAgo() {
-    return DateFormat('EEEE').format(timeAgo(days: 5));
-  }
-
-  static String weekDaySixDaysAgo() {
-    return DateFormat('EEEE').format(timeAgo(days: 6));
   }
 
   static DateTime randomDateTimeOnTheLastWeek() {

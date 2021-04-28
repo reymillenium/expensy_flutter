@@ -173,31 +173,31 @@ class TransactionsData {
   List<Map> groupedAmountLastWeek() {
     List<Map> result = [
       {
-        'day': DateHelper.weekDayNow(),
+        'day': DateHelper.weekDayTimeAgo(),
         'amount': 0,
       },
       {
-        'day': DateHelper.weekDayOneDayAgo(),
+        'day': DateHelper.weekDayTimeAgo(days: 1),
         'amount': 0,
       },
       {
-        'day': DateHelper.weekDayTwoDaysAgo(),
+        'day': DateHelper.weekDayTimeAgo(days: 2),
         'amount': 0,
       },
       {
-        'day': DateHelper.weekDayThreeDaysAgo(),
+        'day': DateHelper.weekDayTimeAgo(days: 3),
         'amount': 0,
       },
       {
-        'day': DateHelper.weekDayFourDaysAgo(),
+        'day': DateHelper.weekDayTimeAgo(days: 4),
         'amount': 0,
       },
       {
-        'day': DateHelper.weekDayFiveDaysAgo(),
+        'day': DateHelper.weekDayTimeAgo(days: 5),
         'amount': 0,
       },
       {
-        'day': DateHelper.weekDaySixDaysAgo(),
+        'day': DateHelper.weekDayTimeAgo(days: 6),
         'amount': 0,
       }
     ];
