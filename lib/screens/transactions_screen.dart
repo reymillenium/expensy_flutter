@@ -107,10 +107,6 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
               ),
             ),
           ),
-
-          // SizedBox(
-          //   height: 90,
-          // ),
         ],
       ),
 
@@ -125,7 +121,6 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
           ],
         ),
         shape: CircularNotchedRectangle(),
-        //color of the BottomAppBar
         color: Colors.purple,
       ),
 

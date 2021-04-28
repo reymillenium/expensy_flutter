@@ -16,6 +16,7 @@ import 'package:expensy_flutter/models/transactions_data.dart';
 import 'package:expensy_flutter/components/transactions_list.dart';
 
 // Helpers:
+import 'package:expensy_flutter/helpers/string_helper.dart';
 
 // Utilities:
 
@@ -107,12 +108,8 @@ class AddTransactionScreen extends StatelessWidget {
                   )
                 ],
                 keyboardType: TextInputType.number,
-                onChanged: (String newText) {
-                  // amount = double.parse(newText);
-                  // Allows only numbers:
-                  // amount = newText == '' ? 0 : double.parse(newText.replaceAll(new RegExp(r'[^0-9]'), ''));
-                  // Allows numbers and a dot
-                  amount = newText == '' ? 0 : double.parse(newText.replaceAll(new RegExp(r'[^0-9\.]'), ''));
+                onChanged: (String newAmountText) {
+                  amount = StringHelper.extractDoubleOrZero(newAmountText);
                 },
               ),
 
