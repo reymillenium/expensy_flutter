@@ -69,6 +69,26 @@ class DateHelper {
     ));
   }
 
+  static DateTime timeFromNow({
+    int microseconds = 0,
+    int milliseconds = 0,
+    int seconds = 0,
+    int minutes = 0,
+    int hours = 0,
+    int days = 0,
+    int years = 0,
+  }) {
+    int accumulatedDays = days + (years * 365);
+    return DateTime.now().add(new Duration(
+      microseconds: microseconds,
+      milliseconds: milliseconds,
+      seconds: seconds,
+      minutes: minutes,
+      hours: hours,
+      days: accumulatedDays,
+    ));
+  }
+
   static String weekDayNow() {
     return DateFormat('EEEE').format(now());
   }

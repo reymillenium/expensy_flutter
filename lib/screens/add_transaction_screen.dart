@@ -33,10 +33,8 @@ class AddTransactionScreen extends StatelessWidget {
     String title = '';
     double amount = 0;
     DateTime now = DateTime.now();
-    // final oneHundredYearsAgo = now.subtract(new Duration(days: 365 * 100));
     final oneHundredYearsAgo = DateHelper.timeAgo(years: 100);
-    // final oneHundredYearsFromNow = now.add(new Duration(days: 365 * 100));
-    final oneHundredYearsFromNow = now.add(new Duration(days: 365 * 100));
+    final oneHundredYearsFromNow = DateHelper.timeFromNow(years: 100);
     DateTime executionDate = now;
 
     return SingleChildScrollView(
