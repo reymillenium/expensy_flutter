@@ -130,6 +130,29 @@ class DateHelper {
     ));
   }
 
+  // Returns the day of the week from a given amount of time before a given DateTime:
+  static String weekDayTimeBefore({
+    @required DateTime begin,
+    int microseconds = 0,
+    int milliseconds = 0,
+    int seconds = 0,
+    int minutes = 0,
+    int hours = 0,
+    int days = 0,
+    int years = 0,
+  }) {
+    return DateFormat('EEEE').format(timeBefore(
+      begin: begin,
+      microseconds: microseconds,
+      milliseconds: milliseconds,
+      seconds: seconds,
+      minutes: minutes,
+      hours: hours,
+      days: days,
+      years: years,
+    ));
+  }
+
   // Returns the day of the week from a given amount of time into the future:
   static String weekDayTimeFromNow({
     int microseconds = 0,
@@ -141,6 +164,29 @@ class DateHelper {
     int years = 0,
   }) {
     return DateFormat('EEEE').format(timeFromNow(
+      microseconds: microseconds,
+      milliseconds: milliseconds,
+      seconds: seconds,
+      minutes: minutes,
+      hours: hours,
+      days: days,
+      years: years,
+    ));
+  }
+
+  // Returns the day of the week from a given amount of time after a given DateTime:
+  static String weekDayTimeAfter({
+    @required DateTime begin,
+    int microseconds = 0,
+    int milliseconds = 0,
+    int seconds = 0,
+    int minutes = 0,
+    int hours = 0,
+    int days = 0,
+    int years = 0,
+  }) {
+    return DateFormat('EEEE').format(timeAfter(
+      begin: begin,
       microseconds: microseconds,
       milliseconds: milliseconds,
       seconds: seconds,
