@@ -134,11 +134,11 @@ class AddTransactionScreen extends StatelessWidget {
                   return true;
                 },
                 onChanged: (val) {
-                  print('onChanged $val');
+                  // print('onChanged $val');
                   executionDate = DateTime.parse(val);
                 },
                 validator: (val) {
-                  print(val);
+                  // print(val);
                   return null;
                 },
                 // onSaved: (val) => print(val),

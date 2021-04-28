@@ -180,7 +180,7 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
                   });
                 },
                 validator: (val) {
-                  print(val);
+                  // print(val);
                   return null;
                 },
                 // onSaved: (val) => print(val),
