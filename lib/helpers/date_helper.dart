@@ -7,16 +7,8 @@ import 'package:uuid/uuid.dart'; // Allows to use: Uuid
 import 'package:rflutter_alert/rflutter_alert.dart'; // Allows to use: Alert
 import 'package:faker/faker.dart'; // Allows to use: fake data generation (Fake)
 
-// Screens:
-
-// Models:
-import 'package:expensy_flutter/models/transaction.dart';
-
-// Components:
-import 'package:expensy_flutter/components/transactions_list.dart';
-
 // Helpers:
-import 'package:expensy_flutter/helpers/numeric_helper.dart';
+import './numeric_helper.dart';
 
 // Utilities:
 
@@ -47,6 +39,28 @@ class DateHelper {
     ));
   }
 
+  // Returns a DateTime object a given amount of time before a given DateTime:
+  static DateTime timeBefore({
+    @required DateTime begin,
+    int microseconds = 0,
+    int milliseconds = 0,
+    int seconds = 0,
+    int minutes = 0,
+    int hours = 0,
+    int days = 0,
+    int years = 0,
+  }) {
+    int accumulatedDays = days + (years * 365);
+    return begin.subtract(new Duration(
+      microseconds: microseconds,
+      milliseconds: milliseconds,
+      seconds: seconds,
+      minutes: minutes,
+      hours: hours,
+      days: accumulatedDays,
+    ));
+  }
+
   // Returns a DateTime object a given amount of time into the future:
   static DateTime timeFromNow({
     int microseconds = 0,
@@ -59,6 +73,28 @@ class DateHelper {
   }) {
     int accumulatedDays = days + (years * 365);
     return DateTime.now().add(new Duration(
+      microseconds: microseconds,
+      milliseconds: milliseconds,
+      seconds: seconds,
+      minutes: minutes,
+      hours: hours,
+      days: accumulatedDays,
+    ));
+  }
+
+  // Returns a DateTime object a given amount of time after a given DateTime:
+  static DateTime timeAfter({
+    @required DateTime begin,
+    int microseconds = 0,
+    int milliseconds = 0,
+    int seconds = 0,
+    int minutes = 0,
+    int hours = 0,
+    int days = 0,
+    int years = 0,
+  }) {
+    int accumulatedDays = days + (years * 365);
+    return begin.add(new Duration(
       microseconds: microseconds,
       milliseconds: milliseconds,
       seconds: seconds,
