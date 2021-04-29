@@ -101,7 +101,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                     title = newText;
                   });
                 },
-                onSubmitted: !hasValidData() ? null : (_) => submitData,
+                onSubmitted: !hasValidData() ? null : (_) => submitData(),
               ),
 
               // Amount Input
@@ -122,7 +122,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                     amount = StringHelper.extractDoubleOrZero(newAmountText);
                   });
                 },
-                onSubmitted: !hasValidData() ? null : (_) => submitData,
+                onSubmitted: !hasValidData() ? null : (_) => submitData(),
               ),
 
               // DateTime picker
