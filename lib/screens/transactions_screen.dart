@@ -79,7 +79,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             iconSize: 40,
             icon: Icon(Icons.add_rounded),
             tooltip: 'Add Transaction',
-            onPressed: showModalNewTransaction,
+            onPressed: () => showModalNewTransaction(context),
           ),
         ],
       ),
@@ -127,14 +127,14 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       floatingActionButton: FloatingActionButton(
         tooltip: 'Add Transaction',
         child: Icon(Icons.add),
-        onPressed: showModalNewTransaction,
+        onPressed: () => showModalNewTransaction(context),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 
   // It shows the AddTransactionScreen widget as a modal:
-  void showModalNewTransaction() {
+  void showModalNewTransaction(BuildContext context) {
     showModalBottomSheet(
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
