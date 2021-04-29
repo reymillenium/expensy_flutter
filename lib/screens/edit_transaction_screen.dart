@@ -20,7 +20,7 @@ import 'package:expensy_flutter/helpers/string_helper.dart';
 
 // Utilities:
 
-class UpdateTransactionScreen extends StatefulWidget {
+class EditTransactionScreen extends StatefulWidget {
   // Properties:
   final int index;
   final String title;
@@ -29,7 +29,7 @@ class UpdateTransactionScreen extends StatefulWidget {
   final Function onUpdateTransactionHandler;
 
   // Constructor:
-  UpdateTransactionScreen({
+  EditTransactionScreen({
     this.index,
     this.title,
     this.amount,
@@ -38,10 +38,10 @@ class UpdateTransactionScreen extends StatefulWidget {
   });
 
   @override
-  _UpdateTransactionScreenState createState() => _UpdateTransactionScreenState();
+  _EditTransactionScreenState createState() => _EditTransactionScreenState();
 }
 
-class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
+class _EditTransactionScreenState extends State<EditTransactionScreen> {
   // Sate Properties:
   int _index;
   String _title;

@@ -5,7 +5,7 @@ import 'dart:convert'; // Allows to use: base64UrlEncode
 import 'package:intl/intl.dart'; // Allows to use: DateFormat
 
 // Screens:
-import 'package:expensy_flutter/screens/update_transaction_screen.dart';
+import 'package:expensy_flutter/screens/edit_transaction_screen.dart';
 
 // Models:
 import 'package:expensy_flutter/models/transaction.dart';
@@ -118,7 +118,7 @@ class TransactionTile extends StatelessWidget {
         //               backgroundColor: Colors.transparent,
         //               isScrollControlled: true,
         //               context: context,
-        //               builder: (context) => UpdateTransactionScreen(
+        //               builder: (context) => EditTransactionScreen(
         //                 index: index,
         //                 title: transaction.title,
         //                 amount: transaction.amount,
@@ -188,7 +188,7 @@ class TransactionTile extends StatelessWidget {
                     backgroundColor: Colors.transparent,
                     isScrollControlled: true,
                     context: context,
-                    builder: (context) => UpdateTransactionScreen(
+                    builder: (context) => EditTransactionScreen(
                       index: index,
                       title: transaction.title,
                       amount: transaction.amount,
