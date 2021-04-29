@@ -39,25 +39,25 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   final TransactionsData transactionsData = TransactionsData();
   int touchedIndex;
 
-  void onAddTransactionHandler(String title, double amount, DateTime executionDate) {
+  void _onAddTransactionHandler(String title, double amount, DateTime executionDate) {
     setState(() {
       transactionsData.addTransaction(title, amount, executionDate);
     });
   }
 
-  void onUpdateTransactionHandler(int index, String title, double amount, DateTime executionDate) {
+  void _onUpdateTransactionHandler(int index, String title, double amount, DateTime executionDate) {
     setState(() {
       transactionsData.updateTransaction(index, title, amount, executionDate);
     });
   }
 
-  void onDeleteTransactionHandler(int index) {
+  void _onDeleteTransactionHandler(int index) {
     setState(() {
       transactionsData.deleteTransactionWithConfirm(index, context);
     });
   }
 
-  void touchCallbackHandler(BarTouchResponse barTouchResponse) {
+  void _touchCallbackHandler(BarTouchResponse barTouchResponse) {
     setState(() {
       if (barTouchResponse.spot != null && barTouchResponse.touchInput is! PointerUpEvent && barTouchResponse.touchInput is! PointerExitEvent) {
         touchedIndex = barTouchResponse.spot.touchedBarGroupIndex;
@@ -79,7 +79,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             iconSize: 40,
             icon: Icon(Icons.add_rounded),
             tooltip: 'Add Transaction',
-            onPressed: () => showModalNewTransaction(context),
+            onPressed: () => _showModalNewTransaction(context),
           ),
         ],
       ),
@@ -89,7 +89,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
         children: <Widget>[
           // Transactions Bar Chart
           TransactionsChart(
-            touchCallbackHandler: touchCallbackHandler,
+            touchCallbackHandler: _touchCallbackHandler,
             touchedIndex: touchedIndex,
             groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
             biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
@@ -101,8 +101,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             child: Container(
               child: TransactionsList(
                 transactions: transactionsData.transactions,
-                onUpdateTransactionHandler: onUpdateTransactionHandler,
-                onDeleteTransactionHandler: onDeleteTransactionHandler,
+                onUpdateTransactionHandler: _onUpdateTransactionHandler,
+                onDeleteTransactionHandler: _onDeleteTransactionHandler,
               ),
             ),
           ),
@@ -127,20 +127,20 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       floatingActionButton: FloatingActionButton(
         tooltip: 'Add Transaction',
         child: Icon(Icons.add),
-        onPressed: () => showModalNewTransaction(context),
+        onPressed: () => _showModalNewTransaction(context),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 
   // It shows the AddTransactionScreen widget as a modal:
-  void showModalNewTransaction(BuildContext context) {
+  void _showModalNewTransaction(BuildContext context) {
     showModalBottomSheet(
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
       context: context,
       builder: (context) => NewTransactionScreen(
-        onAddTransactionHandler: onAddTransactionHandler,
+        onAddTransactionHandler: _onAddTransactionHandler,
       ),
     );
   }

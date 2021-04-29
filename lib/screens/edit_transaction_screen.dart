@@ -128,7 +128,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
                     _title = newText;
                   });
                 },
-                onFieldSubmitted: hasValidData() ? (_) => () => updateData(context) : null,
+                onFieldSubmitted: _hasValidData() ? (_) => () => _updateData(context) : null,
               ),
 
               // Amount Input
@@ -150,7 +150,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
                     _amount = StringHelper.extractDoubleOrZero(amountText);
                   });
                 },
-                onFieldSubmitted: hasValidData() ? (_) => () => updateData(context) : null,
+                onFieldSubmitted: _hasValidData() ? (_) => () => _updateData(context) : null,
               ),
 
               // DateTime picker
@@ -188,12 +188,12 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 30.0),
                 child: Material(
-                  color: hasValidData() ? Colors.purple : Colors.grey,
+                  color: _hasValidData() ? Colors.purple : Colors.grey,
                   // borderRadius: BorderRadius.circular(12.0),
                   elevation: 5.0,
                   child: MaterialButton(
                     disabledColor: Colors.grey,
-                    onPressed: hasValidData() ? () => updateData(context) : null,
+                    onPressed: _hasValidData() ? () => _updateData(context) : null,
                     // minWidth: 300.0,
                     minWidth: double.infinity,
                     height: 42.0,
@@ -215,7 +215,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
     );
   }
 
-  bool hasValidData() {
+  bool _hasValidData() {
     bool result = false;
     if (_title.isNotEmpty && _amount != 0) {
       result = true;
@@ -223,7 +223,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
     return result;
   }
 
-  void updateData(BuildContext context) {
+  void _updateData(BuildContext context) {
     if (_title.isNotEmpty && _amount != 0) {
       _onUpdateTransactionHandler(_index, _title, _amount, _executionDate);
     }

@@ -101,7 +101,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                     title = newText;
                   });
                 },
-                onSubmitted: !hasValidData() ? null : (_) => () => submitData(context),
+                onSubmitted: !_hasValidData() ? null : (_) => () => _submitData(context),
               ),
 
               // Amount Input
@@ -122,7 +122,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                     amount = StringHelper.extractDoubleOrZero(newAmountText);
                   });
                 },
-                onSubmitted: !hasValidData() ? null : (_) => () => submitData(context),
+                onSubmitted: !_hasValidData() ? null : (_) => () => _submitData(context),
               ),
 
               // DateTime picker
@@ -160,12 +160,12 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 30.0),
                 child: Material(
-                  color: hasValidData() ? Colors.purple : Colors.grey,
+                  color: _hasValidData() ? Colors.purple : Colors.grey,
                   // borderRadius: BorderRadius.circular(12.0),
                   elevation: 5,
                   child: MaterialButton(
                     disabledColor: Colors.grey,
-                    onPressed: !hasValidData() ? null : () => submitData(context),
+                    onPressed: !_hasValidData() ? null : () => _submitData(context),
                     // minWidth: 300.0,
                     minWidth: double.infinity,
                     height: 42.0,
@@ -187,7 +187,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
     );
   }
 
-  bool hasValidData() {
+  bool _hasValidData() {
     bool result = false;
     if (title.isNotEmpty && amount != 0) {
       result = true;
@@ -195,7 +195,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
     return result;
   }
 
-  void submitData(BuildContext context) {
+  void _submitData(BuildContext context) {
     if (title.isNotEmpty && amount != 0) {
       widget.onAddTransactionHandler(title, amount, executionDate);
     }
