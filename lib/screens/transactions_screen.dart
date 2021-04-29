@@ -24,16 +24,8 @@ import 'package:expensy_flutter/components/transactions_chart.dart';
 import 'package:expensy_flutter/utilities/constants.dart';
 
 class TransactionsScreen extends StatefulWidget {
-  // Properties
+  // Properties:
   final String title;
-  // final List<Color> availableColors = [
-  //   Colors.purpleAccent,
-  //   Colors.yellow,
-  //   Colors.lightBlue,
-  //   Colors.orange,
-  //   Colors.pink,
-  //   Colors.redAccent,
-  // ];
 
   // Constructor:
   TransactionsScreen({Key key, this.title}) : super(key: key);
@@ -43,10 +35,9 @@ class TransactionsScreen extends StatefulWidget {
 }
 
 class _TransactionsScreenState extends State<TransactionsScreen> {
-  // Properties:
+  // State Properties:
   final TransactionsData transactionsData = TransactionsData();
   int touchedIndex;
-  // bool isPlaying = false;
 
   void onAddTransactionHandler(String title, double amount, DateTime executionDate) {
     setState(() {
@@ -83,6 +74,14 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: [
+          IconButton(
+            iconSize: 40,
+            icon: Icon(Icons.add_rounded),
+            tooltip: 'Add Transaction',
+            onPressed: showModalAddTransaction,
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -128,18 +127,21 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       floatingActionButton: FloatingActionButton(
         tooltip: 'Increment',
         child: Icon(Icons.add),
-        onPressed: () {
-          showModalBottomSheet(
-            backgroundColor: Colors.transparent,
-            isScrollControlled: true,
-            context: context,
-            builder: (context) => AddTransactionScreen(
-              onAddTransactionHandler: onAddTransactionHandler,
-            ),
-          );
-        },
+        onPressed: showModalAddTransaction,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+    );
+  }
+
+  // It shows the AddTransactionScreen widget as a modal:
+  void showModalAddTransaction() {
+    showModalBottomSheet(
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      context: context,
+      builder: (context) => AddTransactionScreen(
+        onAddTransactionHandler: onAddTransactionHandler,
+      ),
     );
   }
 }
