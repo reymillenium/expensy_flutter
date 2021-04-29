@@ -21,7 +21,7 @@ import 'package:expensy_flutter/helpers/string_helper.dart';
 
 // Utilities:
 
-class AddTransactionScreen extends StatelessWidget {
+class AddTransactionScreen extends StatefulWidget {
   // Properties:
   final Function onAddTransactionHandler;
 
@@ -29,14 +29,21 @@ class AddTransactionScreen extends StatelessWidget {
   AddTransactionScreen({this.onAddTransactionHandler});
 
   @override
-  Widget build(BuildContext context) {
-    String title = '';
-    double amount = 0;
-    DateTime now = DateTime.now();
-    final oneHundredYearsAgo = DateHelper.timeAgo(years: 100);
-    final oneHundredYearsFromNow = DateHelper.timeFromNow(years: 100);
-    DateTime executionDate = now;
+  _AddTransactionScreenState createState() => _AddTransactionScreenState();
+}
 
+class _AddTransactionScreenState extends State<AddTransactionScreen> {
+  // State Properties:
+  String title = '';
+  double amount = 0;
+  DateTime executionDate = DateTime.now();
+
+  // Run time constants:
+  final oneHundredYearsAgo = DateHelper.timeAgo(years: 100);
+  final oneHundredYearsFromNow = DateHelper.timeFromNow(years: 100);
+
+  @override
+  Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
         // padding: const EdgeInsets.only(left: 20, top: 0, right: 20),
@@ -90,9 +97,9 @@ class AddTransactionScreen extends StatelessWidget {
                 ),
                 style: TextStyle(),
                 onChanged: (String newText) {
-                  // setState(() {
-                  title = newText;
-                  // });
+                  setState(() {
+                    title = newText;
+                  });
                 },
               ),
 
@@ -110,7 +117,9 @@ class AddTransactionScreen extends StatelessWidget {
                 ],
                 keyboardType: TextInputType.number,
                 onChanged: (String newAmountText) {
-                  amount = StringHelper.extractDoubleOrZero(newAmountText);
+                  setState(() {
+                    amount = StringHelper.extractDoubleOrZero(newAmountText);
+                  });
                 },
               ),
 
@@ -119,7 +128,7 @@ class AddTransactionScreen extends StatelessWidget {
                 // type: DateTimePickerType.dateTimeSeparate,
                 type: DateTimePickerType.date,
                 dateMask: 'd MMM, yyyy',
-                initialValue: now.toString(),
+                initialValue: DateTime.now().toString(),
                 firstDate: oneHundredYearsAgo,
                 lastDate: oneHundredYearsFromNow,
                 icon: Icon(Icons.event),
@@ -134,8 +143,9 @@ class AddTransactionScreen extends StatelessWidget {
                   return true;
                 },
                 onChanged: (val) {
-                  // print('onChanged $val');
-                  executionDate = DateTime.parse(val);
+                  setState(() {
+                    executionDate = DateTime.parse(val);
+                  });
                 },
                 validator: (val) {
                   // print(val);
@@ -148,16 +158,19 @@ class AddTransactionScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 30.0),
                 child: Material(
-                  color: Colors.purple,
+                  color: hasValidData() ? Colors.purple : Colors.grey,
                   // borderRadius: BorderRadius.circular(12.0),
-                  elevation: 5.0,
+                  elevation: 5,
                   child: MaterialButton(
-                    onPressed: () {
-                      if (title != '' && amount != 0) {
-                        onAddTransactionHandler(title, amount, executionDate);
-                      }
-                      Navigator.pop(context);
-                    },
+                    disabledColor: Colors.grey,
+                    onPressed: !hasValidData()
+                        ? null
+                        : () {
+                            if (title != '' && amount != 0) {
+                              widget.onAddTransactionHandler(title, amount, executionDate);
+                            }
+                            Navigator.pop(context);
+                          },
                     // minWidth: 300.0,
                     minWidth: double.infinity,
                     height: 42.0,
@@ -177,5 +190,13 @@ class AddTransactionScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bool hasValidData() {
+    bool result = false;
+    if (title != '' && amount != 0) {
+      result = true;
+    }
+    return result;
   }
 }
