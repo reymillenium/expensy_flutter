@@ -21,18 +21,18 @@ import 'package:expensy_flutter/helpers/string_helper.dart';
 
 // Utilities:
 
-class AddTransactionScreen extends StatefulWidget {
+class NewTransactionScreen extends StatefulWidget {
   // Properties:
   final Function onAddTransactionHandler;
 
   // Constructor:
-  AddTransactionScreen({this.onAddTransactionHandler});
+  NewTransactionScreen({this.onAddTransactionHandler});
 
   @override
-  _AddTransactionScreenState createState() => _AddTransactionScreenState();
+  _NewTransactionScreenState createState() => _NewTransactionScreenState();
 }
 
-class _AddTransactionScreenState extends State<AddTransactionScreen> {
+class _NewTransactionScreenState extends State<NewTransactionScreen> {
   // State Properties:
   String title = '';
   double amount = 0;

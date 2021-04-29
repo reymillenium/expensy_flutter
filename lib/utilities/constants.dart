@@ -8,7 +8,7 @@ import 'package:fl_chart/fl_chart.dart'; // Allows to use the Bar Charts
 import 'package:flutter/gestures.dart'; // Allows: PointerExitEvent
 
 // Screens:
-import 'package:expensy_flutter/screens/add_transaction_screen.dart';
+import 'package:expensy_flutter/screens/new_transaction_screen.dart';
 
 // Models:
 import 'package:expensy_flutter/models/transaction.dart';

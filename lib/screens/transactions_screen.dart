@@ -8,7 +8,7 @@ import 'package:fl_chart/fl_chart.dart'; // Allows to use the Bar Charts
 import 'package:flutter/gestures.dart'; // Allows: PointerExitEvent
 
 // Screens:
-import 'package:expensy_flutter/screens/add_transaction_screen.dart';
+import 'package:expensy_flutter/screens/new_transaction_screen.dart';
 
 // Models:
 import 'package:expensy_flutter/models/transaction.dart';
@@ -79,7 +79,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             iconSize: 40,
             icon: Icon(Icons.add_rounded),
             tooltip: 'Add Transaction',
-            onPressed: showModalAddTransaction,
+            onPressed: showModalNewTransaction,
           ),
         ],
       ),
@@ -125,21 +125,21 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
       // FAB
       floatingActionButton: FloatingActionButton(
-        tooltip: 'Increment',
+        tooltip: 'Add Transaction',
         child: Icon(Icons.add),
-        onPressed: showModalAddTransaction,
+        onPressed: showModalNewTransaction,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 
   // It shows the AddTransactionScreen widget as a modal:
-  void showModalAddTransaction() {
+  void showModalNewTransaction() {
     showModalBottomSheet(
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
       context: context,
-      builder: (context) => AddTransactionScreen(
+      builder: (context) => NewTransactionScreen(
         onAddTransactionHandler: onAddTransactionHandler,
       ),
     );
