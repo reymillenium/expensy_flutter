@@ -40,7 +40,7 @@ class TransactionsData {
     final DateTime now = DateTime.now();
     final uuid = Uuid();
 
-    // transactions = List<Transaction>.generate(40, (index) {
+    // transactions = List<Transaction>.generate(20, (index) {
     //   var uuid = Uuid();
     //   DateTime onTheLastWeek = now.subtract(new Duration(days: NumericHelper.randomIntegerInRange(min: 0, max: 6)));
     //
@@ -54,7 +54,7 @@ class TransactionsData {
     //   );
     // });
 
-    for (int i = 0; i < 40; i++) {
+    for (int i = 0; i < 20; i++) {
       DateTime onTheLastWeek = DateHelper.randomDateTimeOnTheLastWeek();
 
       Transaction newTransaction = Transaction(

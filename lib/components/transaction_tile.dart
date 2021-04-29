@@ -23,6 +23,11 @@ class TransactionTile extends StatelessWidget {
   final Function onUpdateTransactionHandler;
   final Function onDeleteTransactionHandler;
 
+  // Run time constants:
+  // final DateFormat formatter = DateFormat('MM/dd/yyyy').add_jm();
+  final DateFormat formatter = DateFormat().add_yMMMMd();
+  final currencyFormat = new NumberFormat("#,##0.00", "en_US");
+
   // Constructor:
   TransactionTile({
     this.transaction,
@@ -33,12 +38,8 @@ class TransactionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final DateFormat formatter = DateFormat('MM/dd/yyyy').add_jm();
-    final DateFormat formatter = DateFormat().add_yMMMMd();
     final String formattedDate = formatter.format(transaction.executionDate);
-    final currencyFormat = new NumberFormat("#,##0.00", "en_US");
     final String amountLabel = '\$${currencyFormat.format(transaction.amount)}';
-    // final double amountFontSize = 14;
     final double amountFontSize = (84 / amountLabel.length);
 
     return Card(
