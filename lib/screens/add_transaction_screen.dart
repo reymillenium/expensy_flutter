@@ -189,14 +189,14 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
 
   bool hasValidData() {
     bool result = false;
-    if (title != '' && amount != 0) {
+    if (title.isNotEmpty && amount != 0) {
       result = true;
     }
     return result;
   }
 
   void submitData() {
-    if (title != '' && amount != 0) {
+    if (title.isNotEmpty && amount != 0) {
       widget.onAddTransactionHandler(title, amount, executionDate);
     }
     Navigator.pop(context);

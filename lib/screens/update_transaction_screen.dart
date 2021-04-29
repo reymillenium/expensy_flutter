@@ -217,14 +217,14 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
 
   bool hasValidData() {
     bool result = false;
-    if (_title != '' && _amount != 0) {
+    if (_title.isNotEmpty && _amount != 0) {
       result = true;
     }
     return result;
   }
 
   void updateData() {
-    if (_title != '' && _amount != 0) {
+    if (_title.isNotEmpty && _amount != 0) {
       _onUpdateTransactionHandler(_index, _title, _amount, _executionDate);
     }
     Navigator.pop(context);
