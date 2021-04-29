@@ -41,7 +41,7 @@ class UpdateTransactionScreen extends StatefulWidget {
 }
 
 class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
-  // Properties:
+  // Sate Properties:
   int _index;
   String _title;
   double _amount;
@@ -190,16 +190,19 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 30.0),
                 child: Material(
-                  color: Colors.purple,
+                  color: hasValidData() ? Colors.purple : Colors.grey,
                   // borderRadius: BorderRadius.circular(12.0),
                   elevation: 5.0,
                   child: MaterialButton(
-                    onPressed: () {
-                      if (_title != '' && _amount != 0) {
-                        _onUpdateTransactionHandler(_index, _title, _amount, _executionDate);
-                      }
-                      Navigator.pop(context);
-                    },
+                    disabledColor: Colors.grey,
+                    onPressed: !hasValidData()
+                        ? null
+                        : () {
+                            if (_title != '' && _amount != 0) {
+                              _onUpdateTransactionHandler(_index, _title, _amount, _executionDate);
+                            }
+                            Navigator.pop(context);
+                          },
                     // minWidth: 300.0,
                     minWidth: double.infinity,
                     height: 42.0,
@@ -219,5 +222,13 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
         ),
       ),
     );
+  }
+
+  bool hasValidData() {
+    bool result = false;
+    if (_title != '' && _amount != 0) {
+      result = true;
+    }
+    return result;
   }
 }
