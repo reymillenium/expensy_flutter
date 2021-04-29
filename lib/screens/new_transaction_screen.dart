@@ -34,13 +34,21 @@ class NewTransactionScreen extends StatefulWidget {
 
 class _NewTransactionScreenState extends State<NewTransactionScreen> {
   // State Properties:
-  String title = '';
-  double amount = 0;
-  DateTime executionDate = DateTime.now();
+  String _title = '';
+  double _amount = 0;
+  DateTime _executionDate = DateTime.now();
+  Function _onAddTransactionHandler;
 
   // Run time constants:
-  final oneHundredYearsAgo = DateHelper.timeAgo(years: 100);
-  final oneHundredYearsFromNow = DateHelper.timeFromNow(years: 100);
+  final _oneHundredYearsAgo = DateHelper.timeAgo(years: 100);
+  final _oneHundredYearsFromNow = DateHelper.timeFromNow(years: 100);
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _onAddTransactionHandler = widget.onAddTransactionHandler;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +106,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                 style: TextStyle(),
                 onChanged: (String newText) {
                   setState(() {
-                    title = newText;
+                    _title = newText;
                   });
                 },
                 onSubmitted: !_hasValidData() ? null : (_) => () => _submitData(context),
@@ -119,7 +127,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                 keyboardType: TextInputType.number,
                 onChanged: (String newAmountText) {
                   setState(() {
-                    amount = StringHelper.extractDoubleOrZero(newAmountText);
+                    _amount = StringHelper.extractDoubleOrZero(newAmountText);
                   });
                 },
                 onSubmitted: !_hasValidData() ? null : (_) => () => _submitData(context),
@@ -131,8 +139,8 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                 type: DateTimePickerType.date,
                 dateMask: 'd MMM, yyyy',
                 initialValue: DateTime.now().toString(),
-                firstDate: oneHundredYearsAgo,
-                lastDate: oneHundredYearsFromNow,
+                firstDate: _oneHundredYearsAgo,
+                lastDate: _oneHundredYearsFromNow,
                 icon: Icon(Icons.event),
                 dateLabelText: 'Date',
                 timeLabelText: "Hour",
@@ -146,7 +154,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                 },
                 onChanged: (val) {
                   setState(() {
-                    executionDate = DateTime.parse(val);
+                    _executionDate = DateTime.parse(val);
                   });
                 },
                 validator: (val) {
@@ -189,15 +197,15 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
 
   bool _hasValidData() {
     bool result = false;
-    if (title.isNotEmpty && amount != 0) {
+    if (_title.isNotEmpty && _amount != 0) {
       result = true;
     }
     return result;
   }
 
   void _submitData(BuildContext context) {
-    if (title.isNotEmpty && amount != 0) {
-      widget.onAddTransactionHandler(title, amount, executionDate);
+    if (_title.isNotEmpty && _amount != 0) {
+      _onAddTransactionHandler(_title, _amount, _executionDate);
     }
     Navigator.pop(context);
   }

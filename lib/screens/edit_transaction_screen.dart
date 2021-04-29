@@ -17,6 +17,7 @@ import 'package:expensy_flutter/components/transactions_list.dart';
 
 // Helpers:
 import 'package:expensy_flutter/helpers/string_helper.dart';
+import 'package:expensy_flutter/helpers/date_helper.dart';
 
 // Utilities:
 
@@ -42,14 +43,18 @@ class EditTransactionScreen extends StatefulWidget {
 }
 
 class _EditTransactionScreenState extends State<EditTransactionScreen> {
-  // Sate Properties:
+  // State Properties:
   int _index;
   String _title;
   double _amount;
   DateTime _executionDate;
   Function _onUpdateTransactionHandler;
 
-  // void Function(int, String, double, DateTime) _onUpdateTransactionHandler;
+  // Run time constants:
+  DateTime now = DateTime.now();
+  final _oneHundredYearsAgo = DateHelper.timeAgo(years: 100);
+  final _oneHundredYearsFromNow = DateHelper.timeFromNow(years: 100);
+  final NumberFormat _currencyFormat = new NumberFormat("#,##0.00", "en_US");
 
   @override
   void initState() {
@@ -64,11 +69,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
-    final oneHundredYearsAgo = now.subtract(new Duration(days: 365 * 100));
-    final oneHundredYearsFromNow = now.add(new Duration(days: 365 * 100));
-    final currencyFormat = new NumberFormat("#,##0.00", "en_US");
-    final String initialAmountLabel = 'USD(\$) ${currencyFormat.format(_amount)}';
+    final String initialAmountLabel = 'USD(\$) ${_currencyFormat.format(_amount)}';
 
     return SingleChildScrollView(
       child: Container(
@@ -159,8 +160,8 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
                 type: DateTimePickerType.date,
                 dateMask: 'd MMM, yyyy',
                 initialValue: _executionDate.toString(),
-                firstDate: oneHundredYearsAgo,
-                lastDate: oneHundredYearsFromNow,
+                firstDate: _oneHundredYearsAgo,
+                lastDate: _oneHundredYearsFromNow,
                 icon: Icon(Icons.event),
                 dateLabelText: 'Date',
                 timeLabelText: "Hour",
