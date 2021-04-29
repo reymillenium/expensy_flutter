@@ -16,6 +16,7 @@ import 'package:expensy_flutter/models/transactions_data.dart';
 import 'package:expensy_flutter/components/transactions_list.dart';
 
 // Helpers:
+import 'package:expensy_flutter/helpers/string_helper.dart';
 
 // Utilities:
 
@@ -127,6 +128,7 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
                     _title = newText;
                   });
                 },
+                onFieldSubmitted: hasValidData() ? (_) => updateData() : null,
               ),
 
               // Amount Input
@@ -143,15 +145,12 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
                   )
                 ],
                 keyboardType: TextInputType.number,
-                onChanged: (String newText) {
-                  // amount = double.parse(newText);
-                  // Allows only numbers:
-                  // amount = newText == '' ? 0 : double.parse(newText.replaceAll(new RegExp(r'[^0-9]'), ''));
-                  // Allows numbers and a dot
+                onChanged: (String amountText) {
                   setState(() {
-                    _amount = newText == '' ? 0 : double.parse(newText.replaceAll(new RegExp(r'[^0-9\.]'), ''));
+                    _amount = StringHelper.extractDoubleOrZero(amountText);
                   });
                 },
+                onFieldSubmitted: hasValidData() ? (_) => updateData() : null,
               ),
 
               // DateTime picker
@@ -174,7 +173,6 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
                   return true;
                 },
                 onChanged: (val) {
-                  print('onChanged $val');
                   setState(() {
                     _executionDate = DateTime.parse(val);
                   });
@@ -195,14 +193,7 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
                   elevation: 5.0,
                   child: MaterialButton(
                     disabledColor: Colors.grey,
-                    onPressed: !hasValidData()
-                        ? null
-                        : () {
-                            if (_title != '' && _amount != 0) {
-                              _onUpdateTransactionHandler(_index, _title, _amount, _executionDate);
-                            }
-                            Navigator.pop(context);
-                          },
+                    onPressed: hasValidData() ? updateData : null,
                     // minWidth: 300.0,
                     minWidth: double.infinity,
                     height: 42.0,
@@ -230,5 +221,12 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
       result = true;
     }
     return result;
+  }
+
+  void updateData() {
+    if (_title != '' && _amount != 0) {
+      _onUpdateTransactionHandler(_index, _title, _amount, _executionDate);
+    }
+    Navigator.pop(context);
   }
 }
