@@ -128,7 +128,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
                     _title = newText;
                   });
                 },
-                onFieldSubmitted: hasValidData() ? (_) => updateData() : null,
+                onFieldSubmitted: hasValidData() ? (_) => () => updateData(context) : null,
               ),
 
               // Amount Input
@@ -150,7 +150,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
                     _amount = StringHelper.extractDoubleOrZero(amountText);
                   });
                 },
-                onFieldSubmitted: hasValidData() ? (_) => updateData() : null,
+                onFieldSubmitted: hasValidData() ? (_) => () => updateData(context) : null,
               ),
 
               // DateTime picker
@@ -193,7 +193,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
                   elevation: 5.0,
                   child: MaterialButton(
                     disabledColor: Colors.grey,
-                    onPressed: hasValidData() ? updateData : null,
+                    onPressed: hasValidData() ? () => updateData(context) : null,
                     // minWidth: 300.0,
                     minWidth: double.infinity,
                     height: 42.0,
@@ -223,7 +223,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
     return result;
   }
 
-  void updateData() {
+  void updateData(BuildContext context) {
     if (_title.isNotEmpty && _amount != 0) {
       _onUpdateTransactionHandler(_index, _title, _amount, _executionDate);
     }

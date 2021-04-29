@@ -101,7 +101,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                     title = newText;
                   });
                 },
-                onSubmitted: !hasValidData() ? null : (_) => submitData(),
+                onSubmitted: !hasValidData() ? null : (_) => () => submitData(context),
               ),
 
               // Amount Input
@@ -122,7 +122,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                     amount = StringHelper.extractDoubleOrZero(newAmountText);
                   });
                 },
-                onSubmitted: !hasValidData() ? null : (_) => submitData(),
+                onSubmitted: !hasValidData() ? null : (_) => () => submitData(context),
               ),
 
               // DateTime picker
@@ -165,7 +165,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                   elevation: 5,
                   child: MaterialButton(
                     disabledColor: Colors.grey,
-                    onPressed: !hasValidData() ? null : submitData,
+                    onPressed: !hasValidData() ? null : () => submitData(context),
                     // minWidth: 300.0,
                     minWidth: double.infinity,
                     height: 42.0,
@@ -195,7 +195,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
     return result;
   }
 
-  void submitData() {
+  void submitData(BuildContext context) {
     if (title.isNotEmpty && amount != 0) {
       widget.onAddTransactionHandler(title, amount, executionDate);
     }
