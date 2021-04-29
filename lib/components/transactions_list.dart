@@ -47,18 +47,20 @@ class TransactionsList extends StatelessWidget {
     //   children: getTransactionList2(),
     // );
 
-    return ListView.builder(
-      padding: const EdgeInsets.only(left: 0, top: 0, right: 0),
-      controller: _listViewScrollController,
-      itemBuilder: (context, index) {
-        return TransactionTile(
-          index: index,
-          transaction: transactions[index],
-          onUpdateTransactionHandler: onUpdateTransactionHandler,
-          onDeleteTransactionHandler: () => onDeleteTransactionHandler(index),
-        );
-      },
-      itemCount: transactions.length,
+    return Container(
+      child: ListView.builder(
+        padding: const EdgeInsets.only(left: 0, top: 0, right: 0),
+        controller: _listViewScrollController,
+        itemBuilder: (context, index) {
+          return TransactionTile(
+            index: index,
+            transaction: transactions[index],
+            onUpdateTransactionHandler: onUpdateTransactionHandler,
+            onDeleteTransactionHandler: () => onDeleteTransactionHandler(index),
+          );
+        },
+        itemCount: transactions.length,
+      ),
     );
   }
 }

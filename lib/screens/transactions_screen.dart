@@ -81,6 +81,41 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
           ),
         ],
       ),
+
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Preferences...'),
+              decoration: BoxDecoration(
+                color: Colors.purple,
+              ),
+            ),
+            ListTile(
+              title: Text('Item 1'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Item 2'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+          ],
+        ),
+      ),
+
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -96,12 +131,10 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
           // Transaction List:
           Expanded(
             flex: 5,
-            child: Container(
-              child: TransactionsList(
-                transactions: transactionsData.transactions,
-                onUpdateTransactionHandler: _onUpdateTransactionHandler,
-                onDeleteTransactionHandler: _onDeleteTransactionHandler,
-              ),
+            child: TransactionsList(
+              transactions: transactionsData.transactions,
+              onUpdateTransactionHandler: _onUpdateTransactionHandler,
+              onDeleteTransactionHandler: _onDeleteTransactionHandler,
             ),
           ),
         ],
