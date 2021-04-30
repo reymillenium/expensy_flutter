@@ -7,6 +7,7 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:fl_chart/fl_chart.dart'; // Allows to use the Bar Charts
 import 'package:flutter/gestures.dart'; // Allows: PointerExitEvent
 import 'package:provider/provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // Screens:
 import 'package:expensy_flutter/screens/new_transaction_screen.dart';
@@ -148,6 +149,10 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
               ),
             ),
             ExpansionTile(
+              leading: Icon(
+                Icons.palette,
+                color: Colors.black,
+              ),
               title: Text(
                 'Theme color:',
                 style: TextStyle(
@@ -179,6 +184,10 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
               }).toList(),
             ),
             ExpansionTile(
+              leading: FaIcon(
+                FontAwesomeIcons.font,
+                color: Colors.black,
+              ),
               title: Text(
                 'Theme font:',
                 style: TextStyle(
