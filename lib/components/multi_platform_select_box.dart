@@ -10,7 +10,7 @@ import 'package:expensy_flutter/components/cupertino_picker.dart';
 
 class MultiPlatformSelectBox extends StatelessWidget {
   final Function onSelectedItemChangedIOS;
-  final String selectedValueAndroid;
+  final int selectedValueAndroid;
   final Function onChangedAndroid;
   final List<dynamic> itemsList;
 
@@ -35,7 +35,7 @@ class MultiPlatformSelectBox extends StatelessWidget {
     } else {
       return DropDownButtonCurrency(
         selectedCurrencyValue: selectedValueAndroid,
-        onChanged: (String newValue) {
+        onChanged: (int newValue) {
           onChangedAndroid(newValue);
         },
         itemsList: itemsList,

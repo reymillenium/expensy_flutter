@@ -150,8 +150,11 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
               onSelectedItemChangedIOS: (selectedIndex) {
                 setCurrentThemeHandler(selectedIndex);
               },
-              selectedValueAndroid: availableThemes[themeIndex]['name'],
-              onChangedAndroid: (String newValue) {},
+              // selectedValueAndroid: availableThemes[themeIndex]['name'],
+              selectedValueAndroid: themeIndex,
+              onChangedAndroid: (int newValue) {
+                setCurrentThemeHandler(newValue);
+              },
               itemsList: availableThemes,
             ),
             ...availableThemes.asMap().entries.map((entry) {
