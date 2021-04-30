@@ -6,7 +6,7 @@ import 'package:audioplayers/audio_cache.dart';
 
 // Utilities:
 
-class SoundEffectsHelper {
+class SoundHelper {
   final AudioCache player = AudioCache(prefix: 'assets/audio/');
 
   // Plays a click sound:

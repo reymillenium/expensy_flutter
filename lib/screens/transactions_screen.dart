@@ -23,6 +23,7 @@ import 'package:expensy_flutter/components/transactions_chart.dart';
 import 'package:expensy_flutter/components/multi_platform_select_box.dart';
 
 // Helpers:
+import 'package:expensy_flutter/helpers/sound_helper.dart';
 
 // Utilities:
 import 'package:expensy_flutter/utilities/constants.dart';
@@ -273,7 +274,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
   // It shows the AddTransactionScreen widget as a modal:
   void _showModalNewTransaction(BuildContext context) {
-    // print(Theme.of(context).fontFamily);
+    SoundHelper().playSmallButtonClick();
     showModalBottomSheet(
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
