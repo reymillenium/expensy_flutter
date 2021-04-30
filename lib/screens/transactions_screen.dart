@@ -27,6 +27,7 @@ import 'package:expensy_flutter/helpers/sound_helper.dart';
 
 // Utilities:
 import 'package:expensy_flutter/utilities/constants.dart';
+import 'package:tinycolor/tinycolor.dart';
 
 class TransactionsScreen extends StatefulWidget {
   // Properties:
@@ -47,6 +48,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     {'isOpened': false},
     {'isOpened': false}
   ];
+
   void _onAddTransactionHandler(String title, double amount, DateTime executionDate) {
     setState(() {
       transactionsData.addTransaction(title, amount, executionDate);
@@ -79,6 +81,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   Widget build(BuildContext context) {
     AppData appData = Provider.of<AppData>(context, listen: true);
     List<Map> availableThemeColors = appData.availableThemeColors;
+    Map currentThemeColors = appData.currentThemeColors;
     List<Map> availableThemeFonts = appData.availableThemeFonts;
     Map currentThemeFont = appData.currentThemeFont;
 
@@ -108,7 +111,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       ),
       onDrawerChanged: (isOpened) {
         if (!isOpened) {
-          closeAllThePanels();
+          _closeAllThePanels();
         }
       },
 
@@ -227,9 +230,9 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             //   }).toList(),
             // ),
             ExpansionPanelList(
-              expansionCallback: openOnePanelAndCloseTheRest,
+              expansionCallback: _openOnePanelAndCloseTheRest,
               children: [
-                // Panel # 1: Theme color
+                // Expansion Panel # 1: Theme colors
                 ExpansionPanel(
                   canTapOnHeader: true,
                   headerBuilder: (BuildContext context, bool isExpanded) {
@@ -252,7 +255,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                     children: availableThemeColors.asMap().entries.map((entry) {
                       int index = entry.key;
                       Map value = entry.value;
-
+                      // Each Theme Color List Tile:
                       return ListTile(
                         title: Text(
                           value['name'],
@@ -263,19 +266,18 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                           ),
                         ),
                         onTap: () {
-                          // Update the state of the app.
                           setCurrentThemeColorHandler(index);
-                          closeAllThePanels();
-                          // Then close the drawer
-                          Navigator.pop(context);
+                          // closeAllThePanels();
+                          // Navigator.pop(context);
                         },
+                        tileColor: _activeTileColor(currentThemeColors['name'], value['name']),
                       );
                     }).toList(),
                   ),
                   isExpanded: expansionPanelListStatus[0]['isOpened'],
                 ),
 
-                // Panel # 2: Theme font
+                // Expansion Panel # 2: Theme fonts
                 ExpansionPanel(
                   canTapOnHeader: true,
                   headerBuilder: (BuildContext context, bool isExpanded) {
@@ -298,7 +300,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                     children: availableThemeFonts.asMap().entries.map((entry) {
                       int index = entry.key;
                       Map value = entry.value;
-
+                      // Each Theme Color List Tile:
                       return ListTile(
                         title: Text(
                           value['name'],
@@ -309,11 +311,11 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                           ),
                         ),
                         onTap: () {
-                          // Update the state of the app.
                           setCurrentFontFamilyHandler(index);
-                          closeAllThePanels();
-                          Navigator.pop(context);
+                          // closeAllThePanels();
+                          // Navigator.pop(context);
                         },
+                        tileColor: _activeTileColor(currentThemeFont['name'], value['name']),
                       );
                     }).toList(),
                   ),
@@ -374,7 +376,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     );
   }
 
-  void closeAllThePanels() {
+  void _closeAllThePanels() {
     setState(() {
       for (int i = 0; i < expansionPanelListStatus.length; i++) {
         expansionPanelListStatus[i]['isOpened'] = false;
@@ -382,7 +384,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     });
   }
 
-  void openOnePanelAndCloseTheRest(int index, bool isExpanded) {
+  void _openOnePanelAndCloseTheRest(int index, bool isExpanded) {
     setState(() {
       for (int i = 0; i < expansionPanelListStatus.length; i++) {
         if (index == i) {
@@ -392,6 +394,10 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
         }
       }
     });
+  }
+
+  Color _activeTileColor(String currentValue, String valueToCompare) {
+    return currentValue == valueToCompare ? TinyColor(Colors.black54).lighten(60).color : Colors.transparent;
   }
 
   // It shows the AddTransactionScreen widget as a modal:
