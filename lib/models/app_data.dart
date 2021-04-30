@@ -25,10 +25,38 @@ class AppData extends ChangeNotifier {
       ),
     },
     {
+      'name': 'Indigo',
+      'theme': ThemeData(
+        primaryColor: Colors.indigo,
+        accentColor: Colors.indigoAccent,
+      ),
+    },
+    {
+      'name': 'Blue',
+      'theme': ThemeData(
+        primaryColor: Colors.blue,
+        accentColor: Colors.blueAccent,
+      ),
+    },
+    {
       'name': 'Orange',
       'theme': ThemeData(
         primaryColor: Colors.deepOrange,
         accentColor: Colors.orangeAccent,
+      ),
+    },
+    {
+      'name': 'Pink',
+      'theme': ThemeData(
+        primaryColor: Colors.pink,
+        accentColor: Colors.pinkAccent,
+      ),
+    },
+    {
+      'name': 'Teal',
+      'theme': ThemeData(
+        primaryColor: Colors.teal,
+        accentColor: Colors.tealAccent,
       ),
     },
     {
@@ -39,10 +67,10 @@ class AppData extends ChangeNotifier {
       ),
     },
     {
-      'name': 'Pink',
+      'name': 'Cyan',
       'theme': ThemeData(
-        primaryColor: Colors.pink,
-        accentColor: Colors.pinkAccent,
+        primaryColor: Colors.cyan,
+        accentColor: Colors.cyanAccent,
       ),
     },
   ];

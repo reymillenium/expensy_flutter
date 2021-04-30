@@ -52,6 +52,9 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Color primaryColor = Theme.of(context).primaryColor;
+    Color accentColor = Theme.of(context).accentColor;
+
     return SingleChildScrollView(
       child: Container(
         // padding: const EdgeInsets.only(left: 20, top: 0, right: 20),
@@ -71,7 +74,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
               Text(
                 'Add Transaction',
                 style: TextStyle(
-                  color: Colors.purple,
+                  color: primaryColor,
                   fontSize: 30,
                 ),
               ),
@@ -84,20 +87,19 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                   hintText: 'Title',
                   border: UnderlineInputBorder(
                     borderSide: BorderSide(
-                      // color: kLightBlueBackground,
-                      color: Colors.red,
-                      // width: 30,
-                    ),
+                        // color: kLightBlueBackground,
+                        // width: 30,
+                        ),
                   ),
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
-                      color: Colors.purple,
+                      color: primaryColor,
                       width: 4.0,
                     ),
                   ),
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
-                      color: Colors.purpleAccent,
+                      color: accentColor,
                       // color: Colors.red,
                       width: 6.0,
                     ),
@@ -168,7 +170,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 30.0),
                 child: Material(
-                  color: _hasValidData() ? Colors.purple : Colors.grey,
+                  color: _hasValidData() ? primaryColor : Colors.grey,
                   // borderRadius: BorderRadius.circular(12.0),
                   elevation: 5,
                   child: MaterialButton(

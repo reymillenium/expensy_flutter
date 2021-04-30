@@ -32,6 +32,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: currentTheme.primaryColor,
         accentColor: currentTheme.accentColor,
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          foregroundColor: currentTheme.primaryColor == Colors.deepPurple ? Colors.white : Colors.black,
+        ),
       ),
       debugShowCheckedModeBanner: false,
       home: TransactionsScreen(title: 'Expensy'),

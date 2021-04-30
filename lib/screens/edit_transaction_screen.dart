@@ -70,6 +70,8 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
   @override
   Widget build(BuildContext context) {
     final String initialAmountLabel = 'USD(\$) ${_currencyFormat.format(_amount)}';
+    Color primaryColor = Theme.of(context).primaryColor;
+    Color accentColor = Theme.of(context).accentColor;
 
     return SingleChildScrollView(
       child: Container(
@@ -90,7 +92,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
               Text(
                 'Update Transaction',
                 style: TextStyle(
-                  color: Colors.purple,
+                  color: primaryColor,
                   fontSize: 30,
                 ),
               ),
@@ -111,13 +113,13 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
                   ),
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
-                      color: Colors.purple,
+                      color: primaryColor,
                       width: 4.0,
                     ),
                   ),
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
-                      color: Colors.purpleAccent,
+                      color: accentColor,
                       // color: Colors.red,
                       width: 6.0,
                     ),
@@ -189,7 +191,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 30.0),
                 child: Material(
-                  color: _hasValidData() ? Colors.purple : Colors.grey,
+                  color: _hasValidData() ? primaryColor : Colors.grey,
                   // borderRadius: BorderRadius.circular(12.0),
                   elevation: 5.0,
                   child: MaterialButton(
