@@ -43,7 +43,10 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   // State Properties:
   final TransactionsData transactionsData = TransactionsData();
   int touchedIndex;
-
+  List<Map> expansionPanelListStatus = [
+    {'isOpened': false},
+    {'isOpened': false}
+  ];
   void _onAddTransactionHandler(String title, double amount, DateTime executionDate) {
     setState(() {
       transactionsData.addTransaction(title, amount, executionDate);
@@ -103,6 +106,11 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
           ),
         ],
       ),
+      onDrawerChanged: (isOpened) {
+        if (!isOpened) {
+          closeAllThePanels();
+        }
+      },
 
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
@@ -148,75 +156,181 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                 ],
               ),
             ),
-            ExpansionTile(
-              leading: Icon(
-                Icons.palette,
-                color: Colors.black,
-              ),
-              title: Text(
-                'Theme color:',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              children: availableThemeColors.asMap().entries.map((entry) {
-                int index = entry.key;
-                Map value = entry.value;
-
-                return ListTile(
-                  title: Text(
-                    value['name'],
-                    style: TextStyle(
-                      color: value['theme']['primaryColor'],
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  onTap: () {
-                    // Update the state of the app.
-                    setCurrentThemeColorHandler(index);
-                    // Then close the drawer
-                    Navigator.pop(context);
+            // ExpansionTile(
+            //   leading: Icon(
+            //     Icons.palette,
+            //     color: Colors.black,
+            //   ),
+            //   title: Text(
+            //     'Theme color:',
+            //     style: TextStyle(
+            //       color: Colors.black,
+            //       fontSize: 20,
+            //       fontWeight: FontWeight.bold,
+            //     ),
+            //   ),
+            //   children: availableThemeColors.asMap().entries.map((entry) {
+            //     int index = entry.key;
+            //     Map value = entry.value;
+            //
+            //     return ListTile(
+            //       title: Text(
+            //         value['name'],
+            //         style: TextStyle(
+            //           color: value['theme']['primaryColor'],
+            //           fontSize: 16,
+            //           fontWeight: FontWeight.bold,
+            //         ),
+            //       ),
+            //       onTap: () {
+            //         // Update the state of the app.
+            //         setCurrentThemeColorHandler(index);
+            //         // Then close the drawer
+            //         Navigator.pop(context);
+            //       },
+            //     );
+            //   }).toList(),
+            // ),
+            // ExpansionTile(
+            //   leading: FaIcon(
+            //     FontAwesomeIcons.font,
+            //     color: Colors.black,
+            //   ),
+            //   title: Text(
+            //     'Theme font:',
+            //     style: TextStyle(
+            //       color: Colors.black,
+            //       fontSize: 20,
+            //       fontWeight: FontWeight.bold,
+            //     ),
+            //   ),
+            //   children: availableThemeFonts.asMap().entries.map((entry) {
+            //     int index = entry.key;
+            //     Map value = entry.value;
+            //
+            //     return ListTile(
+            //       title: Text(
+            //         value['name'],
+            //         style: TextStyle(
+            //           fontFamily: value['fontFamily'],
+            //           fontSize: 16,
+            //           fontWeight: FontWeight.bold,
+            //         ),
+            //       ),
+            //       onTap: () {
+            //         // Update the state of the app.
+            //         setCurrentFontFamilyHandler(index);
+            //         // Then close the drawer
+            //         Navigator.pop(context);
+            //       },
+            //     );
+            //   }).toList(),
+            // ),
+            ExpansionPanelList(
+              expansionCallback: (int index, bool isExpanded) {
+                setState(() {
+                  for (int i = 0; i < expansionPanelListStatus.length; i++) {
+                    if (index == i) {
+                      expansionPanelListStatus[index]['isOpened'] = !isExpanded;
+                    } else {
+                      expansionPanelListStatus[i]['isOpened'] = false;
+                    }
+                  }
+                });
+                print('expansionCallback');
+              },
+              children: [
+                // Panel # 1: Theme color
+                ExpansionPanel(
+                  canTapOnHeader: true,
+                  headerBuilder: (BuildContext context, bool isExpanded) {
+                    return ListTile(
+                      leading: Icon(
+                        Icons.palette,
+                        color: Colors.black,
+                      ),
+                      title: Text(
+                        'Theme color:',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    );
                   },
-                );
-              }).toList(),
-            ),
-            ExpansionTile(
-              leading: FaIcon(
-                FontAwesomeIcons.font,
-                color: Colors.black,
-              ),
-              title: Text(
-                'Theme font:',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              children: availableThemeFonts.asMap().entries.map((entry) {
-                int index = entry.key;
-                Map value = entry.value;
+                  body: Column(
+                    children: availableThemeColors.asMap().entries.map((entry) {
+                      int index = entry.key;
+                      Map value = entry.value;
 
-                return ListTile(
-                  title: Text(
-                    value['name'],
-                    style: TextStyle(
-                      fontFamily: value['fontFamily'],
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                      return ListTile(
+                        title: Text(
+                          value['name'],
+                          style: TextStyle(
+                            color: value['theme']['primaryColor'],
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        onTap: () {
+                          // Update the state of the app.
+                          setCurrentThemeColorHandler(index);
+                          closeAllThePanels();
+                          // Then close the drawer
+                          Navigator.pop(context);
+                        },
+                      );
+                    }).toList(),
                   ),
-                  onTap: () {
-                    // Update the state of the app.
-                    setCurrentFontFamilyHandler(index);
-                    // Then close the drawer
-                    Navigator.pop(context);
+                  isExpanded: expansionPanelListStatus[0]['isOpened'],
+                ),
+
+                // Panel # 2: Theme font
+                ExpansionPanel(
+                  canTapOnHeader: true,
+                  headerBuilder: (BuildContext context, bool isExpanded) {
+                    return ListTile(
+                      leading: FaIcon(
+                        FontAwesomeIcons.font,
+                        color: Colors.black,
+                      ),
+                      title: Text(
+                        'Theme font:',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    );
                   },
-                );
-              }).toList(),
+                  body: Column(
+                    children: availableThemeFonts.asMap().entries.map((entry) {
+                      int index = entry.key;
+                      Map value = entry.value;
+
+                      return ListTile(
+                        title: Text(
+                          value['name'],
+                          style: TextStyle(
+                            fontFamily: value['fontFamily'],
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        onTap: () {
+                          // Update the state of the app.
+                          setCurrentFontFamilyHandler(index);
+                          closeAllThePanels();
+                          Navigator.pop(context);
+                        },
+                      );
+                    }).toList(),
+                  ),
+                  isExpanded: expansionPanelListStatus[1]['isOpened'],
+                ),
+              ],
             ),
           ],
         ),
@@ -269,6 +383,14 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
+  }
+
+  void closeAllThePanels() {
+    setState(() {
+      for (int i = 0; i < expansionPanelListStatus.length; i++) {
+        expansionPanelListStatus[i]['isOpened'] = false;
+      }
+    });
   }
 
   // It shows the AddTransactionScreen widget as a modal:
