@@ -39,15 +39,15 @@ flutter:
   fonts:
     - family: Luminari
       fonts:
-        - asset: fonts/Luminari/Luminari-Regular.ttf
+        - asset: assets/fonts/Luminari/Luminari-Regular.ttf
           style: normal
           weight: 500
-        - asset: fonts/Luminari/Luminari-Regular.woff
+        - asset: assets/fonts/Luminari/Luminari-Regular.woff
           style: normal
           weight: 500
     - family: SourceSansPro
       fonts:
-        - asset: fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf
+        - asset: assets/fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf
           style: normal
           weight: 500
 
