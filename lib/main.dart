@@ -26,10 +26,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     AppData appData = Provider.of<AppData>(context, listen: true);
     ThemeData currentTheme = appData.currentTheme;
+    final String appTitle = 'Expensy';
 
     return MaterialApp(
-      title: 'Expensy',
+      title: appTitle,
       theme: ThemeData(
+        fontFamily: 'SourceSansPro',
         primarySwatch: currentTheme.primaryColor,
         accentColor: currentTheme.accentColor,
         floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: TransactionsScreen(title: 'Expensy'),
+      home: TransactionsScreen(title: appTitle),
     );
   }
 }

@@ -35,6 +35,21 @@ flutter:
     - images/
     - assets/audio/
 
+  fonts:
+    - family: Luminari
+      fonts:
+        - asset: fonts/Luminari-Regular.ttf
+          style: normal
+          weight: 500
+        - asset: fonts/Luminari-Regular.woff
+          style: normal
+          weight: 500
+    - family: SourceSansPro
+      fonts:
+        - asset: fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf
+          style: normal
+          weight: 500
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

@@ -20,64 +20,98 @@ class AppData extends ChangeNotifier {
   List<Map> _availableThemes = [
     {
       'name': 'Purple',
-      'theme': ThemeData(
-        primaryColor: Colors.deepPurple,
-        accentColor: Colors.purpleAccent,
-      ),
+      'theme': {
+        'primarySwatch': Colors.deepPurple,
+        'primaryColor': Colors.deepPurple,
+        'accentColor': Colors.purpleAccent,
+      },
     },
     {
       'name': 'Indigo',
-      'theme': ThemeData(
-        primaryColor: Colors.indigo,
-        accentColor: Colors.indigoAccent,
-      ),
+      'theme': {
+        'primarySwatch': Colors.indigo,
+        'primaryColor': Colors.indigo,
+        'accentColor': Colors.indigoAccent,
+      },
     },
     {
       'name': 'Blue',
-      'theme': ThemeData(
-        primaryColor: Colors.blue,
-        accentColor: Colors.blueAccent,
-      ),
+      'theme': {
+        'primarySwatch': Colors.blue,
+        'primaryColor': Colors.blue,
+        'accentColor': Colors.blueAccent,
+      },
     },
     {
       'name': 'Orange',
-      'theme': ThemeData(
-        primaryColor: Colors.deepOrange,
-        accentColor: Colors.orangeAccent,
-      ),
+      'theme': {
+        'primarySwatch': Colors.deepOrange,
+        'primaryColor': Colors.deepOrange,
+        'accentColor': Colors.orangeAccent,
+      },
     },
     {
       'name': 'Pink',
-      'theme': ThemeData(
-        primaryColor: Colors.pink,
-        accentColor: Colors.pinkAccent,
-      ),
+      'theme': {
+        'primarySwatch': Colors.pink,
+        'primaryColor': Colors.pink,
+        'accentColor': Colors.pinkAccent,
+      },
     },
     {
       'name': 'Teal',
-      'theme': ThemeData(
-        primaryColor: Colors.teal,
-        accentColor: Colors.tealAccent,
-      ),
+      'theme': {
+        'primarySwatch': Colors.teal,
+        'primaryColor': Colors.teal,
+        'accentColor': Colors.tealAccent,
+      },
     },
     {
       'name': 'Green',
-      'theme': ThemeData(
-        primaryColor: Colors.green,
-        accentColor: Colors.greenAccent,
-      ),
+      'theme': {
+        'primarySwatch': Colors.green,
+        'primaryColor': Colors.green,
+        'accentColor': Colors.greenAccent,
+      },
     },
     {
       'name': 'Cyan',
-      'theme': ThemeData(
-        primaryColor: Colors.cyan,
-        accentColor: Colors.cyanAccent,
-      ),
+      'theme': {
+        'primarySwatch': Colors.cyan,
+        'primaryColor': Colors.cyan,
+        'accentColor': Colors.cyanAccent,
+      },
+    },
+  ];
+
+  int _fontIndex = 0;
+  List<Map> _availableFonts = [
+    {
+      'name': 'Roboto',
+      'fontFamily': 'Roboto',
+    },
+    {
+      'name': 'Luminari',
+      'fontFamily': 'Luminari',
+    },
+    {
+      'name': 'SourceSansPro',
+      'fontFamily': 'SourceSansPro',
     },
   ];
 
   AppData() {
-    _currentTheme = _availableThemes[_themeIndex]['theme'];
+    // _currentTheme = _availableThemes[_themeIndex]['theme'];
+    ThemeData newThemeData = ThemeData(
+      fontFamily: _availableFonts[_fontIndex]['fontFamily'],
+      primarySwatch: _availableThemes[themeIndex]['theme']['primarySwatch'],
+      primaryColor: _availableThemes[themeIndex]['theme']['primaryColor'],
+      accentColor: _availableThemes[themeIndex]['theme']['accentColor'],
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        foregroundColor: _availableThemes[_themeIndex]['theme']['primaryColor'] == Colors.deepPurple ? Colors.white : Colors.black,
+      ),
+    );
+    _currentTheme = newThemeData;
   }
 
   // Getters:
@@ -97,9 +131,43 @@ class AppData extends ChangeNotifier {
     return UnmodifiableListView(_availableThemes);
   }
 
+  get fontIndex {
+    return _fontIndex;
+  }
+
+  UnmodifiableListView<Map> get availableFonts {
+    return UnmodifiableListView(_availableFonts);
+  }
+
+  // Public methods:
   void setCurrentTheme(int themeIndex) {
     _themeIndex = themeIndex;
-    _currentTheme = _availableThemes[themeIndex]['theme'];
+    // _currentTheme = _availableThemes[themeIndex]['theme'];
+    ThemeData newThemeData = ThemeData(
+      fontFamily: _availableFonts[_fontIndex]['fontFamily'],
+      primarySwatch: _availableThemes[themeIndex]['theme']['primarySwatch'],
+      primaryColor: _availableThemes[themeIndex]['theme']['primaryColor'],
+      accentColor: _availableThemes[themeIndex]['theme']['accentColor'],
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        foregroundColor: _availableThemes[_themeIndex]['theme']['primaryColor'] == Colors.deepPurple ? Colors.white : Colors.black,
+      ),
+    );
+    _currentTheme = newThemeData;
+    notifyListeners();
+  }
+
+  void setCurrentFontFamily(int fontIndex) {
+    ThemeData newThemeData = ThemeData(
+      fontFamily: _availableFonts[fontIndex]['fontFamily'],
+      primarySwatch: _availableThemes[_themeIndex]['theme']['primarySwatch'],
+      primaryColor: _availableThemes[_themeIndex]['theme']['primaryColor'],
+      accentColor: _availableThemes[themeIndex]['theme']['accentColor'],
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        foregroundColor: _availableThemes[_themeIndex]['theme']['primaryColor'] == Colors.deepPurple ? Colors.white : Colors.black,
+      ),
+    );
+    // _currentTheme = _availableThemes[themeIndex]['theme'];
+    _currentTheme = newThemeData;
     notifyListeners();
   }
 }

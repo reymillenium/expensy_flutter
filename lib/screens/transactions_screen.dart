@@ -82,7 +82,14 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(
+          widget.title,
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Luminari',
+          ),
+        ),
         actions: [
           IconButton(
             iconSize: 40,
@@ -130,6 +137,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                       fontSize: 24,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'Luminari',
                     ),
                   ),
                   // Text('Primary Color:'),
@@ -164,7 +172,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                   title: Text(
                     value['name'],
                     style: TextStyle(
-                      color: value['theme'].primaryColor,
+                      color: value['theme']['primaryColor'],
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
@@ -247,6 +255,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
   // It shows the AddTransactionScreen widget as a modal:
   void _showModalNewTransaction(BuildContext context) {
+    // print(Theme.of(context).fontFamily);
     showModalBottomSheet(
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
