@@ -227,18 +227,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             //   }).toList(),
             // ),
             ExpansionPanelList(
-              expansionCallback: (int index, bool isExpanded) {
-                setState(() {
-                  for (int i = 0; i < expansionPanelListStatus.length; i++) {
-                    if (index == i) {
-                      expansionPanelListStatus[index]['isOpened'] = !isExpanded;
-                    } else {
-                      expansionPanelListStatus[i]['isOpened'] = false;
-                    }
-                  }
-                });
-                print('expansionCallback');
-              },
+              expansionCallback: openOnePanelAndCloseTheRest,
               children: [
                 // Panel # 1: Theme color
                 ExpansionPanel(
@@ -389,6 +378,18 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     setState(() {
       for (int i = 0; i < expansionPanelListStatus.length; i++) {
         expansionPanelListStatus[i]['isOpened'] = false;
+      }
+    });
+  }
+
+  void openOnePanelAndCloseTheRest(int index, bool isExpanded) {
+    setState(() {
+      for (int i = 0; i < expansionPanelListStatus.length; i++) {
+        if (index == i) {
+          expansionPanelListStatus[index]['isOpened'] = !isExpanded;
+        } else {
+          expansionPanelListStatus[i]['isOpened'] = false;
+        }
       }
     });
   }
