@@ -15,37 +15,50 @@ import 'dart:collection'; // Allows to use UnmodifiableListView
 
 class AppData extends ChangeNotifier {
   // Properties:
-  Color _primaryColor = Colors.purple;
-  List<Map> _availablePrimaryColors = [
-    {
-      'name': 'Red',
-      'color': Colors.red,
-    },
+  ThemeData _currentTheme;
+  List<Map> _availableThemes = [
     {
       'name': 'Purple',
-      'color': Colors.purple,
+      'theme': ThemeData(
+        primaryColor: Colors.purple,
+        accentColor: Colors.purpleAccent,
+      ),
+    },
+    {
+      'name': 'Red',
+      'theme': ThemeData(
+        primaryColor: Colors.red,
+        accentColor: Colors.redAccent,
+      ),
     },
     {
       'name': 'Blue',
-      'color': Colors.blue,
+      'theme': ThemeData(
+        primaryColor: Colors.blue,
+        accentColor: Colors.blueAccent,
+      ),
     },
   ];
 
+  AppData() {
+    _currentTheme = _availableThemes[0]['theme'];
+  }
+
   // Getters:
-  get primaryColor {
-    return _primaryColor;
+  get currentTheme {
+    return _currentTheme;
   }
 
-  get availablePrimaryColorsCount {
-    return _availablePrimaryColors.length;
+  get availableThemesCount {
+    return _availableThemes.length;
   }
 
-  UnmodifiableListView<Map> get availablePrimaryColors {
-    return UnmodifiableListView(_availablePrimaryColors);
+  UnmodifiableListView<Map> get availableThemes {
+    return UnmodifiableListView(_availableThemes);
   }
 
-  void setPrimaryColor(Color primaryColor) {
-    _primaryColor = primaryColor;
+  void setCurrentTheme(ThemeData theme) {
+    _currentTheme = theme;
     notifyListeners();
   }
 }

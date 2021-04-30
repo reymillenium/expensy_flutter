@@ -72,8 +72,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   @override
   Widget build(BuildContext context) {
     AppData appData = Provider.of<AppData>(context, listen: true);
-    List<Map> availablePrimaryColors = appData.availablePrimaryColors;
-    Function setPrimaryColorHandler = (primaryColor) => appData.setPrimaryColor(primaryColor);
+    List<Map> availableThemes = appData.availableThemes;
+    Function setCurrentThemeHandler = (primaryColor) => appData.setCurrentTheme(primaryColor);
 
     return Scaffold(
       appBar: AppBar(
@@ -97,18 +97,50 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('Available colors...'),
+              child: Column(
+                children: [
+                  Material(
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                    elevation: 10,
+                    color: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                        "images/expensy_logo.png",
+                        width: 80,
+                        height: 80,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    'Expensy',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                  // Text('Primary Color:'),
+                ],
+              ),
+              // decoration: BoxDecoration(
+              //   // color: Colors.purple,
+              //   color: Theme.of(context).primaryColor,
+              // ),
+
               decoration: BoxDecoration(
-                // color: Colors.purple,
-                color: Theme.of(context).primaryColor,
+                gradient: LinearGradient(
+                  colors: [Theme.of(context).primaryColor, Theme.of(context).accentColor],
+                  // colors: [Colors.purple, Colors.purpleAccent],
+                ),
               ),
             ),
-            ...availablePrimaryColors.map((availableColor) {
+            ...availableThemes.map((theme) {
               return ListTile(
-                title: Text(availableColor['name']),
+                title: Text(theme['name']),
                 onTap: () {
                   // Update the state of the app.
-                  setPrimaryColorHandler(availableColor['color']);
+                  setCurrentThemeHandler(theme['theme']);
                   // Then close the drawer
                   Navigator.pop(context);
                 },
