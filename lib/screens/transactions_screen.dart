@@ -73,12 +73,15 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   @override
   Widget build(BuildContext context) {
     AppData appData = Provider.of<AppData>(context, listen: true);
+    int themeIndex = appData.themeIndex;
     ThemeData currentTheme = appData.currentTheme;
     List<Map> availableThemes = appData.availableThemes;
-    int themeIndex = appData.themeIndex;
+    List<Map> availableFonts = appData.availableFonts;
+
     Color primaryColor = Theme.of(context).primaryColor;
     Color accentColor = Theme.of(context).accentColor;
     Function setCurrentThemeHandler = (themeIndex) => appData.setCurrentTheme(themeIndex);
+    Function setCurrentFontFamilyHandler = (fontIndex) => appData.setCurrentFontFamily(fontIndex);
 
     return Scaffold(
       appBar: AppBar(
@@ -157,7 +160,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             // ),
             ExpansionTile(
               title: Text(
-                'Active theme:',
+                'Theme color:',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 20,
@@ -186,6 +189,39 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                 );
               }).toList(),
             ),
+
+            ExpansionTile(
+              title: Text(
+                'Theme font:',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              children: availableFonts.asMap().entries.map((entry) {
+                int index = entry.key;
+                Map value = entry.value;
+
+                return ListTile(
+                  title: Text(
+                    value['name'],
+                    style: TextStyle(
+                      fontFamily: value['fontFamily'],
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  onTap: () {
+                    // Update the state of the app.
+                    setCurrentFontFamilyHandler(index);
+                    // Then close the drawer
+                    Navigator.pop(context);
+                  },
+                );
+              }).toList(),
+            ),
+
             // ...availableThemes.asMap().entries.map((entry) {
             //   int index = entry.key;
             //   Map value = entry.value;

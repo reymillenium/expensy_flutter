@@ -30,14 +30,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       title: appTitle,
-      theme: ThemeData(
-        fontFamily: 'SourceSansPro',
-        primarySwatch: currentTheme.primaryColor,
-        accentColor: currentTheme.accentColor,
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-          foregroundColor: currentTheme.primaryColor == Colors.deepPurple ? Colors.white : Colors.black,
-        ),
-      ),
+      theme: currentTheme,
       debugShowCheckedModeBanner: false,
       home: TransactionsScreen(title: appTitle),
     );

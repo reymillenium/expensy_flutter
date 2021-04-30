@@ -157,6 +157,7 @@ class AppData extends ChangeNotifier {
   }
 
   void setCurrentFontFamily(int fontIndex) {
+    _fontIndex = fontIndex;
     ThemeData newThemeData = ThemeData(
       fontFamily: _availableFonts[fontIndex]['fontFamily'],
       primarySwatch: _availableThemes[_themeIndex]['theme']['primarySwatch'],
