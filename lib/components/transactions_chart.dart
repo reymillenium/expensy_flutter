@@ -7,6 +7,7 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:fl_chart/fl_chart.dart'; // Allows to use the Bar Charts
 import 'package:flutter/gestures.dart'; // Allows: PointerExitEvent
 import 'package:tinycolor/tinycolor.dart'; // Allows to light a color and many other things
+import 'package:provider/provider.dart';
 
 // Screens:
 import 'package:expensy_flutter/screens/new_transaction_screen.dart';
@@ -14,6 +15,7 @@ import 'package:expensy_flutter/screens/new_transaction_screen.dart';
 // Models:
 import 'package:expensy_flutter/models/transaction.dart';
 import 'package:expensy_flutter/models/transactions_data.dart';
+import 'package:expensy_flutter/models/app_data.dart';
 
 // Components:
 import 'package:expensy_flutter/components/transactions_list.dart';
@@ -43,6 +45,12 @@ class TransactionsChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppData appData = Provider.of<AppData>(context, listen: true);
+    // List<Map> availableThemeColors = appData.availableThemeColors;
+    // Map currentThemeColors = appData.currentThemeColors;
+    // List<Map> availableThemeFonts = appData.availableThemeFonts;
+    Map currentThemeFont = appData.currentThemeFont;
+
     final Color primaryColor = Theme.of(context).primaryColor;
     final Color accentColor = Theme.of(context).accentColor;
 
@@ -82,7 +90,7 @@ class TransactionsChart extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8.0),
                       child: BarChart(
-                        mainBarData(primaryColor),
+                        mainBarData(primaryColor, currentThemeFont),
                         // mainBarData(context),
                         swapAnimationDuration: animDuration,
                       ),
@@ -132,7 +140,7 @@ class TransactionsChart extends StatelessWidget {
         return makeGroupData(primaryColor, 6 - i, NumericHelper.roundDouble(groupedAmountLastWeek[6 - i]['amount'], 2), isTouched: (i) == touchedIndex);
       });
 
-  BarChartData mainBarData(Color primaryColor) {
+  BarChartData mainBarData(Color primaryColor, Map currentThemeFont) {
     return BarChartData(
       barTouchData: BarTouchData(
         touchTooltipData: BarTouchTooltipData(
@@ -174,6 +182,7 @@ class TransactionsChart extends StatelessWidget {
             color: primaryColor,
             fontWeight: FontWeight.bold,
             fontSize: 14,
+            fontFamily: currentThemeFont['fontFamily'],
           ),
           margin: 16,
           getTitles: (double value) {
