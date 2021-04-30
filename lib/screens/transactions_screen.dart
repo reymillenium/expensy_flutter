@@ -19,6 +19,7 @@ import 'package:expensy_flutter/models/app_data.dart';
 // Components:
 import 'package:expensy_flutter/components/transactions_list.dart';
 import 'package:expensy_flutter/components/transactions_chart.dart';
+import 'package:expensy_flutter/components/multi_platform_select_box.dart';
 
 // Helpers:
 
@@ -72,8 +73,12 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   @override
   Widget build(BuildContext context) {
     AppData appData = Provider.of<AppData>(context, listen: true);
+    ThemeData currentTheme = appData.currentTheme;
     List<Map> availableThemes = appData.availableThemes;
-    Function setCurrentThemeHandler = (primaryColor) => appData.setCurrentTheme(primaryColor);
+    int themeIndex = appData.themeIndex;
+    Color primaryColor = Theme.of(context).primaryColor;
+    Color accentColor = Theme.of(context).accentColor;
+    Function setCurrentThemeHandler = (themeIndex) => appData.setCurrentTheme(themeIndex);
 
     return Scaffold(
       appBar: AppBar(
@@ -97,6 +102,12 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [primaryColor, accentColor],
+                  // colors: [Colors.purple, Colors.purpleAccent],
+                ),
+              ),
               child: Column(
                 children: [
                   Material(
@@ -118,29 +129,40 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   // Text('Primary Color:'),
                 ],
               ),
-              // decoration: BoxDecoration(
-              //   // color: Colors.purple,
-              //   color: Theme.of(context).primaryColor,
-              // ),
-
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Theme.of(context).primaryColor, Theme.of(context).accentColor],
-                  // colors: [Colors.purple, Colors.purpleAccent],
+            ),
+            ListTile(
+              title: Text(
+                'Active theme:',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
+              onTap: () {},
             ),
-            ...availableThemes.map((theme) {
+            MultiPlatformSelectBox(
+              onSelectedItemChangedIOS: (selectedIndex) {
+                setCurrentThemeHandler(selectedIndex);
+              },
+              selectedValueAndroid: availableThemes[themeIndex]['name'],
+              onChangedAndroid: (String newValue) {},
+              itemsList: availableThemes,
+            ),
+            ...availableThemes.asMap().entries.map((entry) {
+              int index = entry.key;
+              Map value = entry.value;
+
               return ListTile(
-                title: Text(theme['name']),
+                title: Text(value['name']),
                 onTap: () {
                   // Update the state of the app.
-                  setCurrentThemeHandler(theme['theme']);
+                  setCurrentThemeHandler(index);
                   // Then close the drawer
                   Navigator.pop(context);
                 },

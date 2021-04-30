@@ -16,6 +16,7 @@ import 'dart:collection'; // Allows to use UnmodifiableListView
 class AppData extends ChangeNotifier {
   // Properties:
   ThemeData _currentTheme;
+  int _themeIndex = 0;
   List<Map> _availableThemes = [
     {
       'name': 'Purple',
@@ -76,12 +77,16 @@ class AppData extends ChangeNotifier {
   ];
 
   AppData() {
-    _currentTheme = _availableThemes[0]['theme'];
+    _currentTheme = _availableThemes[_themeIndex]['theme'];
   }
 
   // Getters:
   get currentTheme {
     return _currentTheme;
+  }
+
+  get themeIndex {
+    return _themeIndex;
   }
 
   get availableThemesCount {
@@ -92,8 +97,9 @@ class AppData extends ChangeNotifier {
     return UnmodifiableListView(_availableThemes);
   }
 
-  void setCurrentTheme(ThemeData theme) {
-    _currentTheme = theme;
+  void setCurrentTheme(int themeIndex) {
+    _themeIndex = themeIndex;
+    _currentTheme = _availableThemes[themeIndex]['theme'];
     notifyListeners();
   }
 }
