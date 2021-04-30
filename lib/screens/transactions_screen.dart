@@ -93,7 +93,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             DrawerHeader(
               child: Text('Preferences...'),
               decoration: BoxDecoration(
-                color: Colors.purple,
+                // color: Colors.purple,
+                color: Theme.of(context).primaryColor,
               ),
             ),
             ListTile(
@@ -126,6 +127,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             touchedIndex: touchedIndex,
             groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
             biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
+            // primaryColor: Theme.of(context).primaryColor,
           ),
 
           // Transaction List:
@@ -151,7 +153,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
           ],
         ),
         shape: CircularNotchedRectangle(),
-        color: Colors.purple,
+        color: Theme.of(context).primaryColor,
       ),
 
       // FAB

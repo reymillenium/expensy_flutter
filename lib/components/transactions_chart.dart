@@ -42,6 +42,8 @@ class TransactionsChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color primaryColor = Theme.of(context).primaryColor;
+
     return AspectRatio(
       aspectRatio: 1.5,
       child: Card(
@@ -89,7 +91,8 @@ class TransactionsChart extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8.0),
                       child: BarChart(
-                        mainBarData(),
+                        mainBarData(primaryColor),
+                        // mainBarData(context),
                         swapAnimationDuration: animDuration,
                       ),
                     ),
@@ -169,7 +172,7 @@ class TransactionsChart extends StatelessWidget {
         return makeGroupData(6 - i, NumericHelper.roundDouble(groupedAmountLastWeek[6 - i]['amount'], 2), isTouched: (i) == touchedIndex);
       });
 
-  BarChartData mainBarData() {
+  BarChartData mainBarData(Color primaryColor) {
     return BarChartData(
       barTouchData: BarTouchData(
         touchTooltipData: BarTouchTooltipData(
@@ -245,8 +248,10 @@ class TransactionsChart extends StatelessWidget {
         show: true,
         bottomTitles: SideTitles(
           showTitles: true,
-          getTextStyles: (value) => const TextStyle(
-            color: Colors.purple,
+          getTextStyles: (value) => TextStyle(
+            // color: Colors.purple,
+            // color: Theme.of(context).primaryColor,
+            color: primaryColor,
             fontWeight: FontWeight.bold,
             fontSize: 14,
           ),
