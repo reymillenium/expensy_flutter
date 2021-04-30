@@ -6,6 +6,7 @@ import 'package:intl/intl.dart'; // Allows to use: DateFormat
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:fl_chart/fl_chart.dart'; // Allows to use the Bar Charts
 import 'package:flutter/gestures.dart'; // Allows: PointerExitEvent
+import 'package:tinycolor/tinycolor.dart'; // Allows to light a color and many other things
 
 // Screens:
 import 'package:expensy_flutter/screens/new_transaction_screen.dart';
@@ -43,6 +44,7 @@ class TransactionsChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color primaryColor = Theme.of(context).primaryColor;
+    final Color accentColor = Theme.of(context).accentColor;
 
     return AspectRatio(
       aspectRatio: 1.5,
@@ -64,17 +66,6 @@ class TransactionsChart extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  // Text(
-                  //   'Last Week Transactions',
-                  //   style: TextStyle(
-                  //     color: const Color(0xff0f4a3c),
-                  //     fontSize: 24,
-                  //     fontWeight: FontWeight.bold,
-                  //   ),
-                  // ),
-                  // const SizedBox(
-                  //   height: 4,
-                  // ),
                   Text(
                     'Last Week Transactions',
                     style: TextStyle(
@@ -110,6 +101,7 @@ class TransactionsChart extends StatelessWidget {
   }
 
   BarChartGroupData makeGroupData(
+    Color primaryColor,
     int x,
     double y, {
     bool isTouched = false,
@@ -127,7 +119,8 @@ class TransactionsChart extends StatelessWidget {
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
             y: biggestAmountLastWeek + 2,
-            colors: [barBackgroundColor],
+            // colors: [barBackgroundColor],
+            colors: [TinyColor(primaryColor).lighten(16).color],
           ),
         ),
       ],
@@ -135,41 +128,8 @@ class TransactionsChart extends StatelessWidget {
     );
   }
 
-  List<BarChartGroupData> showingGroups() => List.generate(7, (i) {
-        // switch (i) {
-        //   case 0:
-        //     // return makeGroupData(0, 5, isTouched: i == touchedIndex);
-        //     // return makeGroupData(0, groupedAmountLastWeek[0], isTouched: i == touchedIndex);
-        //     // return makeGroupData(0, NumericHelper.roundDouble(groupedAmountLastWeek[0], 1), isTouched: i == touchedIndex);
-        //     return makeGroupData(6, NumericHelper.roundDouble(groupedAmountLastWeek[6]['amount'], 1), isTouched: i == touchedIndex);
-        //   case 1:
-        //     // return makeGroupData(1, 6.5, isTouched: i == touchedIndex);
-        //     // return makeGroupData(1, groupedAmountLastWeek[1], isTouched: i == touchedIndex);
-        //     return makeGroupData(5, NumericHelper.roundDouble(groupedAmountLastWeek[5]['amount'], 1), isTouched: i == touchedIndex);
-        //   case 2:
-        //     // return makeGroupData(2, 5, isTouched: i == touchedIndex);
-        //     // return makeGroupData(2, groupedAmountLastWeek[2], isTouched: i == touchedIndex);
-        //     return makeGroupData(4, NumericHelper.roundDouble(groupedAmountLastWeek[4]['amount'], 1), isTouched: i == touchedIndex);
-        //   case 3:
-        //     // return makeGroupData(3, 7.5, isTouched: i == touchedIndex);
-        //     // return makeGroupData(3, groupedAmountLastWeek[3], isTouched: i == touchedIndex);
-        //     return makeGroupData(3, NumericHelper.roundDouble(groupedAmountLastWeek[3]['amount'], 1), isTouched: i == touchedIndex);
-        //   case 4:
-        //     // return makeGroupData(4, 9, isTouched: i == touchedIndex);
-        //     // return makeGroupData(4, groupedAmountLastWeek[4], isTouched: i == touchedIndex);
-        //     return makeGroupData(2, NumericHelper.roundDouble(groupedAmountLastWeek[2]['amount'], 1), isTouched: i == touchedIndex);
-        //   case 5:
-        //     // return makeGroupData(5, 11.5, isTouched: i == touchedIndex);
-        //     // return makeGroupData(5, groupedAmountLastWeek[5], isTouched: i == touchedIndex);
-        //     return makeGroupData(1, NumericHelper.roundDouble(groupedAmountLastWeek[1]['amount'], 1), isTouched: i == touchedIndex);
-        //   case 6:
-        //     // return makeGroupData(6, 6.5, isTouched: i == touchedIndex);
-        //     // return makeGroupData(6, groupedAmountLastWeek[6], isTouched: i == touchedIndex);
-        //     return makeGroupData(0, NumericHelper.roundDouble(groupedAmountLastWeek[0]['amount'], 1), isTouched: i == touchedIndex);
-        //   default:
-        //     return null;
-        // }
-        return makeGroupData(6 - i, NumericHelper.roundDouble(groupedAmountLastWeek[6 - i]['amount'], 2), isTouched: (i) == touchedIndex);
+  List<BarChartGroupData> showingGroups(Color primaryColor) => List.generate(7, (i) {
+        return makeGroupData(primaryColor, 6 - i, NumericHelper.roundDouble(groupedAmountLastWeek[6 - i]['amount'], 2), isTouched: (i) == touchedIndex);
       });
 
   BarChartData mainBarData(Color primaryColor) {
@@ -179,37 +139,6 @@ class TransactionsChart extends StatelessWidget {
             tooltipBgColor: Colors.blueGrey,
             tooltipPadding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
             getTooltipItem: (group, groupIndex, rod, rodIndex) {
-              // String weekDay;
-              // switch (group.x.toInt()) {
-              //   case 0:
-              //     // weekDay = 'Monday';
-              //     weekDay = groupedAmountLastWeek[0]['day'];
-              //     break;
-              //   case 1:
-              //     // weekDay = 'Tuesday';
-              //     weekDay = groupedAmountLastWeek[1]['day'];
-              //     break;
-              //   case 2:
-              //     // weekDay = 'Wednesday';
-              //     weekDay = groupedAmountLastWeek[2]['day'];
-              //     break;
-              //   case 3:
-              //     // weekDay = 'Thursday';
-              //     weekDay = groupedAmountLastWeek[3]['day'];
-              //     break;
-              //   case 4:
-              //     // weekDay = 'Friday';
-              //     weekDay = groupedAmountLastWeek[4]['day'];
-              //     break;
-              //   case 5:
-              //     // weekDay = 'Saturday';
-              //     weekDay = groupedAmountLastWeek[5]['day'];
-              //     break;
-              //   case 6:
-              //     // weekDay = 'Sunday';
-              //     weekDay = groupedAmountLastWeek[6]['day'];
-              //     break;
-              // }
               String weekDay = groupedAmountLastWeek[group.x]['day'];
 
               return BarTooltipItem(
@@ -233,15 +162,6 @@ class TransactionsChart extends StatelessWidget {
                 // textAlign: TextAlign.center,
               );
             }),
-        // touchCallback: (barTouchResponse) {
-        //   setState(() {
-        //     if (barTouchResponse.spot != null && barTouchResponse.touchInput is! PointerUpEvent && barTouchResponse.touchInput is! PointerExitEvent) {
-        //       touchedIndex = barTouchResponse.spot.touchedBarGroupIndex;
-        //     } else {
-        //       touchedIndex = -1;
-        //     }
-        //   });
-        // },
         touchCallback: (barTouchResponse) => touchCallbackHandler(barTouchResponse),
       ),
       titlesData: FlTitlesData(
@@ -258,31 +178,6 @@ class TransactionsChart extends StatelessWidget {
           margin: 16,
           getTitles: (double value) {
             int integerValue = value.toInt();
-            // switch (value.toInt()) {
-            //   case 0:
-            //     // return 'M';
-            //     return groupedAmountLastWeek[0]['day'].substring(0, 2);
-            //   case 1:
-            //     // return 'T';
-            //     return groupedAmountLastWeek[1]['day'].substring(0, 2);
-            //   case 2:
-            //     // return 'W';
-            //     return groupedAmountLastWeek[2]['day'].substring(0, 2);
-            //   case 3:
-            //     // return 'T';
-            //     return groupedAmountLastWeek[3]['day'].substring(0, 2);
-            //   case 4:
-            //     // return 'F';
-            //     return groupedAmountLastWeek[4]['day'].substring(0, 2);
-            //   case 5:
-            //     // return 'S';
-            //     return groupedAmountLastWeek[5]['day'].substring(0, 2);
-            //   case 6:
-            //     // return 'S';
-            //     return groupedAmountLastWeek[6]['day'].substring(0, 2);
-            //   default:
-            //     return '';
-            // }
             return groupedAmountLastWeek[integerValue]['day'].substring(0, 2);
           },
         ),
@@ -293,7 +188,7 @@ class TransactionsChart extends StatelessWidget {
       borderData: FlBorderData(
         show: false,
       ),
-      barGroups: showingGroups(),
+      barGroups: showingGroups(primaryColor),
     );
   }
 }

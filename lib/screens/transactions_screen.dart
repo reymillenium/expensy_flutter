@@ -173,7 +173,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                     // Update the state of the app.
                     setCurrentThemeHandler(index);
                     // Then close the drawer
-                    // Navigator.pop(context);
+                    Navigator.pop(context);
                   },
                 );
               }).toList(),
