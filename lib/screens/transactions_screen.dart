@@ -73,15 +73,15 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   @override
   Widget build(BuildContext context) {
     AppData appData = Provider.of<AppData>(context, listen: true);
-    int themeIndex = appData.themeIndex;
-    ThemeData currentTheme = appData.currentTheme;
-    List<Map> availableThemes = appData.availableThemes;
-    List<Map> availableFonts = appData.availableFonts;
+    // int themeIndex = appData.themeColorIndex;
+    // ThemeData currentTheme = appData.currentThemeData;
+    List<Map> availableThemeColors = appData.availableThemeColors;
+    List<Map> availableThemeFonts = appData.availableThemeFonts;
 
     Color primaryColor = Theme.of(context).primaryColor;
     Color accentColor = Theme.of(context).accentColor;
-    Function setCurrentThemeHandler = (themeIndex) => appData.setCurrentTheme(themeIndex);
-    Function setCurrentFontFamilyHandler = (fontIndex) => appData.setCurrentFontFamily(fontIndex);
+    Function setCurrentThemeColorHandler = (themeColorIndex) => appData.setCurrentThemeColor(themeColorIndex);
+    Function setCurrentFontFamilyHandler = (themeFontIndex) => appData.setCurrentFontFamily(themeFontIndex);
 
     return Scaffold(
       appBar: AppBar(
@@ -147,17 +147,6 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                 ],
               ),
             ),
-            // MultiPlatformSelectBox(
-            //   onSelectedItemChangedIOS: (selectedIndex) {
-            //     setCurrentThemeHandler(selectedIndex);
-            //   },
-            //   // selectedValueAndroid: availableThemes[themeIndex]['name'],
-            //   selectedValueAndroid: themeIndex,
-            //   onChangedAndroid: (int newValue) {
-            //     setCurrentThemeHandler(newValue);
-            //   },
-            //   itemsList: availableThemes,
-            // ),
             ExpansionTile(
               title: Text(
                 'Theme color:',
@@ -167,7 +156,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              children: availableThemes.asMap().entries.map((entry) {
+              children: availableThemeColors.asMap().entries.map((entry) {
                 int index = entry.key;
                 Map value = entry.value;
 
@@ -182,14 +171,13 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                   ),
                   onTap: () {
                     // Update the state of the app.
-                    setCurrentThemeHandler(index);
+                    setCurrentThemeColorHandler(index);
                     // Then close the drawer
                     Navigator.pop(context);
                   },
                 );
               }).toList(),
             ),
-
             ExpansionTile(
               title: Text(
                 'Theme font:',
@@ -199,7 +187,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              children: availableFonts.asMap().entries.map((entry) {
+              children: availableThemeFonts.asMap().entries.map((entry) {
                 int index = entry.key;
                 Map value = entry.value;
 
@@ -221,21 +209,6 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                 );
               }).toList(),
             ),
-
-            // ...availableThemes.asMap().entries.map((entry) {
-            //   int index = entry.key;
-            //   Map value = entry.value;
-            //
-            //   return ListTile(
-            //     title: Text(value['name']),
-            //     onTap: () {
-            //       // Update the state of the app.
-            //       setCurrentThemeHandler(index);
-            //       // Then close the drawer
-            //       Navigator.pop(context);
-            //     },
-            //   );
-            // }).toList()
           ],
         ),
       ),

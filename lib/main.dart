@@ -25,12 +25,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppData appData = Provider.of<AppData>(context, listen: true);
-    ThemeData currentTheme = appData.currentTheme;
+    ThemeData currentThemeData = appData.currentThemeData;
     final String appTitle = 'Expensy';
 
     return MaterialApp(
       title: appTitle,
-      theme: currentTheme,
+      theme: currentThemeData,
       debugShowCheckedModeBanner: false,
       home: TransactionsScreen(title: appTitle),
     );

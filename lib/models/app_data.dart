@@ -15,9 +15,9 @@ import 'dart:collection'; // Allows to use UnmodifiableListView
 
 class AppData extends ChangeNotifier {
   // Properties:
-  ThemeData _currentTheme;
-  int _themeIndex = 0;
-  List<Map> _availableThemes = [
+  ThemeData _currentThemeData;
+  int _themeColorIndex = 0;
+  List<Map> _availableThemeColors = [
     {
       'name': 'Purple',
       'theme': {
@@ -84,8 +84,8 @@ class AppData extends ChangeNotifier {
     },
   ];
 
-  int _fontIndex = 0;
-  List<Map> _availableFonts = [
+  int _themeFontIndex = 0;
+  List<Map> _availableThemeFonts = [
     {
       'name': 'Roboto',
       'fontFamily': 'Roboto',
@@ -101,74 +101,67 @@ class AppData extends ChangeNotifier {
   ];
 
   AppData() {
-    // _currentTheme = _availableThemes[_themeIndex]['theme'];
     ThemeData newThemeData = ThemeData(
-      fontFamily: _availableFonts[_fontIndex]['fontFamily'],
-      primarySwatch: _availableThemes[themeIndex]['theme']['primarySwatch'],
-      primaryColor: _availableThemes[themeIndex]['theme']['primaryColor'],
-      accentColor: _availableThemes[themeIndex]['theme']['accentColor'],
+      fontFamily: _availableThemeFonts[_themeFontIndex]['fontFamily'],
+      primarySwatch: _availableThemeColors[_themeColorIndex]['theme']['primarySwatch'],
+      primaryColor: _availableThemeColors[_themeColorIndex]['theme']['primaryColor'],
+      accentColor: _availableThemeColors[_themeColorIndex]['theme']['accentColor'],
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        foregroundColor: _availableThemes[_themeIndex]['theme']['primaryColor'] == Colors.deepPurple ? Colors.white : Colors.black,
+        foregroundColor: _availableThemeColors[_themeColorIndex]['theme']['primaryColor'] == Colors.deepPurple ? Colors.white : Colors.black,
       ),
     );
-    _currentTheme = newThemeData;
+    _currentThemeData = newThemeData;
   }
 
   // Getters:
-  get currentTheme {
-    return _currentTheme;
+  get currentThemeData {
+    return _currentThemeData;
   }
 
-  get themeIndex {
-    return _themeIndex;
+  get themeColorIndex {
+    return _themeColorIndex;
   }
 
-  get availableThemesCount {
-    return _availableThemes.length;
-  }
-
-  UnmodifiableListView<Map> get availableThemes {
-    return UnmodifiableListView(_availableThemes);
+  UnmodifiableListView<Map> get availableThemeColors {
+    return UnmodifiableListView(_availableThemeColors);
   }
 
   get fontIndex {
-    return _fontIndex;
+    return _themeFontIndex;
   }
 
-  UnmodifiableListView<Map> get availableFonts {
-    return UnmodifiableListView(_availableFonts);
+  UnmodifiableListView<Map> get availableThemeFonts {
+    return UnmodifiableListView(_availableThemeFonts);
   }
 
   // Public methods:
-  void setCurrentTheme(int themeIndex) {
-    _themeIndex = themeIndex;
-    // _currentTheme = _availableThemes[themeIndex]['theme'];
+  void setCurrentThemeColor(int themeColorIndex) {
+    _themeColorIndex = themeColorIndex;
     ThemeData newThemeData = ThemeData(
-      fontFamily: _availableFonts[_fontIndex]['fontFamily'],
-      primarySwatch: _availableThemes[themeIndex]['theme']['primarySwatch'],
-      primaryColor: _availableThemes[themeIndex]['theme']['primaryColor'],
-      accentColor: _availableThemes[themeIndex]['theme']['accentColor'],
+      fontFamily: _availableThemeFonts[_themeFontIndex]['fontFamily'],
+      primarySwatch: _availableThemeColors[themeColorIndex]['theme']['primarySwatch'],
+      primaryColor: _availableThemeColors[themeColorIndex]['theme']['primaryColor'],
+      accentColor: _availableThemeColors[themeColorIndex]['theme']['accentColor'],
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        foregroundColor: _availableThemes[_themeIndex]['theme']['primaryColor'] == Colors.deepPurple ? Colors.white : Colors.black,
+        foregroundColor: _availableThemeColors[_themeColorIndex]['theme']['primaryColor'] == Colors.deepPurple ? Colors.white : Colors.black,
       ),
     );
-    _currentTheme = newThemeData;
+    _currentThemeData = newThemeData;
     notifyListeners();
   }
 
-  void setCurrentFontFamily(int fontIndex) {
-    _fontIndex = fontIndex;
+  void setCurrentFontFamily(int themeFontIndex) {
+    _themeFontIndex = themeFontIndex;
     ThemeData newThemeData = ThemeData(
-      fontFamily: _availableFonts[fontIndex]['fontFamily'],
-      primarySwatch: _availableThemes[_themeIndex]['theme']['primarySwatch'],
-      primaryColor: _availableThemes[_themeIndex]['theme']['primaryColor'],
-      accentColor: _availableThemes[themeIndex]['theme']['accentColor'],
+      fontFamily: _availableThemeFonts[themeFontIndex]['fontFamily'],
+      primarySwatch: _availableThemeColors[_themeColorIndex]['theme']['primarySwatch'],
+      primaryColor: _availableThemeColors[_themeColorIndex]['theme']['primaryColor'],
+      accentColor: _availableThemeColors[themeColorIndex]['theme']['accentColor'],
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        foregroundColor: _availableThemes[_themeIndex]['theme']['primaryColor'] == Colors.deepPurple ? Colors.white : Colors.black,
+        foregroundColor: _availableThemeColors[_themeColorIndex]['theme']['primaryColor'] == Colors.deepPurple ? Colors.white : Colors.black,
       ),
     );
-    // _currentTheme = _availableThemes[themeIndex]['theme'];
-    _currentTheme = newThemeData;
+    _currentThemeData = newThemeData;
     notifyListeners();
   }
 }
