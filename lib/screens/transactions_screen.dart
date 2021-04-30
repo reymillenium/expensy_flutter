@@ -6,6 +6,7 @@ import 'package:intl/intl.dart'; // Allows to use: DateFormat
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:fl_chart/fl_chart.dart'; // Allows to use the Bar Charts
 import 'package:flutter/gestures.dart'; // Allows: PointerExitEvent
+import 'package:provider/provider.dart';
 
 // Screens:
 import 'package:expensy_flutter/screens/new_transaction_screen.dart';
@@ -13,6 +14,7 @@ import 'package:expensy_flutter/screens/new_transaction_screen.dart';
 // Models:
 import 'package:expensy_flutter/models/transaction.dart';
 import 'package:expensy_flutter/models/transactions_data.dart';
+import 'package:expensy_flutter/models/app_data.dart';
 
 // Components:
 import 'package:expensy_flutter/components/transactions_list.dart';
@@ -69,6 +71,10 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AppData appData = Provider.of<AppData>(context, listen: true);
+    List<Map> availablePrimaryColors = appData.availablePrimaryColors;
+    Function setPrimaryColorHandler = (primaryColor) => appData.setPrimaryColor(primaryColor);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -91,28 +97,23 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('Preferences...'),
+              child: Text('Available colors...'),
               decoration: BoxDecoration(
                 // color: Colors.purple,
                 color: Theme.of(context).primaryColor,
               ),
             ),
-            ListTile(
-              title: Text('Item 1'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Item 2'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
+            ...availablePrimaryColors.map((availableColor) {
+              return ListTile(
+                title: Text(availableColor['name']),
+                onTap: () {
+                  // Update the state of the app.
+                  setPrimaryColorHandler(availableColor['color']);
+                  // Then close the drawer
+                  Navigator.pop(context);
+                },
+              );
+            }).toList()
           ],
         ),
       ),
