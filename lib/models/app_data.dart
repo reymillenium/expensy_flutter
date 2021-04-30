@@ -20,22 +20,29 @@ class AppData extends ChangeNotifier {
     {
       'name': 'Purple',
       'theme': ThemeData(
-        primaryColor: Colors.purple,
+        primaryColor: Colors.deepPurple,
         accentColor: Colors.purpleAccent,
       ),
     },
     {
-      'name': 'Red',
+      'name': 'Orange',
       'theme': ThemeData(
-        primaryColor: Colors.red,
-        accentColor: Colors.redAccent,
+        primaryColor: Colors.deepOrange,
+        accentColor: Colors.orangeAccent,
       ),
     },
     {
-      'name': 'Blue',
+      'name': 'Green',
       'theme': ThemeData(
-        primaryColor: Colors.blue,
-        accentColor: Colors.blueAccent,
+        primaryColor: Colors.green,
+        accentColor: Colors.greenAccent,
+      ),
+    },
+    {
+      'name': 'Pink',
+      'theme': ThemeData(
+        primaryColor: Colors.pink,
+        accentColor: Colors.pinkAccent,
       ),
     },
   ];
