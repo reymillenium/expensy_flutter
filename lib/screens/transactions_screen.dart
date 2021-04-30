@@ -128,7 +128,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Image.asset(
-                        "images/expensy_logo.png",
+                        "assets/images/expensy_logo.png",
                         width: 80,
                         height: 80,
                         fit: BoxFit.cover,
