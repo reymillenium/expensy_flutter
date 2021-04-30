@@ -127,7 +127,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                   Text(
                     'Expensy',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 24,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
@@ -136,41 +136,62 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                 ],
               ),
             ),
-            ListTile(
+            // MultiPlatformSelectBox(
+            //   onSelectedItemChangedIOS: (selectedIndex) {
+            //     setCurrentThemeHandler(selectedIndex);
+            //   },
+            //   // selectedValueAndroid: availableThemes[themeIndex]['name'],
+            //   selectedValueAndroid: themeIndex,
+            //   onChangedAndroid: (int newValue) {
+            //     setCurrentThemeHandler(newValue);
+            //   },
+            //   itemsList: availableThemes,
+            // ),
+            ExpansionTile(
               title: Text(
                 'Active theme:',
                 style: TextStyle(
+                  color: Colors.black,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              onTap: () {},
-            ),
-            MultiPlatformSelectBox(
-              onSelectedItemChangedIOS: (selectedIndex) {
-                setCurrentThemeHandler(selectedIndex);
-              },
-              // selectedValueAndroid: availableThemes[themeIndex]['name'],
-              selectedValueAndroid: themeIndex,
-              onChangedAndroid: (int newValue) {
-                setCurrentThemeHandler(newValue);
-              },
-              itemsList: availableThemes,
-            ),
-            ...availableThemes.asMap().entries.map((entry) {
-              int index = entry.key;
-              Map value = entry.value;
+              children: availableThemes.asMap().entries.map((entry) {
+                int index = entry.key;
+                Map value = entry.value;
 
-              return ListTile(
-                title: Text(value['name']),
-                onTap: () {
-                  // Update the state of the app.
-                  setCurrentThemeHandler(index);
-                  // Then close the drawer
-                  Navigator.pop(context);
-                },
-              );
-            }).toList()
+                return ListTile(
+                  title: Text(
+                    value['name'],
+                    style: TextStyle(
+                      color: value['theme'].primaryColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  onTap: () {
+                    // Update the state of the app.
+                    setCurrentThemeHandler(index);
+                    // Then close the drawer
+                    // Navigator.pop(context);
+                  },
+                );
+              }).toList(),
+            ),
+            // ...availableThemes.asMap().entries.map((entry) {
+            //   int index = entry.key;
+            //   Map value = entry.value;
+            //
+            //   return ListTile(
+            //     title: Text(value['name']),
+            //     onTap: () {
+            //       // Update the state of the app.
+            //       setCurrentThemeHandler(index);
+            //       // Then close the drawer
+            //       Navigator.pop(context);
+            //     },
+            //   );
+            // }).toList()
           ],
         ),
       ),
