@@ -126,12 +126,20 @@ class AppData extends ChangeNotifier {
     return UnmodifiableListView(_availableThemeColors);
   }
 
+  get currentThemeColors {
+    return _availableThemeColors[_themeColorIndex];
+  }
+
   get fontIndex {
     return _themeFontIndex;
   }
 
   UnmodifiableListView<Map> get availableThemeFonts {
     return UnmodifiableListView(_availableThemeFonts);
+  }
+
+  get currentThemeFont {
+    return _availableThemeFonts[_themeFontIndex];
   }
 
   // Public methods:

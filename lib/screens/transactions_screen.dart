@@ -75,10 +75,9 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   @override
   Widget build(BuildContext context) {
     AppData appData = Provider.of<AppData>(context, listen: true);
-    // int themeIndex = appData.themeColorIndex;
-    // ThemeData currentTheme = appData.currentThemeData;
     List<Map> availableThemeColors = appData.availableThemeColors;
     List<Map> availableThemeFonts = appData.availableThemeFonts;
+    Map currentThemeFont = appData.currentThemeFont;
 
     Color primaryColor = Theme.of(context).primaryColor;
     Color accentColor = Theme.of(context).accentColor;
@@ -92,7 +91,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            fontFamily: 'Luminari',
+            fontFamily: currentThemeFont['fontFamily'],
           ),
         ),
         actions: [
@@ -142,7 +141,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                       fontSize: 24,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontFamily: 'Luminari',
+                      fontFamily: currentThemeFont['fontFamily'],
                     ),
                   ),
                   // Text('Primary Color:'),
