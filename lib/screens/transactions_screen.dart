@@ -98,11 +98,14 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       appBar: AppBar(
         title: Text(
           widget.title,
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            fontFamily: currentThemeFont['fontFamily'],
-          ),
+          // style: TextStyle(
+          //   fontSize: 24,
+          //   fontWeight: FontWeight.bold,
+          //   fontFamily: currentThemeFont['fontFamily'],
+          // ),
+          style: Theme.of(context).appBarTheme.textTheme.headline6.copyWith(
+                fontFamily: currentThemeFont['fontFamily'],
+              ),
         ),
         actions: [
           IconButton(

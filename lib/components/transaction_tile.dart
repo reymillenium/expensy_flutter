@@ -160,10 +160,11 @@ class TransactionTile extends StatelessWidget {
             children: [
               Text(
                 transaction.title,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                // style: TextStyle(
+                //   fontSize: 18,
+                //   fontWeight: FontWeight.bold,
+                // ),
+                style: Theme.of(context).textTheme.headline6,
               ),
               Text(
                 formattedDate,

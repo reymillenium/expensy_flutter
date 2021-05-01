@@ -30,7 +30,25 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       title: appTitle,
-      theme: currentThemeData,
+      theme: currentThemeData.copyWith(
+        textTheme: currentThemeData.textTheme.copyWith(
+          headline6: TextStyle(
+            fontSize: 18,
+            color: Colors.black,
+            // color: currentThemeData.textTheme.headline6.color,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        appBarTheme: currentThemeData.appBarTheme.copyWith(
+          textTheme: ThemeData.light().textTheme.copyWith(
+                headline6: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  // color: Colors.yellow,
+                ),
+              ),
+        ),
+      ),
       debugShowCheckedModeBanner: false,
       home: TransactionsScreen(title: appTitle),
     );
