@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'dart:math'; // Allows to use: random
 import 'dart:convert'; // Allows to use: base64UrlEncode
 import 'package:intl/intl.dart'; // Allows to use: DateFormat
+import 'package:provider/provider.dart';
 
 // Screens:
 import 'package:expensy_flutter/screens/edit_transaction_screen.dart';
 
 // Models:
 import 'package:expensy_flutter/models/transaction.dart';
+import 'package:expensy_flutter/models/app_data.dart';
 
 // Components:
 
@@ -38,8 +40,11 @@ class TransactionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppData appData = Provider.of<AppData>(context, listen: true);
+    Map currentCurrency = appData.currentCurrency;
+
     final String formattedDate = formatter.format(transaction.executionDate);
-    final String amountLabel = '\$${currencyFormat.format(transaction.amount)}';
+    final String amountLabel = '${currentCurrency['symbol']}${currencyFormat.format(transaction.amount)}';
     final double amountFontSize = (84 / amountLabel.length);
 
     return Card(
