@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       title: appTitle,
+      // theme: currentThemeData,
       theme: currentThemeData.copyWith(
         textTheme: currentThemeData.textTheme.copyWith(
           headline6: TextStyle(
