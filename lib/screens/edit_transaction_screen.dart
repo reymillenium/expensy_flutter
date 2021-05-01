@@ -5,12 +5,14 @@ import 'dart:math'; // Allows to use: random
 import 'dart:convert'; // Allows to use: base64UrlEncode
 import 'package:intl/intl.dart'; // Allows to use: DateFormat
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:provider/provider.dart';
 
 // Screens:
 
 // Models:
 import 'package:expensy_flutter/models/transaction.dart';
 import 'package:expensy_flutter/models/transactions_data.dart';
+import 'package:expensy_flutter/models/app_data.dart';
 
 // Components:
 import 'package:expensy_flutter/components/transactions_list.dart';
@@ -69,7 +71,11 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final String initialAmountLabel = 'USD(\$) ${_currencyFormat.format(_amount)}';
+    AppData appData = Provider.of<AppData>(context, listen: true);
+    Map currentCurrency = appData.currentCurrency;
+
+    // final String initialAmountLabel = 'USD(\$) ${_currencyFormat.format(_amount)}';
+    final String initialAmountLabel = '${currentCurrency['code']}(${currentCurrency['symbol']}) ${_currencyFormat.format(_amount)}';
     Color primaryColor = Theme.of(context).primaryColor;
     Color accentColor = Theme.of(context).accentColor;
 
@@ -137,13 +143,14 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
               // Amount Input
               TextFormField(
                 initialValue: initialAmountLabel,
-                decoration: InputDecoration(hintText: 'USD(\$) '),
+                // decoration: InputDecoration(hintText: 'USD(\$) '),
+                decoration: InputDecoration(hintText: '${currentCurrency['code']}(${currentCurrency['symbol']}) '),
                 inputFormatters: [
                   CurrencyTextInputFormatter(
                     // turnOffGrouping: false,
                     locale: 'en_US',
                     decimalDigits: 2,
-                    symbol: 'USD(\$) ', // or to remove symbol set ''.
+                    symbol: '${currentCurrency['code']}(${currentCurrency['symbol']}) ', // or to remove symbol set ''.
                     // symbol: '', // or to remove symbol set ''.
                   )
                 ],

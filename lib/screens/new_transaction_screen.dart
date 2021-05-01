@@ -6,12 +6,14 @@ import 'dart:math'; // Allows to use: random
 import 'dart:convert'; // Allows to use: base64UrlEncode
 import 'package:intl/intl.dart'; // Allows to use: DateFormat
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:provider/provider.dart';
 
 // Screens:
 
 // Models:
 import 'package:expensy_flutter/models/transaction.dart';
 import 'package:expensy_flutter/models/transactions_data.dart';
+import 'package:expensy_flutter/models/app_data.dart';
 
 // Components:
 import 'package:expensy_flutter/components/transactions_list.dart';
@@ -52,6 +54,9 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AppData appData = Provider.of<AppData>(context, listen: true);
+    Map currentCurrency = appData.currentCurrency;
+
     Color primaryColor = Theme.of(context).primaryColor;
     Color accentColor = Theme.of(context).accentColor;
 
@@ -116,14 +121,13 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
 
               // Amount Input
               TextField(
-                decoration: InputDecoration(hintText: 'USD(\$) '),
+                decoration: InputDecoration(hintText: '${currentCurrency['code']}(${currentCurrency['symbol']}) '),
                 inputFormatters: [
                   CurrencyTextInputFormatter(
                     // turnOffGrouping: false,
                     locale: 'en_US',
                     decimalDigits: 2,
-                    symbol: 'USD(\$) ', // or to remove symbol set ''.
-                    // symbol: '', // or to remove symbol set ''.
+                    symbol: '${currentCurrency['code']}(${currentCurrency['symbol']}) ', // or to remove symbol set ''.
                   )
                 ],
                 keyboardType: TextInputType.number,
