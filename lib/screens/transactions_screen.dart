@@ -46,7 +46,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   int touchedIndex;
   List<Map> expansionPanelListStatus = [
     {'isOpened': false},
-    {'isOpened': false}
+    {'isOpened': false},
+    {'isOpened': false},
   ];
 
   void _onAddTransactionHandler(String title, double amount, DateTime executionDate) {
@@ -84,11 +85,14 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     Map currentThemeColors = appData.currentThemeColors;
     List<Map> availableThemeFonts = appData.availableThemeFonts;
     Map currentThemeFont = appData.currentThemeFont;
+    List<Map> availableCurrencies = appData.availableCurrencies;
+    Map currentCurrency = appData.currentCurrency;
 
     Color primaryColor = Theme.of(context).primaryColor;
     Color accentColor = Theme.of(context).accentColor;
     Function setCurrentThemeColorHandler = (themeColorIndex) => appData.setCurrentThemeColor(themeColorIndex);
     Function setCurrentFontFamilyHandler = (themeFontIndex) => appData.setCurrentFontFamily(themeFontIndex);
+    Function setCurrentCurrencyHandler = (currencyIndex) => appData.setCurrentCurrency(currencyIndex);
 
     return Scaffold(
       appBar: AppBar(
@@ -320,6 +324,55 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                     }).toList(),
                   ),
                   isExpanded: expansionPanelListStatus[1]['isOpened'],
+                ),
+
+                // Expansion Panel # 3: Currencies
+                ExpansionPanel(
+                  canTapOnHeader: true,
+                  headerBuilder: (BuildContext context, bool isExpanded) {
+                    return ListTile(
+                      leading: FaIcon(
+                        FontAwesomeIcons.moneyBill,
+                        color: Colors.black,
+                      ),
+                      title: Text(
+                        'Currency:',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    );
+                  },
+                  body: Column(
+                    children: availableCurrencies.asMap().entries.map((entry) {
+                      int index = entry.key;
+                      Map value = entry.value;
+                      // Each Currency List Tile:
+                      return ListTile(
+                        leading: FaIcon(
+                          value['icon'],
+                          color: Colors.black,
+                        ),
+                        title: Text(
+                          value['name'],
+                          style: TextStyle(
+                            fontFamily: currentThemeFont['fontFamily'],
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        onTap: () {
+                          setCurrentCurrencyHandler(index);
+                          // closeAllThePanels();
+                          // Navigator.pop(context);
+                        },
+                        tileColor: _activeTileColor(currentCurrency['code'], value['code']),
+                      );
+                    }).toList(),
+                  ),
+                  isExpanded: expansionPanelListStatus[2]['isOpened'],
                 ),
               ],
             ),

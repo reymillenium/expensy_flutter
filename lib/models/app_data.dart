@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:collection'; // Allows to use UnmodifiableListView
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // Screens:
 
@@ -114,31 +115,37 @@ class AppData extends ChangeNotifier {
       'name': 'USA Dollar',
       'code': 'USD',
       'symbol': '\$',
+      'icon': FontAwesomeIcons.dollarSign,
     },
     {
       'name': 'Euro',
       'code': 'EUR',
       'symbol': '€',
+      'icon': FontAwesomeIcons.euroSign,
     },
     {
       'name': 'British Pound',
       'code': 'GBP',
       'symbol': '£',
+      'icon': FontAwesomeIcons.poundSign,
     },
     {
       'name': 'Indian Rupee',
       'code': 'INR',
       'symbol': '₹',
+      'icon': FontAwesomeIcons.rupeeSign,
     },
     {
       'name': 'Japanese Yen',
       'code': 'JPY',
       'symbol': '¥',
+      'icon': FontAwesomeIcons.yenSign,
     },
     {
       'name': 'Russian Ruble',
       'code': 'RUB',
       'symbol': '₽',
+      'icon': FontAwesomeIcons.rubleSign,
     },
   ];
 
@@ -225,6 +232,11 @@ class AppData extends ChangeNotifier {
       ),
     );
     _currentThemeData = newThemeData;
+    notifyListeners();
+  }
+
+  void setCurrentCurrency(int currencyIndex) {
+    _currencyIndex = currencyIndex;
     notifyListeners();
   }
 }
