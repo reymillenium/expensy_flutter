@@ -98,6 +98,14 @@ class AppData extends ChangeNotifier {
       'name': 'SourceSansPro',
       'fontFamily': 'SourceSansPro',
     },
+    {
+      'name': 'OpenSans',
+      'fontFamily': 'OpenSans',
+    },
+    {
+      'name': 'Quicksand',
+      'fontFamily': 'Quicksand',
+    },
   ];
 
   AppData() {

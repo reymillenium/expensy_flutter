@@ -64,9 +64,7 @@ flutter:
           style: normal
           weight: 500
         - asset: assets/fonts/Quicksand/Quicksand-Medium.ttf
-          weight: 500
         - asset: assets/fonts/Quicksand/Quicksand-Light.ttf
-          weight: 500
         - asset: assets/fonts/Quicksand/Quicksand-Bold.ttf
           weight: 700
 
