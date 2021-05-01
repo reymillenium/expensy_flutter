@@ -51,6 +51,24 @@ flutter:
         - asset: assets/fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf
           style: normal
           weight: 500
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans/OpenSans-Regular.ttf
+          style: normal
+          weight: 500
+        - asset: assets/fonts/OpenSans/OpenSans-Bold.ttf
+          weight: 700
+    - family: Quicksand
+      fonts:
+        - asset: assets/fonts/Quicksand/Quicksand-Regular.ttf
+          style: normal
+          weight: 500
+        - asset: assets/fonts/Quicksand/Quicksand-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Quicksand/Quicksand-Light.ttf
+          weight: 500
+        - asset: assets/fonts/Quicksand/Quicksand-Bold.ttf
+          weight: 700
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
