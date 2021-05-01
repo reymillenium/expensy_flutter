@@ -108,6 +108,41 @@ class AppData extends ChangeNotifier {
     },
   ];
 
+  int _currencyIndex = 0;
+  List<Map> _availableCurrencies = [
+    {
+      'name': 'USA Dollar',
+      'code': 'USD',
+      'symbol': '\$',
+    },
+    {
+      'name': 'Euro',
+      'code': 'EUR',
+      'symbol': '€',
+    },
+    {
+      'name': 'British Pound',
+      'code': 'GBP',
+      'symbol': '£',
+    },
+    {
+      'name': 'Indian Rupee',
+      'code': 'INR',
+      'symbol': '₹',
+    },
+    {
+      'name': 'Japanese Yen',
+      'code': 'JPY',
+      'symbol': '¥',
+    },
+    {
+      'name': 'Russian Ruble',
+      'code': 'RUB',
+      'symbol': '₽',
+    },
+  ];
+
+  // Constructor:
   AppData() {
     ThemeData newThemeData = ThemeData(
       fontFamily: _availableThemeFonts[_themeFontIndex]['fontFamily'],
@@ -148,6 +183,18 @@ class AppData extends ChangeNotifier {
 
   get currentThemeFont {
     return _availableThemeFonts[_themeFontIndex];
+  }
+
+  get currencyIndex {
+    return _currencyIndex;
+  }
+
+  UnmodifiableListView<Map> get availableCurrencies {
+    return UnmodifiableListView(_availableCurrencies);
+  }
+
+  get currentCurrency {
+    return _availableCurrencies[_currencyIndex];
   }
 
   // Public methods:
