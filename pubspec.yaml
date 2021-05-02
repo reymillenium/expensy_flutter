@@ -24,6 +24,7 @@ dependencies:
   tinycolor: ^1.0.3
   font_awesome_flutter: ^9.0.0
   audioplayers: ^0.18.3
+  empty_widget: ^0.0.2
 
 dev_dependencies:
   flutter_test:

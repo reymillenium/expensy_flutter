@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:math'; // Allows to use: random
 import 'dart:convert'; // Allows to use: base64UrlEncode
 import 'package:intl/intl.dart'; // Allows to use: DateFormat
+import 'package:empty_widget/empty_widget.dart';
 
 // Screens:
 
@@ -11,6 +12,7 @@ import 'package:expensy_flutter/models/transaction.dart';
 
 // Components:
 import 'package:expensy_flutter/components/transaction_tile.dart';
+import 'package:expensy_flutter/components/empty_widget.dart';
 
 // Helpers:
 
@@ -48,19 +50,25 @@ class TransactionsList extends StatelessWidget {
     // );
 
     return Container(
-      child: ListView.builder(
-        padding: const EdgeInsets.only(left: 0, top: 0, right: 0),
-        controller: _listViewScrollController,
-        itemBuilder: (context, index) {
-          return TransactionTile(
-            index: index,
-            transaction: transactions[index],
-            onUpdateTransactionHandler: onUpdateTransactionHandler,
-            onDeleteTransactionHandler: () => onDeleteTransactionHandler(index),
-          );
-        },
-        itemCount: transactions.length,
-      ),
+      child: transactions.isEmpty
+          ? EmptyWidget(
+              packageImage: 1,
+              title: 'We are sorry',
+              subTitle: 'There is no transactions',
+            )
+          : ListView.builder(
+              padding: const EdgeInsets.only(left: 0, top: 0, right: 0),
+              controller: _listViewScrollController,
+              itemBuilder: (context, index) {
+                return TransactionTile(
+                  index: index,
+                  transaction: transactions[index],
+                  onUpdateTransactionHandler: onUpdateTransactionHandler,
+                  onDeleteTransactionHandler: () => onDeleteTransactionHandler(index),
+                );
+              },
+              itemCount: transactions.length,
+            ),
     );
   }
 }
