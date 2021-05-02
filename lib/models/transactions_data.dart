@@ -27,7 +27,7 @@ class TransactionsData {
 
   // Constructor:
   TransactionsData() {
-    _generateDummyData();
+    // _generateDummyData();
   }
 
   // Getters:

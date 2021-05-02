@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     AppData appData = Provider.of<AppData>(context, listen: true);
     ThemeData currentThemeData = appData.currentThemeData;
+    Map currentThemeFont = appData.currentThemeFont;
     final String appTitle = 'Expensy';
 
     return MaterialApp(
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
           headline6: TextStyle(
             fontSize: 18,
             color: Colors.black,
+            fontFamily: currentThemeFont['fontFamily'],
             // color: currentThemeData.textTheme.headline6.color,
             fontWeight: FontWeight.bold,
           ),
