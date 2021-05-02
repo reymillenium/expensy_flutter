@@ -27,7 +27,7 @@ class TransactionsData {
 
   // Constructor:
   TransactionsData() {
-    // _generateDummyData();
+    _generateDummyData();
   }
 
   // Getters:
@@ -207,8 +207,18 @@ class TransactionsData {
       result[i]['amount'] += lastWeekAmounts[i];
     }
 
-    // print(result);
     return result;
+  }
+
+  List<Map> groupedAmountLastWeek2() {
+    List<double> lastWeekAmounts = this.lastWeekAmounts();
+
+    return List.generate(7, (index) {
+      return {
+        'day': DateHelper.weekDayTimeAgo(days: index),
+        'amount': lastWeekAmounts[index],
+      };
+    });
   }
 
   double biggestAmountLastWeek() {

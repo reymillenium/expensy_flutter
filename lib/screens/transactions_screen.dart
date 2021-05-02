@@ -391,7 +391,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
           TransactionsChart(
             touchCallbackHandler: _touchCallbackHandler,
             touchedIndex: touchedIndex,
-            groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
+            // groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
+            groupedAmountLastWeek: transactionsData.groupedAmountLastWeek2(),
             biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
             // primaryColor: Theme.of(context).primaryColor,
           ),
