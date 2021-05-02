@@ -171,46 +171,6 @@ class TransactionsData {
   }
 
   List<Map> groupedAmountLastWeek() {
-    List<Map> result = [
-      {
-        'day': DateHelper.weekDayTimeAgo(),
-        'amount': 0,
-      },
-      {
-        'day': DateHelper.weekDayTimeAgo(days: 1),
-        'amount': 0,
-      },
-      {
-        'day': DateHelper.weekDayTimeAgo(days: 2),
-        'amount': 0,
-      },
-      {
-        'day': DateHelper.weekDayTimeAgo(days: 3),
-        'amount': 0,
-      },
-      {
-        'day': DateHelper.weekDayTimeAgo(days: 4),
-        'amount': 0,
-      },
-      {
-        'day': DateHelper.weekDayTimeAgo(days: 5),
-        'amount': 0,
-      },
-      {
-        'day': DateHelper.weekDayTimeAgo(days: 6),
-        'amount': 0,
-      }
-    ];
-
-    List<double> lastWeekAmounts = this.lastWeekAmounts();
-    for (int i = 0; i < lastWeekAmounts.length; i++) {
-      result[i]['amount'] += lastWeekAmounts[i];
-    }
-
-    return result;
-  }
-
-  List<Map> groupedAmountLastWeek2() {
     List<double> lastWeekAmounts = this.lastWeekAmounts();
 
     return List.generate(7, (index) {
