@@ -41,9 +41,7 @@ class TransactionChartBarHomeMade extends StatelessWidget {
   Widget build(BuildContext context) {
     Color primaryColor = Theme.of(context).primaryColor;
     const backgroundColumnHeight = 120.0;
-    // double activeBarHeightPercentage = NumericHelper.roundDouble((groupedAmountOnDay['amount'] * 100) / biggestAmountLastWeek, 2);
-    // print(activeBarHeightPercentage);
-    double activeBarHeight = NumericHelper.roundDouble((groupedAmountOnDay['amount'] / biggestAmountLastWeek) * (backgroundColumnHeight - 10), 2);
+    double activeBarHeight = groupedAmountOnDay['amount'] == 0 ? 0 : NumericHelper.roundDouble((groupedAmountOnDay['amount'] / biggestAmountLastWeek) * (backgroundColumnHeight - 10), 2);
 
     return Column(
       children: [
@@ -63,6 +61,7 @@ class TransactionChartBarHomeMade extends StatelessWidget {
               decoration: BoxDecoration(
                 color: TinyColor(primaryColor).lighten(16).color,
                 borderRadius: BorderRadius.all(Radius.circular(10)),
+                // borderRadius: BorderRadius.circular(10),
               ),
             ),
             Container(
