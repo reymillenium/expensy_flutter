@@ -106,7 +106,8 @@ class DateHelper {
 
   // Returns the current day of the week::
   static String weekDayNow() {
-    return DateFormat('EEEE').format(DateTime.now());
+    // return DateFormat('EEEE').format(DateTime.now());
+    return DateFormat.EEEE().format(DateTime.now());
   }
 
   // Returns the day of the week from a given amount of time ago:
@@ -119,7 +120,8 @@ class DateHelper {
     int days = 0,
     int years = 0,
   }) {
-    return DateFormat('EEEE').format(timeAgo(
+    // return DateFormat('EEEE').format(timeAgo(
+    return DateFormat.EEEE().format(timeAgo(
       microseconds: microseconds,
       milliseconds: milliseconds,
       seconds: seconds,
@@ -141,7 +143,8 @@ class DateHelper {
     int days = 0,
     int years = 0,
   }) {
-    return DateFormat('EEEE').format(timeBefore(
+    // return DateFormat('EEEE').format(timeBefore(
+    return DateFormat.EEEE().format(timeBefore(
       begin: begin,
       microseconds: microseconds,
       milliseconds: milliseconds,
@@ -163,7 +166,8 @@ class DateHelper {
     int days = 0,
     int years = 0,
   }) {
-    return DateFormat('EEEE').format(timeFromNow(
+    // return DateFormat('EEEE').format(timeFromNow(
+    return DateFormat.EEEE().format(timeFromNow(
       microseconds: microseconds,
       milliseconds: milliseconds,
       seconds: seconds,
@@ -185,7 +189,8 @@ class DateHelper {
     int days = 0,
     int years = 0,
   }) {
-    return DateFormat('EEEE').format(timeAfter(
+    // return DateFormat('EEEE').format(timeAfter(
+    return DateFormat.EEEE().format(timeAfter(
       begin: begin,
       microseconds: microseconds,
       milliseconds: milliseconds,

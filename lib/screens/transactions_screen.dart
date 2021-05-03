@@ -21,6 +21,7 @@ import 'package:expensy_flutter/models/app_data.dart';
 import 'package:expensy_flutter/components/transactions_list.dart';
 import 'package:expensy_flutter/components/transactions_chart.dart';
 import 'package:expensy_flutter/components/multi_platform_select_box.dart';
+import 'package:expensy_flutter/components/transactions_chart_home_made.dart';
 
 // Helpers:
 import 'package:expensy_flutter/helpers/sound_helper.dart';
@@ -388,12 +389,16 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           // Transactions Bar Chart
-          TransactionsChart(
-            touchCallbackHandler: _touchCallbackHandler,
-            touchedIndex: touchedIndex,
+          // TransactionsChart(
+          //   touchCallbackHandler: _touchCallbackHandler,
+          //   touchedIndex: touchedIndex,
+          //   groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
+          //   biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
+          //   // primaryColor: Theme.of(context).primaryColor,
+          // ),
+
+          TransactionsChartHomeMade(
             groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
-            biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
-            // primaryColor: Theme.of(context).primaryColor,
           ),
 
           // Transaction List:
