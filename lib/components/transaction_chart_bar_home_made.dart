@@ -29,23 +29,65 @@ import 'package:expensy_flutter/utilities/constants.dart';
 class TransactionChartBarHomeMade extends StatelessWidget {
   // Properties:
   final Map groupedAmountOnDay;
+  final double biggestAmountLastWeek;
 
   // Constructor:
   TransactionChartBarHomeMade({
     this.groupedAmountOnDay,
+    this.biggestAmountLastWeek,
   });
 
   @override
   Widget build(BuildContext context) {
+    Color primaryColor = Theme.of(context).primaryColor;
+    const backgroundColumnHeight = 120.0;
+    // double activeBarHeightPercentage = NumericHelper.roundDouble((groupedAmountOnDay['amount'] * 100) / biggestAmountLastWeek, 2);
+    // print(activeBarHeightPercentage);
+    double activeBarHeight = NumericHelper.roundDouble((groupedAmountOnDay['amount'] / biggestAmountLastWeek) * (backgroundColumnHeight - 10), 2);
+
     return Column(
       children: [
-        Text(
-          groupedAmountOnDay['day'].substring(0, 2),
-          style: TextStyle(
-            color: Colors.red,
-          ),
+        SizedBox(
+          height: 10,
         ),
         Text('${NumericHelper.roundDouble(groupedAmountOnDay['amount'], 2)}'),
+        SizedBox(
+          height: 10,
+        ),
+        Stack(
+          alignment: AlignmentDirectional.bottomStart,
+          children: <Widget>[
+            Container(
+              height: backgroundColumnHeight,
+              width: 20,
+              decoration: BoxDecoration(
+                color: TinyColor(primaryColor).lighten(16).color,
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+            ),
+            Container(
+              height: activeBarHeight,
+              width: 20,
+              decoration: BoxDecoration(
+                // color: Theme.of(context).accentColor,
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          groupedAmountOnDay['day'].substring(0, 2),
+          style: Theme.of(context).textTheme.headline6.copyWith(
+                color: Theme.of(context).primaryColor,
+              ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
       ],
     );
     ;

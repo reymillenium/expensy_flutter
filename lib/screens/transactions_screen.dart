@@ -399,6 +399,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
           TransactionsChartHomeMade(
             groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
+            biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
           ),
 
           // Transaction List:

@@ -30,10 +30,12 @@ import 'package:expensy_flutter/utilities/constants.dart';
 class TransactionsChartHomeMade extends StatelessWidget {
   // Properties:
   final List<Map> groupedAmountLastWeek;
+  final double biggestAmountLastWeek;
 
   // Constructor:
   TransactionsChartHomeMade({
     this.groupedAmountLastWeek,
+    this.biggestAmountLastWeek,
   });
 
   @override
@@ -44,16 +46,57 @@ class TransactionsChartHomeMade extends StatelessWidget {
       return List.from(groupedAmountLastWeek.reversed).map((groupedAmountOnDay) {
         return TransactionChartBarHomeMade(
           groupedAmountOnDay: groupedAmountOnDay,
+          biggestAmountLastWeek: biggestAmountLastWeek,
         );
       }).toList();
     }
 
-    return Card(
-      elevation: 6,
-      margin: EdgeInsets.all(20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: getColumns(),
+    return AspectRatio(
+      aspectRatio: 1.5,
+      child: Card(
+        elevation: 3,
+        color: Colors.white70,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: Colors.white70, width: 1),
+          // side: BorderSide(color: Colors.red, width: 1),
+          // borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+        child: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  Text(
+                    'Last Week Transactions',
+                    style: TextStyle(
+                      // color: const Color(0xff379982),
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: getColumns(),
+                    ),
+                  ),
+                  // const SizedBox(
+                  //   height: 12,
+                  // ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
