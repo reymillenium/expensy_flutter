@@ -389,13 +389,13 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           // Transactions Bar Chart
-          // TransactionsChart(
-          //   touchCallbackHandler: _touchCallbackHandler,
-          //   touchedIndex: touchedIndex,
-          //   groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
-          //   biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
-          //   // primaryColor: Theme.of(context).primaryColor,
-          // ),
+          TransactionsChart(
+            touchCallbackHandler: _touchCallbackHandler,
+            touchedIndex: touchedIndex,
+            groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
+            biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
+            // primaryColor: Theme.of(context).primaryColor,
+          ),
 
           TransactionsChartHomeMade(
             groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),

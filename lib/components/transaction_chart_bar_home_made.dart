@@ -19,7 +19,6 @@ import 'package:expensy_flutter/models/app_data.dart';
 
 // Components:
 import 'package:expensy_flutter/components/transactions_list.dart';
-import 'package:expensy_flutter/components/transaction_chart_bar_home_made.dart';
 
 // Helpers:
 import 'package:expensy_flutter/helpers/numeric_helper.dart';
@@ -27,34 +26,28 @@ import 'package:expensy_flutter/helpers/numeric_helper.dart';
 // Utilities:
 import 'package:expensy_flutter/utilities/constants.dart';
 
-class TransactionsChartHomeMade extends StatelessWidget {
+class TransactionChartBarHomeMade extends StatelessWidget {
   // Properties:
-  final List<Map> groupedAmountLastWeek;
+  final Map groupedAmountOnDay;
 
   // Constructor:
-  TransactionsChartHomeMade({
-    this.groupedAmountLastWeek,
+  TransactionChartBarHomeMade({
+    this.groupedAmountOnDay,
   });
 
   @override
   Widget build(BuildContext context) {
-    // AppData appData = Provider.of<AppData>(context, listen: true);
-
-    List<Widget> getColumns() {
-      return List.from(groupedAmountLastWeek.reversed).map((groupedAmountOnDay) {
-        return TransactionChartBarHomeMade(
-          groupedAmountOnDay: groupedAmountOnDay,
-        );
-      }).toList();
-    }
-
-    return Card(
-      elevation: 6,
-      margin: EdgeInsets.all(20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: getColumns(),
-      ),
+    return Column(
+      children: [
+        Text(
+          groupedAmountOnDay['day'].substring(0, 2),
+          style: TextStyle(
+            color: Colors.red,
+          ),
+        ),
+        Text('${NumericHelper.roundDouble(groupedAmountOnDay['amount'], 2)}'),
+      ],
     );
+    ;
   }
 }
