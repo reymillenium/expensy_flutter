@@ -35,6 +35,14 @@ class TransactionsData {
     return _transactions;
   }
 
+  get lastWeekTransactions {
+    final DateTime now = DateTime.now();
+    return _transactions.where((transaction) {
+      int daysAgo = now.difference(transaction.executionDate).inDays;
+      return daysAgo <= 6;
+    }).toList();
+  }
+
   // Private methods:
   void _generateDummyData() {
     final DateTime now = DateTime.now();
@@ -189,17 +197,11 @@ class TransactionsData {
     final DateTime now = DateTime.now();
     List<double> result = [0, 0, 0, 0, 0, 0, 0];
 
-    for (int i = 0; i < _transactions.length; i++) {
-      int daysAgo = now.difference(_transactions[i].executionDate).inDays;
-      if (daysAgo <= 6) {
-        result[daysAgo] += _transactions[i].amount;
-      }
-    }
+    lastWeekTransactions.forEach((transaction) {
+      int daysAgo = now.difference(transaction.executionDate).inDays;
+      result[daysAgo] += transaction.amount;
+    });
 
-    for (int j = 0; j < result.length; j++) {
-      result[j] = NumericHelper.roundDouble(result[j], 2);
-    }
-
-    return result;
+    return NumericHelper.roundDoubles(result, 2);
   }
 }

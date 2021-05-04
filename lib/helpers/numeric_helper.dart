@@ -28,6 +28,13 @@ class NumericHelper {
     return ((value * mod).round().toDouble() / mod);
   }
 
+  // Returns a list of rounded double numbers, given a not rounded list of doubles and the amount of places after the comma:
+  static List<double> roundDoubles(List<double> doublesList, int places) {
+    return doublesList.map((doubleElement) {
+      return roundDouble(doubleElement, places);
+    }).toList();
+  }
+
   // Returns a random & rounded double number, between two given doubles (both included), , given a not rounded double and the amount of places after the comma:
   static double roundRandomDoubleInRange({double min = 0, double max = 1, int places = 0}) {
     return roundDouble(randomDoubleInRange(min: min, max: max), places);
