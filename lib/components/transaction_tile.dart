@@ -143,13 +143,16 @@ class TransactionTile extends StatelessWidget {
           // visualDensity: VisualDensity.standard,
           leading: CircleAvatar(
             radius: 32,
-            child: Container(
-              child: Text(
-                amountLabel,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.italic,
-                  fontSize: amountFontSize,
+            child: FittedBox(
+              child: Container(
+                padding: EdgeInsets.all(16),
+                child: Text(
+                  amountLabel,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                    fontSize: amountFontSize,
+                  ),
                 ),
               ),
             ),
@@ -174,7 +177,7 @@ class TransactionTile extends StatelessWidget {
               ),
             ],
           ),
-
+          subtitle: Text('testing'),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [

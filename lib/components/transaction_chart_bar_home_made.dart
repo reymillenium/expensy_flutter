@@ -48,7 +48,13 @@ class TransactionChartBarHomeMade extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        Text('${NumericHelper.roundDouble(groupedAmountOnDay['amount'], 2)}'),
+        Container(
+          height: 20,
+          child: FittedBox(
+            fit: BoxFit.fitWidth,
+            child: Text('${NumericHelper.roundDouble(groupedAmountOnDay['amount'], 2)}'),
+          ),
+        ),
         SizedBox(
           height: 10,
         ),
