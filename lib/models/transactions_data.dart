@@ -85,30 +85,69 @@ class TransactionsData {
     _transactions.removeWhere((element) => element.id == id);
   }
 
-  void _showDialog(int index, BuildContext context) {
-    // flutter defined function
-    showDialog(
+  Future<void> _showDialogPlus(String id, BuildContext context) async {
+    return showDialog<void>(
       context: context,
+      barrierDismissible: false, // The user must tap the buttons!
+      // barrierColor: Colors.transparent, // The background color
       builder: (BuildContext context) {
-        // return object of type Dialog
         return AlertDialog(
-          title: new Text("Removal Alert"),
-          content: new Text("Are you sure?"),
-          actions: <Widget>[
-            // usually buttons at the bottom of the dialog
-            new TextButton(
-              child: new Text("OK"),
-              onPressed: () {
-                _removeTransaction(index);
-                Navigator.of(context).pop();
-              },
+          title: Text('Are you sure?'),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)), //this right here
+
+          content: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.all(12),
+              // height: 100,
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    'This action is irreversible.',
+                    style: TextStyle(
+                      color: Theme.of(context).errorColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  // Text('Would you like to confirm this message?'),
+                ],
+              ),
             ),
-            // usually buttons at the bottom of the dialog
-            new TextButton(
-              child: new Text("Cancel"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+          ),
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                child: Row(
+                  children: [
+                    Text('Confirm'),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Icon(Icons.delete),
+                  ],
+                ),
+                onPressed: () {
+                  deleteTransactionWithoutConfirm(id);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                child: Row(
+                  children: [
+                    Text('Cancel'),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Icon(Icons.cancel),
+                  ],
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
             ),
           ],
         );
@@ -116,8 +155,8 @@ class TransactionsData {
     );
   }
 
-  Alert _createAlert({String id, BuildContext context, String message = ''}) {
-    return (Alert(
+  Alert createAlert({String id, BuildContext context, String message = ''}) {
+    return Alert(
       context: context,
       type: AlertType.warning,
       title: "Are you sure?",
@@ -143,7 +182,7 @@ class TransactionsData {
           width: 120,
         ),
       ],
-    ));
+    );
   }
 
   // Public methods:
@@ -171,15 +210,17 @@ class TransactionsData {
   }
 
   void deleteTransactionWithConfirm(String id, BuildContext context) {
-    // _showDialog(index, context);
-    // _createAlert(index: index, context: context).show();
-    _createAlert(id: id, context: context).show().then((value) {
+    // createAlert(id: id, context: context).show().then((value) {
+    //   (context as Element).reassemble();
+    // });
+
+    _showDialogPlus(id, context).then((value) {
       (context as Element).reassemble();
     });
   }
 
-  void deleteTransactionWithoutConfirm(int index) {
-    _removeTransaction(index);
+  void deleteTransactionWithoutConfirm(String id) {
+    _removeTransactionWhere(id);
   }
 
   List<Map> groupedAmountLastWeek() {

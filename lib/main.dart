@@ -31,12 +31,12 @@ class InitialSplashScreen extends StatelessWidget {
 
     return MaterialApp(
       home: SplashScreen(
-        seconds: 5,
+        seconds: 4,
+        navigateAfterSeconds: MyApp(),
         gradientBackground: LinearGradient(colors: [
           Color(0xFFE5DBDB),
           Colors.white70,
         ]),
-        navigateAfterSeconds: MyApp(),
         image: Image.asset(
           reymilleniumLocalImage,
         ),

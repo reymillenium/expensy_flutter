@@ -177,7 +177,7 @@ class TransactionTile extends StatelessWidget {
               ),
             ],
           ),
-          subtitle: Text('testing'),
+          // subtitle: Text('testing'),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
