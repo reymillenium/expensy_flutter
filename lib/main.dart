@@ -61,6 +61,7 @@ class InitialSplashScreen extends StatelessWidget {
         onClick: () {},
         loaderColor: Colors.red,
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
