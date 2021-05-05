@@ -39,7 +39,7 @@ class TransactionsData {
     final DateTime now = DateTime.now();
     return _transactions.where((transaction) {
       int daysAgo = now.difference(transaction.executionDate).inDays;
-      return daysAgo <= 6;
+      return (daysAgo <= 6 && daysAgo >= 0);
     }).toList();
   }
 
