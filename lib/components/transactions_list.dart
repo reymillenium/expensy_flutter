@@ -60,7 +60,7 @@ class TransactionsList extends StatelessWidget {
                   index: index,
                   transaction: transactions[index],
                   onUpdateTransactionHandler: onUpdateTransactionHandler,
-                  onDeleteTransactionHandler: () => onDeleteTransactionHandler(index),
+                  onDeleteTransactionHandler: () => onDeleteTransactionHandler(transactions[index].id),
                 );
               },
               itemCount: transactions.length,

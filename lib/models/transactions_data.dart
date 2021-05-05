@@ -81,6 +81,10 @@ class TransactionsData {
     _transactions.removeAt(index);
   }
 
+  void _removeTransactionWhere(String id) {
+    _transactions.removeWhere((element) => element.id == id);
+  }
+
   void _showDialog(int index, BuildContext context) {
     // flutter defined function
     showDialog(
@@ -112,7 +116,7 @@ class TransactionsData {
     );
   }
 
-  Alert _createAlert({int index, BuildContext context, String message = ''}) {
+  Alert _createAlert({String id, BuildContext context, String message = ''}) {
     return (Alert(
       context: context,
       type: AlertType.warning,
@@ -125,7 +129,7 @@ class TransactionsData {
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
           onPressed: () {
-            _removeTransaction(index);
+            _removeTransactionWhere(id);
             Navigator.of(context).pop();
           },
           width: 120,
@@ -166,10 +170,10 @@ class TransactionsData {
     updatingTransaction.updatedAt = now;
   }
 
-  void deleteTransactionWithConfirm(int index, BuildContext context) {
+  void deleteTransactionWithConfirm(String id, BuildContext context) {
     // _showDialog(index, context);
     // _createAlert(index: index, context: context).show();
-    _createAlert(index: index, context: context).show().then((value) {
+    _createAlert(id: id, context: context).show().then((value) {
       (context as Element).reassemble();
     });
   }
