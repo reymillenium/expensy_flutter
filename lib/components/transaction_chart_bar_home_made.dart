@@ -95,6 +95,5 @@ class TransactionChartBarHomeMade extends StatelessWidget {
         ),
       ],
     );
-    ;
   }
 }
