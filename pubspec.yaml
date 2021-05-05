@@ -25,6 +25,7 @@ dependencies:
   font_awesome_flutter: ^9.0.0
   audioplayers: ^0.18.3
   empty_widget: ^0.0.2
+  splashscreen: ^1.3.5
 
 dev_dependencies:
   flutter_test:
