@@ -397,10 +397,11 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             // primaryColor: Theme.of(context).primaryColor,
           ),
 
-          TransactionsChartHomeMade(
-            groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
-            biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
-          ),
+          // Home Made Transactions Bar Chart
+          // TransactionsChartHomeMade(
+          //   groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
+          //   biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
+          // ),
 
           // Transaction List:
           Expanded(
