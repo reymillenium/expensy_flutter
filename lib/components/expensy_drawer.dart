@@ -311,26 +311,6 @@ class ExpensyDrawer extends StatelessWidget {
     );
   }
 
-  // void _closeAllThePanels() {
-  //   setState(() {
-  //     for (int i = 0; i < expansionPanelListStatus.length; i++) {
-  //       expansionPanelListStatus[i]['isOpened'] = false;
-  //     }
-  //   });
-  // }
-
-  // void _openOnePanelAndCloseTheRest(int index, bool isExpanded) {
-  //   setState(() {
-  //     for (int i = 0; i < expansionPanelListStatus.length; i++) {
-  //       if (index == i) {
-  //         expansionPanelListStatus[index]['isOpened'] = !isExpanded;
-  //       } else {
-  //         expansionPanelListStatus[i]['isOpened'] = false;
-  //       }
-  //     }
-  //   });
-  // }
-
   Color _getActiveTileColor(String currentValue, String valueToCompare) {
     return currentValue == valueToCompare ? TinyColor(Colors.black54).lighten(60).color : Colors.transparent;
   }

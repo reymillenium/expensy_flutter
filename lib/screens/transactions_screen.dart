@@ -71,8 +71,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   Widget build(BuildContext context) {
     AppData appData = Provider.of<AppData>(context, listen: true);
     Map currentThemeFont = appData.currentThemeFont;
-    // Drawer related:
-    Function closeAllThePanels = appData.closeAllThePanels;
+    Function closeAllThePanels = appData.closeAllThePanels; // Drawer related:
 
     return Scaffold(
       appBar: AppBar(
@@ -116,7 +115,6 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
               touchedIndex: touchedIndex,
               groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
               biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
-              // primaryColor: Theme.of(context).primaryColor,
             ),
           ),
 
