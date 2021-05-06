@@ -4,6 +4,7 @@ import 'package:fl_chart/fl_chart.dart'; // Allows to use the Bar Charts
 import 'package:flutter/gestures.dart'; // Allows: PointerExitEvent
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:native_device_orientation/native_device_orientation.dart';
 
 // Screens:
 import 'package:expensy_flutter/screens/new_transaction_screen.dart';
@@ -19,9 +20,10 @@ import 'package:expensy_flutter/components/expensy_drawer.dart';
 
 // Helpers:
 import 'package:expensy_flutter/helpers/sound_helper.dart';
+import 'package:expensy_flutter/helpers/device_helper.dart';
 
 // Utilities:
-import 'package:tinycolor/tinycolor.dart';
+import 'package:expensy_flutter/utilities/constants.dart';
 
 class TransactionsScreen extends StatefulWidget {
   // Properties:
@@ -73,28 +75,32 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     Map currentThemeFont = appData.currentThemeFont;
     Function closeAllThePanels = appData.closeAllThePanels; // Drawer related:
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          widget.title,
-          // style: TextStyle(
-          //   fontSize: 24,
-          //   fontWeight: FontWeight.bold,
-          //   fontFamily: currentThemeFont['fontFamily'],
-          // ),
-          style: Theme.of(context).appBarTheme.textTheme.headline6.copyWith(
-                fontFamily: currentThemeFont['fontFamily'],
-              ),
-        ),
-        actions: [
-          IconButton(
-            iconSize: 40,
-            icon: Icon(Icons.add_rounded),
-            tooltip: 'Add Transaction',
-            onPressed: () => _showModalNewTransaction(context),
-          ),
-        ],
+    AppBar appBar = AppBar(
+      title: Text(
+        widget.title,
+        // style: TextStyle(
+        //   fontSize: 24,
+        //   fontWeight: FontWeight.bold,
+        //   fontFamily: currentThemeFont['fontFamily'],
+        // ),
+        style: Theme.of(context).appBarTheme.textTheme.headline6.copyWith(
+              fontFamily: currentThemeFont['fontFamily'],
+            ),
       ),
+      actions: [
+        IconButton(
+          iconSize: 40,
+          icon: Icon(Icons.add_rounded),
+          tooltip: 'Add Transaction',
+          onPressed: () => _showModalNewTransaction(context),
+        ),
+      ],
+    );
+    double appBarHeight = appBar.preferredSize.height;
+    // print(DeviceHelper.verticalUsedHeight(context: context, appBarHeight: appBarHeight));
+
+    return Scaffold(
+      appBar: appBar,
       onDrawerChanged: (isOpened) {
         if (!isOpened) {
           closeAllThePanels();
@@ -103,37 +109,50 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
       drawer: ExpensyDrawer(),
 
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          // Transactions Bar Chart
-          Expanded(
-            flex: 3,
-            child: TransactionsChart(
-              touchCallbackHandler: _touchCallbackHandler,
-              touchedIndex: touchedIndex,
-              groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
-              biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
-            ),
-          ),
+      body: NativeDeviceOrientationReader(
+        builder: (context) {
+          final orientation = NativeDeviceOrientationReader.orientation(context);
+          // print('Received new orientation: $orientation');
+          bool safeAreaLeft = orientation == NativeDeviceOrientation.landscapeLeft ? true : false;
+          bool safeAreaRight = orientation == NativeDeviceOrientation.landscapeRight ? true : false;
 
-          // Home Made Transactions Bar Chart
-          // TransactionsChartHomeMade(
-          //   groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
-          //   biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
-          // ),
+          return SafeArea(
+            left: safeAreaLeft,
+            right: safeAreaRight,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                // Transactions Bar Chart
+                Expanded(
+                  flex: 4,
+                  child: TransactionsChart(
+                    touchCallbackHandler: _touchCallbackHandler,
+                    touchedIndex: touchedIndex,
+                    groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
+                    biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
+                  ),
+                ),
 
-          // Transaction List:
-          Expanded(
-            flex: 5,
-            child: TransactionsList(
-              transactions: transactionsData.transactions,
-              onUpdateTransactionHandler: _onUpdateTransactionHandler,
-              onDeleteTransactionHandler: _onDeleteTransactionHandler,
+                // Home Made Transactions Bar Chart
+                // TransactionsChartHomeMade(
+                //   groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
+                //   biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
+                // ),
+
+                // Transaction List:
+                Expanded(
+                  flex: 5,
+                  child: TransactionsList(
+                    transactions: transactionsData.transactions,
+                    onUpdateTransactionHandler: _onUpdateTransactionHandler,
+                    onDeleteTransactionHandler: _onDeleteTransactionHandler,
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
+          );
+        },
       ),
 
       // Navigation Bar (without nav links)

@@ -1,0 +1,24 @@
+// Packages:
+import 'package:flutter/material.dart';
+import 'dart:math'; // Allows to use: random
+import 'dart:convert'; // Allows to use: base64UrlEncode
+import 'package:intl/intl.dart'; // Allows to use: DateFormat
+import 'package:uuid/uuid.dart'; // Allows to use: Uuid
+import 'package:rflutter_alert/rflutter_alert.dart'; // Allows to use: Alert
+import 'package:faker/faker.dart'; // Allows to use: fake data generation (Fake)
+
+// Helpers:
+
+// Utilities:
+
+class DeviceHelper {
+  // Returns the amount of pixels already used in the vertical axis on the device:
+  static double verticalUsedHeight({BuildContext context, double appBarHeight = 0}) {
+    return MediaQuery.of(context).size.height + MediaQuery.of(context).padding.top + appBarHeight;
+  }
+
+  // Returns how much text output in the app should be scaled. Users can change this in their mobile phone / device settings.
+  static double curScaleFactor(BuildContext context) {
+    return MediaQuery.of(context).textScaleFactor;
+  }
+}

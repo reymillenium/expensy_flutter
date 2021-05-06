@@ -15,6 +15,7 @@ import 'package:expensy_flutter/models/app_data.dart';
 // Helpers:
 
 // Utilities:
+import 'package:expensy_flutter/utilities/constants.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
@@ -45,7 +46,7 @@ class InitialSplashScreen extends StatelessWidget {
         title: Text(
           'Expensy',
           style: TextStyle(
-            fontSize: 64,
+            fontSize: 60,
             fontWeight: FontWeight.bold,
             fontFamily: 'Luminari',
             color: Colors.black54,
@@ -57,7 +58,7 @@ class InitialSplashScreen extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        photoSize: 100.0,
+        photoSize: 80.0,
         onClick: () {},
         loaderColor: Colors.red,
       ),
