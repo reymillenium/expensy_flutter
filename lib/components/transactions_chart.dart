@@ -8,6 +8,7 @@ import 'package:fl_chart/fl_chart.dart'; // Allows to use the Bar Charts
 import 'package:flutter/gestures.dart'; // Allows: PointerExitEvent
 import 'package:tinycolor/tinycolor.dart'; // Allows to light a color and many other things
 import 'package:provider/provider.dart';
+import 'package:native_device_orientation/native_device_orientation.dart';
 
 // Screens:
 import 'package:expensy_flutter/screens/new_transaction_screen.dart';
@@ -32,6 +33,7 @@ class TransactionsChart extends StatelessWidget {
   final int touchedIndex;
   final List<Map> groupedAmountLastWeek;
   final double biggestAmountLastWeek;
+  final NativeDeviceOrientation orientation;
 
   // bool isPlaying = false;
 
@@ -41,6 +43,7 @@ class TransactionsChart extends StatelessWidget {
     this.touchedIndex,
     this.groupedAmountLastWeek,
     this.biggestAmountLastWeek,
+    this.orientation,
   });
 
   @override
@@ -51,8 +54,11 @@ class TransactionsChart extends StatelessWidget {
     // List<Map> availableThemeFonts = appData.availableThemeFonts;
     Map currentThemeFont = appData.currentThemeFont;
 
+    print(orientation);
     final Color primaryColor = Theme.of(context).primaryColor;
     final Color accentColor = Theme.of(context).accentColor;
+    bool isLandscape = (orientation == NativeDeviceOrientation.landscapeRight || orientation == NativeDeviceOrientation.landscapeLeft);
+    bool isPortrait = (orientation == NativeDeviceOrientation.portraitDown || orientation == NativeDeviceOrientation.portraitUp);
 
     return Card(
       elevation: 3,
@@ -72,23 +78,37 @@ class TransactionsChart extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
-                Text(
-                  'Last Week Transactions',
-                  style: TextStyle(
-                    // color: const Color(0xff379982),
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                if (isPortrait) ...[
+                  Text(
+                    'Last Week Transactions',
+                    style: TextStyle(
+                      // color: const Color(0xff379982),
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
+                  SizedBox(
+                    height: 24,
+                  ),
+                ],
+                // Text(
+                //   'Last Week Transactions',
+                //   style: TextStyle(
+                //     // color: const Color(0xff379982),
+                //     color: Colors.black,
+                //     fontSize: 18,
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 24,
+                // ),
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.0),
                     child: BarChart(
-                      mainBarData(primaryColor, currentThemeFont),
+                      mainBarData(primaryColor, currentThemeFont, isLandscape),
                       // mainBarData(context),
                       swapAnimationDuration: animDuration,
                     ),
@@ -137,12 +157,13 @@ class TransactionsChart extends StatelessWidget {
         return makeGroupData(primaryColor, 6 - i, NumericHelper.roundDouble(groupedAmountLastWeek[6 - i]['amount'], 2), isTouched: (i) == touchedIndex);
       });
 
-  BarChartData mainBarData(Color primaryColor, Map currentThemeFont) {
+  BarChartData mainBarData(Color primaryColor, Map currentThemeFont, bool isLandscape) {
     return BarChartData(
       barTouchData: BarTouchData(
         touchTooltipData: BarTouchTooltipData(
             tooltipBgColor: Colors.blueGrey,
-            tooltipPadding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+            direction: isLandscape ? TooltipDirection.bottom : TooltipDirection.top,
+            tooltipPadding: EdgeInsets.symmetric(horizontal: 5, vertical: isLandscape ? 0 : 8),
             getTooltipItem: (group, groupIndex, rod, rodIndex) {
               String weekDay = groupedAmountLastWeek[group.x]['day'];
 

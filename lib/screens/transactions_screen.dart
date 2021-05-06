@@ -102,7 +102,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
           // print('Received new orientation: $orientation');
           bool safeAreaLeft = orientation == NativeDeviceOrientation.landscapeLeft ? true : false;
           bool safeAreaRight = orientation == NativeDeviceOrientation.landscapeRight ? true : false;
-
+          bool isLandscape = (orientation == NativeDeviceOrientation.landscapeRight || orientation == NativeDeviceOrientation.landscapeLeft);
+          bool isPortrait = (orientation == NativeDeviceOrientation.portraitDown || orientation == NativeDeviceOrientation.portraitUp);
           return SafeArea(
             left: safeAreaLeft,
             right: safeAreaRight,
@@ -112,12 +113,14 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
               children: <Widget>[
                 // Transactions Bar Chart
                 Expanded(
-                  flex: 4,
+                  flex: isLandscape ? 4 : 3,
+                  // flex: 4,
                   child: TransactionsChart(
                     touchCallbackHandler: _touchCallbackHandler,
                     touchedIndex: touchedIndex,
                     groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
                     biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
+                    orientation: orientation,
                   ),
                 ),
 
