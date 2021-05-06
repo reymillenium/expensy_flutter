@@ -149,6 +149,13 @@ class AppData extends ChangeNotifier {
     },
   ];
 
+  // Drawer Information:
+  List<Map> _expansionPanelListStatus = [
+    {'isOpened': false},
+    {'isOpened': false},
+    {'isOpened': false},
+  ];
+
   // Constructor:
   AppData() {
     ThemeData newThemeData = ThemeData(
@@ -204,6 +211,11 @@ class AppData extends ChangeNotifier {
     return _availableCurrencies[_currencyIndex];
   }
 
+  // Drawer Related:
+  get expansionPanelListStatus {
+    return _expansionPanelListStatus;
+  }
+
   // Public methods:
   void setCurrentThemeColor(int themeColorIndex) {
     _themeColorIndex = themeColorIndex;
@@ -237,6 +249,25 @@ class AppData extends ChangeNotifier {
 
   void setCurrentCurrency(int currencyIndex) {
     _currencyIndex = currencyIndex;
+    notifyListeners();
+  }
+
+  // Drawer Related:
+  void closeAllThePanels() {
+    for (int i = 0; i < _expansionPanelListStatus.length; i++) {
+      _expansionPanelListStatus[i]['isOpened'] = false;
+    }
+    notifyListeners();
+  }
+
+  void openOnePanelAndCloseTheRest(int index, bool isExpanded) {
+    for (int i = 0; i < _expansionPanelListStatus.length; i++) {
+      if (index == i) {
+        _expansionPanelListStatus[index]['isOpened'] = !isExpanded;
+      } else {
+        _expansionPanelListStatus[i]['isOpened'] = false;
+      }
+    }
     notifyListeners();
   }
 }

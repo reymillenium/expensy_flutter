@@ -54,56 +54,53 @@ class TransactionsChart extends StatelessWidget {
     final Color primaryColor = Theme.of(context).primaryColor;
     final Color accentColor = Theme.of(context).accentColor;
 
-    return AspectRatio(
-      aspectRatio: 1.5,
-      child: Card(
-        elevation: 3,
-        color: Colors.white70,
-        shape: RoundedRectangleBorder(
-          side: BorderSide(color: Colors.white70, width: 1),
-          // side: BorderSide(color: Colors.red, width: 1),
-          // borderRadius: BorderRadius.circular(10),
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-        ),
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  Text(
-                    'Last Week Transactions',
-                    style: TextStyle(
-                      // color: const Color(0xff379982),
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+    return Card(
+      elevation: 3,
+      color: Colors.white70,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: Colors.white70, width: 1),
+        // side: BorderSide(color: Colors.red, width: 1),
+        // borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Text(
+                  'Last Week Transactions',
+                  style: TextStyle(
+                    // color: const Color(0xff379982),
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.0),
+                    child: BarChart(
+                      mainBarData(primaryColor, currentThemeFont),
+                      // mainBarData(context),
+                      swapAnimationDuration: animDuration,
                     ),
                   ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: BarChart(
-                        mainBarData(primaryColor, currentThemeFont),
-                        // mainBarData(context),
-                        swapAnimationDuration: animDuration,
-                      ),
-                    ),
-                  ),
-                  // const SizedBox(
-                  //   height: 12,
-                  // ),
-                ],
-              ),
+                ),
+                // const SizedBox(
+                //   height: 12,
+                // ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
