@@ -79,146 +79,149 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
     Color primaryColor = Theme.of(context).primaryColor;
     Color accentColor = Theme.of(context).accentColor;
 
-    return SingleChildScrollView(
-      child: Container(
-        // padding: const EdgeInsets.only(left: 20, top: 0, right: 20),
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
+    return SafeArea(
+      bottom: false,
+      child: SingleChildScrollView(
+        child: Container(
+          // padding: const EdgeInsets.only(left: 20, top: 0, right: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
           ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 30.0),
-          child: Column(
-            children: [
-              Text(
-                'Update Transaction',
-                style: TextStyle(
-                  color: primaryColor,
-                  fontSize: 30,
-                ),
-              ),
-
-              // Title Input
-              TextFormField(
-                initialValue: _title,
-                autofocus: true,
-                autocorrect: false,
-                decoration: InputDecoration(
-                  hintText: 'Title',
-                  border: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      // color: kLightBlueBackground,
-                      color: Colors.red,
-                      // width: 30,
-                    ),
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: primaryColor,
-                      width: 4.0,
-                    ),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: accentColor,
-                      // color: Colors.red,
-                      width: 6.0,
-                    ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 30.0),
+            child: Column(
+              children: [
+                Text(
+                  'Update Transaction',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 30,
                   ),
                 ),
-                style: TextStyle(),
-                onChanged: (String newText) {
-                  setState(() {
-                    _title = newText;
-                  });
-                },
-                onFieldSubmitted: _hasValidData() ? (_) => () => _updateData(context) : null,
-              ),
 
-              // Amount Input
-              TextFormField(
-                initialValue: initialAmountLabel,
-                // decoration: InputDecoration(hintText: 'USD(\$) '),
-                decoration: InputDecoration(hintText: '${currentCurrency['code']}(${currentCurrency['symbol']}) '),
-                inputFormatters: [
-                  CurrencyTextInputFormatter(
-                    // turnOffGrouping: false,
-                    locale: 'en_US',
-                    decimalDigits: 2,
-                    symbol: '${currentCurrency['code']}(${currentCurrency['symbol']}) ', // or to remove symbol set ''.
-                    // symbol: '', // or to remove symbol set ''.
-                  )
-                ],
-                keyboardType: TextInputType.number,
-                onChanged: (String amountText) {
-                  setState(() {
-                    _amount = StringHelper.extractDoubleOrZero(amountText);
-                  });
-                },
-                onFieldSubmitted: _hasValidData() ? (_) => () => _updateData(context) : null,
-              ),
+                // Title Input
+                TextFormField(
+                  initialValue: _title,
+                  autofocus: true,
+                  autocorrect: false,
+                  decoration: InputDecoration(
+                    hintText: 'Title',
+                    border: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        // color: kLightBlueBackground,
+                        color: Colors.red,
+                        // width: 30,
+                      ),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: primaryColor,
+                        width: 4.0,
+                      ),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: accentColor,
+                        // color: Colors.red,
+                        width: 6.0,
+                      ),
+                    ),
+                  ),
+                  style: TextStyle(),
+                  onChanged: (String newText) {
+                    setState(() {
+                      _title = newText;
+                    });
+                  },
+                  onFieldSubmitted: _hasValidData() ? (_) => () => _updateData(context) : null,
+                ),
 
-              // DateTime picker
-              DateTimePicker(
-                // type: DateTimePickerType.dateTimeSeparate,
-                type: DateTimePickerType.date,
-                dateMask: 'd MMM, yyyy',
-                initialValue: _executionDate.toString(),
-                firstDate: _oneHundredYearsAgo,
-                lastDate: _oneHundredYearsFromNow,
-                icon: Icon(Icons.event),
-                dateLabelText: 'Date',
-                timeLabelText: "Hour",
-                selectableDayPredicate: (date) {
-                  // Disable weekend days to select from the calendar
-                  // if (date.weekday == 6 || date.weekday == 7) {
-                  //   return false;
-                  // }
+                // Amount Input
+                TextFormField(
+                  initialValue: initialAmountLabel,
+                  // decoration: InputDecoration(hintText: 'USD(\$) '),
+                  decoration: InputDecoration(hintText: '${currentCurrency['code']}(${currentCurrency['symbol']}) '),
+                  inputFormatters: [
+                    CurrencyTextInputFormatter(
+                      // turnOffGrouping: false,
+                      locale: 'en_US',
+                      decimalDigits: 2,
+                      symbol: '${currentCurrency['code']}(${currentCurrency['symbol']}) ', // or to remove symbol set ''.
+                      // symbol: '', // or to remove symbol set ''.
+                    )
+                  ],
+                  keyboardType: TextInputType.number,
+                  onChanged: (String amountText) {
+                    setState(() {
+                      _amount = StringHelper.extractDoubleOrZero(amountText);
+                    });
+                  },
+                  onFieldSubmitted: _hasValidData() ? (_) => () => _updateData(context) : null,
+                ),
 
-                  return true;
-                },
-                onChanged: (val) {
-                  setState(() {
-                    _executionDate = DateTime.parse(val);
-                  });
-                },
-                validator: (val) {
-                  // print(val);
-                  return null;
-                },
-                // onSaved: (val) => print(val),
-              ),
+                // DateTime picker
+                DateTimePicker(
+                  // type: DateTimePickerType.dateTimeSeparate,
+                  type: DateTimePickerType.date,
+                  dateMask: 'd MMM, yyyy',
+                  initialValue: _executionDate.toString(),
+                  firstDate: _oneHundredYearsAgo,
+                  lastDate: _oneHundredYearsFromNow,
+                  icon: Icon(Icons.event),
+                  dateLabelText: 'Date',
+                  timeLabelText: "Hour",
+                  selectableDayPredicate: (date) {
+                    // Disable weekend days to select from the calendar
+                    // if (date.weekday == 6 || date.weekday == 7) {
+                    //   return false;
+                    // }
 
-              // Update button:
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 30.0),
-                child: Material(
-                  color: _hasValidData() ? primaryColor : Colors.grey,
-                  // borderRadius: BorderRadius.circular(12.0),
-                  elevation: 5.0,
-                  child: MaterialButton(
-                    disabledColor: Colors.grey,
-                    onPressed: _hasValidData() ? () => _updateData(context) : null,
-                    // minWidth: 300.0,
-                    minWidth: double.infinity,
-                    height: 42.0,
-                    child: Text(
-                      'Update',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.0,
-                        color: Colors.white,
+                    return true;
+                  },
+                  onChanged: (val) {
+                    setState(() {
+                      _executionDate = DateTime.parse(val);
+                    });
+                  },
+                  validator: (val) {
+                    // print(val);
+                    return null;
+                  },
+                  // onSaved: (val) => print(val),
+                ),
+
+                // Update button:
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 30.0),
+                  child: Material(
+                    color: _hasValidData() ? primaryColor : Colors.grey,
+                    // borderRadius: BorderRadius.circular(12.0),
+                    elevation: 5.0,
+                    child: MaterialButton(
+                      disabledColor: Colors.grey,
+                      onPressed: _hasValidData() ? () => _updateData(context) : null,
+                      // minWidth: 300.0,
+                      minWidth: double.infinity,
+                      height: 42.0,
+                      child: Text(
+                        'Update',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
