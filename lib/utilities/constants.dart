@@ -27,3 +27,6 @@ final Color barBackgroundColor = const Color(0xff72d8bf);
 
 // Animations:
 final Duration animDuration = const Duration(milliseconds: 250);
+
+// Measurements:
+final double kToolBarHeight = 56.0;

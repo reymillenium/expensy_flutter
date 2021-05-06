@@ -12,9 +12,19 @@ import 'package:faker/faker.dart'; // Allows to use: fake data generation (Fake)
 // Utilities:
 
 class DeviceHelper {
-  // Returns the amount of pixels already used in the vertical axis on the device:
-  static double verticalUsedHeight({BuildContext context, double appBarHeight = 0}) {
-    return MediaQuery.of(context).size.height + MediaQuery.of(context).padding.top + appBarHeight;
+  // Returns the total amount of pixels in the vertical axis of the device:
+  static double totalVerticalHeight({BuildContext context}) {
+    return MediaQuery.of(context).size.height;
+  }
+
+  // Returns the amount of pixels already used by the Status Bar in the vertical axis of the device:
+  static double statusBarTopPadding({BuildContext context}) {
+    return MediaQuery.of(context).padding.top;
+  }
+
+  // Returns the amount of available pixels in the vertical axis of the device:
+  static double availableHeight({BuildContext context, double appBarHeight = 0}) {
+    return MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top - appBarHeight;
   }
 
   // Returns how much text output in the app should be scaled. Users can change this in their mobile phone / device settings.

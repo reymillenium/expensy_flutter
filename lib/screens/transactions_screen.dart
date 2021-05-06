@@ -1,4 +1,5 @@
 // Packages:
+import 'package:expensy_flutter/components/expensy_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart'; // Allows to use the Bar Charts
 import 'package:flutter/gestures.dart'; // Allows: PointerExitEvent
@@ -72,32 +73,18 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   @override
   Widget build(BuildContext context) {
     AppData appData = Provider.of<AppData>(context, listen: true);
-    Map currentThemeFont = appData.currentThemeFont;
     Function closeAllThePanels = appData.closeAllThePanels; // Drawer related:
 
-    AppBar appBar = AppBar(
-      title: Text(
-        widget.title,
-        // style: TextStyle(
-        //   fontSize: 24,
-        //   fontWeight: FontWeight.bold,
-        //   fontFamily: currentThemeFont['fontFamily'],
-        // ),
-        style: Theme.of(context).appBarTheme.textTheme.headline6.copyWith(
-              fontFamily: currentThemeFont['fontFamily'],
-            ),
-      ),
-      actions: [
-        IconButton(
-          iconSize: 40,
-          icon: Icon(Icons.add_rounded),
-          tooltip: 'Add Transaction',
-          onPressed: () => _showModalNewTransaction(context),
-        ),
-      ],
+    ExpensyAppBar appBar = ExpensyAppBar(
+      title: widget.title,
+      showModalNewTransaction: () => _showModalNewTransaction(context),
     );
+
     double appBarHeight = appBar.preferredSize.height;
-    // print(DeviceHelper.verticalUsedHeight(context: context, appBarHeight: appBarHeight));
+    // print('totalVerticalHeight: ${DeviceHelper.totalVerticalHeight(context: context)}');
+    // print('statusBarTopPadding: ${DeviceHelper.statusBarTopPadding(context: context)}');
+    // print('appBarHeight: $appBarHeight');
+    // print('availableHeight: ${DeviceHelper.availableHeight(context: context, appBarHeight: appBarHeight)}');
 
     return Scaffold(
       appBar: appBar,
