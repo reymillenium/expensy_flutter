@@ -25,7 +25,7 @@ import 'package:expensy_flutter/helpers/date_helper.dart';
 
 class EditTransactionScreen extends StatefulWidget {
   // Properties:
-  final String id;
+  final int id;
   final int index;
   final String title;
   final double amount;
@@ -48,7 +48,7 @@ class EditTransactionScreen extends StatefulWidget {
 
 class _EditTransactionScreenState extends State<EditTransactionScreen> {
   // State Properties:
-  String _id;
+  int _id;
   int _index;
   String _title;
   double _amount;

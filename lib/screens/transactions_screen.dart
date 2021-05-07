@@ -41,7 +41,8 @@ class TransactionsScreen extends StatefulWidget {
 
 class _TransactionsScreenState extends State<TransactionsScreen> {
   // State Properties:
-  final TransactionsData transactionsData = TransactionsData();
+  DBHelper dbHelper;
+  TransactionsData transactionsData = TransactionsData();
   int touchedIndex;
 
   void _onAddTransactionHandler(String title, double amount, DateTime executionDate) {
@@ -50,13 +51,13 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     });
   }
 
-  void _onUpdateTransactionHandler(String id, String title, double amount, DateTime executionDate) {
+  void _onUpdateTransactionHandler(int id, String title, double amount, DateTime executionDate) {
     setState(() {
       transactionsData.updateTransaction(id, title, amount, executionDate);
     });
   }
 
-  void _onDeleteTransactionHandler(String id) async {
+  void _onDeleteTransactionHandler(int id) async {
     setState(() {
       transactionsData.deleteTransactionWithConfirm(id, this.context);
     });
@@ -70,6 +71,27 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
         touchedIndex = -1;
       }
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    dbHelper = DBHelper();
+    refreshData();
+  }
+
+  void refreshData() {
+    dbHelper.getMonetaryTransactions().then((transactions) {
+      for (MonetaryTransaction temp in transactions) {
+        // if (temp.type == "student") data.add(temp);
+        // transactionsData.addOneSingleTransaction(temp);
+      }
+      // since you have already added the results to data
+      // setState can have an empty function body
+      setState(() {});
+    });
+    // setState(() {});
   }
 
   @override

@@ -21,7 +21,7 @@ import 'package:expensy_flutter/models/app_data.dart';
 class TransactionTile extends StatelessWidget {
   // Properties:
   final MonetaryTransaction transaction;
-  final String id;
+  final int id;
   final int index;
   final Function onUpdateTransactionHandler;
   final Function onDeleteTransactionHandler;

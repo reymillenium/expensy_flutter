@@ -13,8 +13,7 @@ import 'package:flutter/material.dart';
 
 class MonetaryTransaction {
   // Properties:
-  // int id;
-  String id;
+  int id;
   String title;
   double amount;
   DateTime executionDate;
@@ -61,7 +60,7 @@ class MonetaryTransaction {
   //       'title': title,
   //       'amount': amount,
   //       'executionDate': executionDate.toString(),
-  //       'createdAt': createAt.toString(),
+  //       'createdAt': createdAt.toString(),
   //       'updatedAt': updatedAt.toString(),
   //     };
 }
