@@ -1,5 +1,6 @@
 // Packages:
 import 'package:expensy_flutter/components/expensy_app_bar.dart';
+import 'package:expensy_flutter/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart'; // Allows to use the Bar Charts
 import 'package:flutter/gestures.dart'; // Allows: PointerExitEvent
@@ -22,6 +23,7 @@ import 'package:expensy_flutter/components/expensy_drawer.dart';
 // Helpers:
 import 'package:expensy_flutter/helpers/sound_helper.dart';
 import 'package:expensy_flutter/helpers/device_helper.dart';
+import 'package:expensy_flutter/helpers/db_helper.dart';
 
 // Utilities:
 import 'package:expensy_flutter/utilities/constants.dart';
@@ -48,16 +50,16 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     });
   }
 
-  void _onUpdateTransactionHandler(int index, String title, double amount, DateTime executionDate) {
+  void _onUpdateTransactionHandler(String id, String title, double amount, DateTime executionDate) {
     setState(() {
-      transactionsData.updateTransaction(index, title, amount, executionDate);
+      transactionsData.updateTransaction(id, title, amount, executionDate);
     });
   }
 
   void _onDeleteTransactionHandler(String id) async {
-    // setState(() {
-    transactionsData.deleteTransactionWithConfirm(id, this.context);
-    // });
+    setState(() {
+      transactionsData.deleteTransactionWithConfirm(id, this.context);
+    });
   }
 
   void _touchCallbackHandler(BarTouchResponse barTouchResponse) {

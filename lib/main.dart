@@ -9,6 +9,7 @@ import 'package:expensy_flutter/screens/transactions_screen.dart';
 
 // Models:
 import 'package:expensy_flutter/models/app_data.dart';
+import 'package:expensy_flutter/models/transactions_data.dart';
 
 // Components:
 
@@ -32,7 +33,7 @@ class InitialSplashScreen extends StatelessWidget {
 
     return MaterialApp(
       home: SplashScreen(
-        seconds: 4,
+        seconds: 2,
         navigateAfterSeconds: MyApp(),
         gradientBackground: LinearGradient(colors: [
           Color(0xFFE5DBDB),

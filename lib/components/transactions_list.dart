@@ -16,7 +16,7 @@ import 'package:expensy_flutter/components/empty_widget.dart';
 
 class TransactionsList extends StatelessWidget {
   // Properties:
-  final List<Transaction> transactions;
+  final List<MonetaryTransaction> transactions;
   final _listViewScrollController = ScrollController();
   final Function onUpdateTransactionHandler;
   final Function onDeleteTransactionHandler;
@@ -57,6 +57,7 @@ class TransactionsList extends StatelessWidget {
               controller: _listViewScrollController,
               itemBuilder: (context, index) {
                 return TransactionTile(
+                  id: transactions[index].id,
                   index: index,
                   transaction: transactions[index],
                   onUpdateTransactionHandler: onUpdateTransactionHandler,

@@ -18,22 +18,31 @@ import 'package:expensy_flutter/components/transactions_list.dart';
 // Helpers:
 import 'package:expensy_flutter/helpers/numeric_helper.dart';
 import 'package:expensy_flutter/helpers/date_helper.dart';
+import 'package:expensy_flutter/helpers/db_helper.dart';
 
 // Utilities:
 
 class TransactionsData {
   // Properties:
-  List<Transaction> _transactions = [];
+  List<MonetaryTransaction> _transactions = [];
+  // DBHelper dbHelper;
 
   // Constructor:
   TransactionsData() {
+    // dbHelper = DBHelper();
+    // refreshTransactionList();
     _generateDummyData();
   }
 
   // Getters:
   get transactions {
+    // refreshTransactionList();
     return _transactions;
   }
+
+  // Future<List<MonetaryTransaction>> getMonetaryTransactions() async {
+  //   return await dbHelper.getMonetaryTransactions();
+  // }
 
   get lastWeekTransactions {
     final DateTime now = DateTime.now();
@@ -57,7 +66,7 @@ class TransactionsData {
     //     title: faker.food.dish(),
     //     amount: NumericHelper.roundDouble(NumericHelper.randomDoubleInRange(min: 0.99, max: 10.00), 2),
     //     executionDate: onTheLastWeek,
-    //     createAt: now,
+    //     createdAt: now,
     //     updatedAt: now,
     //   );
     // });
@@ -65,12 +74,12 @@ class TransactionsData {
     for (int i = 0; i < 20; i++) {
       DateTime onTheLastWeek = DateHelper.randomDateTimeOnTheLastWeek();
 
-      Transaction newTransaction = Transaction(
+      MonetaryTransaction newTransaction = MonetaryTransaction(
         id: '${uuid.v4()}',
         title: faker.food.dish(),
         amount: NumericHelper.roundRandomDoubleInRange(min: 0.99, max: 10.00, places: 2),
         executionDate: onTheLastWeek,
-        createAt: now,
+        createdAt: now,
         updatedAt: now,
       );
       _transactions.add(newTransaction);
@@ -78,12 +87,22 @@ class TransactionsData {
   }
 
   void _removeTransaction(int index) {
-    _transactions.removeAt(index);
+    // _transactions.removeAt(index);
   }
 
-  void _removeTransactionWhere(String id) {
+  void _removeTransactionWhere(String id) async {
     _transactions.removeWhere((element) => element.id == id);
+
+    // await dbHelper.deleteTransaction(id);
+    // await refreshTransactionList();
   }
+
+  // Future refreshTransactionList() async {
+  //   _transactions = await dbHelper.getMonetaryTransactions();
+  //   dbHelper.getMonetaryTransactions().then((result) {
+  //     _transactions = result;
+  //   });
+  // }
 
   Future<void> _showDialogPlus(String id, BuildContext context) async {
     return showDialog<void>(
@@ -186,27 +205,35 @@ class TransactionsData {
   }
 
   // Public methods:
-  void addTransaction(String title, double amount, DateTime executionDate) {
+  void addTransaction(String title, double amount, DateTime executionDate) async {
     DateTime now = DateTime.now();
     var uuid = Uuid();
-    Transaction newTransaction = Transaction(
+    MonetaryTransaction newTransaction = MonetaryTransaction(
       id: uuid.v1(),
       title: title,
       amount: amount,
       executionDate: executionDate,
-      createAt: now,
+      createdAt: now,
       updatedAt: now,
     );
     _transactions.add(newTransaction);
+
+    // await dbHelper.saveTransaction(newTransaction);
+    // refreshTransactionList();
   }
 
-  void updateTransaction(int index, String title, double amount, DateTime executionDate) {
+  void updateTransaction(String id, String title, double amount, DateTime executionDate) async {
     DateTime now = DateTime.now();
-    Transaction updatingTransaction = _transactions[index];
+    // MonetaryTransaction updatingTransaction = _transactions[index];
+    MonetaryTransaction updatingTransaction = _transactions.firstWhere((transaction) => id == transaction.id);
+
     updatingTransaction.title = title;
     updatingTransaction.amount = amount;
     updatingTransaction.executionDate = executionDate;
     updatingTransaction.updatedAt = now;
+
+    // await dbHelper.updateTransaction(updatingTransaction);
+    // refreshTransactionList();
   }
 
   void deleteTransactionWithConfirm(String id, BuildContext context) {
@@ -216,11 +243,14 @@ class TransactionsData {
 
     _showDialogPlus(id, context).then((value) {
       (context as Element).reassemble();
+      // refreshTransactionList();
     });
   }
 
   void deleteTransactionWithoutConfirm(String id) {
     _removeTransactionWhere(id);
+    // dbHelper.deleteTransaction(id);
+    // refreshTransactionList();
   }
 
   List<Map> groupedAmountLastWeek() {

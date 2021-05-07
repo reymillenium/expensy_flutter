@@ -11,20 +11,57 @@ import 'package:flutter/material.dart';
 
 // Utilities:
 
-class Transaction {
+class MonetaryTransaction {
+  // Properties:
+  // int id;
   String id;
   String title;
   double amount;
   DateTime executionDate;
-  DateTime createAt;
+  DateTime createdAt;
   DateTime updatedAt;
 
-  Transaction({
+  // Constructors:
+  MonetaryTransaction({
     @required this.id,
     @required this.title,
     @required this.amount,
     @required this.executionDate,
-    @required this.createAt,
+    @required this.createdAt,
     @required this.updatedAt,
   });
+
+  MonetaryTransaction.fromMap(Map<String, dynamic> transactionMap) {
+    id = transactionMap['id'];
+    title = transactionMap['title'];
+    amount = transactionMap['amount'];
+    // executionDate = transactionMap['executionDate'];
+    // createdAt = transactionMap['createdAt'];
+    // updatedAt = transactionMap['updatedAt'];
+
+    executionDate = DateTime.parse(transactionMap['executionDate']);
+    createdAt = DateTime.parse(transactionMap['createdAt']);
+    updatedAt = DateTime.parse(transactionMap['updatedAt']);
+  }
+
+  Map<String, dynamic> toMap() {
+    var transactionMap = <String, dynamic>{
+      'id': id,
+      'title': title,
+      'amount': amount,
+      'executionDate': executionDate.toString(),
+      'createdAt': createdAt.toString(),
+      'updatedAt': updatedAt.toString(),
+    };
+    return transactionMap;
+  }
+
+  // Map<String, dynamic> toMap() => {
+  //       'id': id,
+  //       'title': title,
+  //       'amount': amount,
+  //       'executionDate': executionDate.toString(),
+  //       'createdAt': createAt.toString(),
+  //       'updatedAt': updatedAt.toString(),
+  //     };
 }

@@ -25,6 +25,7 @@ import 'package:expensy_flutter/helpers/date_helper.dart';
 
 class EditTransactionScreen extends StatefulWidget {
   // Properties:
+  final String id;
   final int index;
   final String title;
   final double amount;
@@ -33,6 +34,7 @@ class EditTransactionScreen extends StatefulWidget {
 
   // Constructor:
   EditTransactionScreen({
+    this.id,
     this.index,
     this.title,
     this.amount,
@@ -46,6 +48,7 @@ class EditTransactionScreen extends StatefulWidget {
 
 class _EditTransactionScreenState extends State<EditTransactionScreen> {
   // State Properties:
+  String _id;
   int _index;
   String _title;
   double _amount;
@@ -62,6 +65,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    _id = widget.id;
     _index = widget.index;
     _title = widget.title;
     _amount = widget.amount;
@@ -238,7 +242,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
 
   void _updateData(BuildContext context) {
     if (_title.isNotEmpty && _amount != 0) {
-      _onUpdateTransactionHandler(_index, _title, _amount, _executionDate);
+      _onUpdateTransactionHandler(_id, _title, _amount, _executionDate);
     }
     Navigator.pop(context);
   }

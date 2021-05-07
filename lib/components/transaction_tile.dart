@@ -20,7 +20,8 @@ import 'package:expensy_flutter/models/app_data.dart';
 
 class TransactionTile extends StatelessWidget {
   // Properties:
-  final Transaction transaction;
+  final MonetaryTransaction transaction;
+  final String id;
   final int index;
   final Function onUpdateTransactionHandler;
   final Function onDeleteTransactionHandler;
@@ -33,6 +34,7 @@ class TransactionTile extends StatelessWidget {
   // Constructor:
   TransactionTile({
     this.transaction,
+    this.id,
     this.index,
     this.onUpdateTransactionHandler,
     this.onDeleteTransactionHandler,
@@ -199,6 +201,7 @@ class TransactionTile extends StatelessWidget {
                     isScrollControlled: true,
                     context: context,
                     builder: (context) => EditTransactionScreen(
+                      id: id,
                       index: index,
                       title: transaction.title,
                       amount: transaction.amount,
