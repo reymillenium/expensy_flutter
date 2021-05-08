@@ -8,6 +8,7 @@ import 'package:fl_chart/fl_chart.dart'; // Allows to use the Bar Charts
 import 'package:flutter/gestures.dart'; // Allows: PointerExitEvent
 import 'package:tinycolor/tinycolor.dart'; // Allows to light a color and many other things
 import 'package:provider/provider.dart';
+import 'package:native_device_orientation/native_device_orientation.dart';
 
 // Screens:
 import 'package:expensy_flutter/screens/new_transaction_screen.dart';
@@ -31,22 +32,27 @@ class TransactionsChartHomeMade extends StatelessWidget {
   // Properties:
   final List<Map> groupedAmountLastWeek;
   final double biggestAmountLastWeek;
+  final NativeDeviceOrientation orientation;
 
   // Constructor:
   TransactionsChartHomeMade({
     this.groupedAmountLastWeek,
     this.biggestAmountLastWeek,
+    this.orientation,
   });
 
   @override
   Widget build(BuildContext context) {
     // AppData appData = Provider.of<AppData>(context, listen: true);
+    bool isLandscape = (orientation == NativeDeviceOrientation.landscapeRight || orientation == NativeDeviceOrientation.landscapeLeft);
+    bool isPortrait = (orientation == NativeDeviceOrientation.portraitDown || orientation == NativeDeviceOrientation.portraitUp);
 
     List<Widget> getColumns() {
       return List.from(groupedAmountLastWeek.reversed).map((groupedAmountOnDay) {
         return TransactionChartBarHomeMade(
           groupedAmountOnDay: groupedAmountOnDay,
           biggestAmountLastWeek: biggestAmountLastWeek,
+          orientation: orientation,
         );
       }).toList();
     }
@@ -65,24 +71,27 @@ class TransactionsChartHomeMade extends StatelessWidget {
         child: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  Text(
-                    'Last Week Transactions',
-                    style: TextStyle(
-                      // color: const Color(0xff379982),
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                  if (isPortrait) ...[
+                    Text(
+                      'Last Week Transactions',
+                      style: TextStyle(
+                        // color: const Color(0xff379982),
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                  ],
+
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

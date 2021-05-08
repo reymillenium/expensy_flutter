@@ -8,6 +8,7 @@ import 'package:fl_chart/fl_chart.dart'; // Allows to use the Bar Charts
 import 'package:flutter/gestures.dart'; // Allows: PointerExitEvent
 import 'package:tinycolor/tinycolor.dart'; // Allows to light a color and many other things
 import 'package:provider/provider.dart';
+import 'package:native_device_orientation/native_device_orientation.dart';
 
 // Screens:
 import 'package:expensy_flutter/screens/new_transaction_screen.dart';
@@ -30,11 +31,13 @@ class TransactionChartBarHomeMade extends StatelessWidget {
   // Properties:
   final Map groupedAmountOnDay;
   final double biggestAmountLastWeek;
+  final NativeDeviceOrientation orientation;
 
   // Constructor:
   TransactionChartBarHomeMade({
     this.groupedAmountOnDay,
     this.biggestAmountLastWeek,
+    this.orientation,
   });
 
   @override
@@ -42,57 +45,73 @@ class TransactionChartBarHomeMade extends StatelessWidget {
     Color primaryColor = Theme.of(context).primaryColor;
     const backgroundColumnHeight = 120.0;
     double activeBarHeight = groupedAmountOnDay['amount'] == 0 ? 0 : NumericHelper.roundDouble((groupedAmountOnDay['amount'] / biggestAmountLastWeek) * (backgroundColumnHeight - 10), 2);
+    bool isLandscape = (orientation == NativeDeviceOrientation.landscapeRight || orientation == NativeDeviceOrientation.landscapeLeft);
+    bool isPortrait = (orientation == NativeDeviceOrientation.portraitDown || orientation == NativeDeviceOrientation.portraitUp);
 
     return Column(
       children: [
-        SizedBox(
-          height: 10,
-        ),
-        Container(
-          height: 20,
-          child: FittedBox(
-            fit: BoxFit.fitWidth,
-            child: Text('${NumericHelper.roundDouble(groupedAmountOnDay['amount'], 2)}'),
+        // SizedBox(
+        //   height: 10,
+        // ),
+        if (isPortrait) ...[
+          Container(
+            child: FittedBox(
+              fit: BoxFit.fitWidth,
+              child: Text('${NumericHelper.roundDouble(groupedAmountOnDay['amount'], 2)}'),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+        ],
+        Expanded(
+          child: Stack(
+            alignment: AlignmentDirectional.bottomStart,
+            children: <Widget>[
+              Tooltip(
+                message: '${NumericHelper.roundDouble(groupedAmountOnDay['amount'], 2)}',
+                child: Container(
+                  // height: backgroundColumnHeight,
+                  width: 20,
+                  decoration: BoxDecoration(
+                    color: TinyColor(primaryColor).lighten(16).color,
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    // borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              Tooltip(
+                message: '${NumericHelper.roundDouble(groupedAmountOnDay['amount'], 2)}',
+                child: Container(
+                  height: activeBarHeight,
+                  width: 20,
+                  decoration: BoxDecoration(
+                    // color: Theme.of(context).accentColor,
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-        SizedBox(
-          height: 10,
+        if (isPortrait) ...[
+          SizedBox(
+            height: 10,
+          ),
+        ],
+
+        FittedBox(
+          child: Text(
+            groupedAmountOnDay['day'].substring(0, 2),
+            style: Theme.of(context).textTheme.headline6.copyWith(
+                  color: Theme.of(context).primaryColor,
+                ),
+          ),
         ),
-        Stack(
-          alignment: AlignmentDirectional.bottomStart,
-          children: <Widget>[
-            Container(
-              height: backgroundColumnHeight,
-              width: 20,
-              decoration: BoxDecoration(
-                color: TinyColor(primaryColor).lighten(16).color,
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                // borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            Container(
-              height: activeBarHeight,
-              width: 20,
-              decoration: BoxDecoration(
-                // color: Theme.of(context).accentColor,
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Text(
-          groupedAmountOnDay['day'].substring(0, 2),
-          style: Theme.of(context).textTheme.headline6.copyWith(
-                color: Theme.of(context).primaryColor,
-              ),
-        ),
-        SizedBox(
-          height: 10,
-        ),
+        // SizedBox(
+        //   height: 10,
+        // ),
       ],
     );
   }

@@ -19,6 +19,7 @@ import 'package:expensy_flutter/models/app_data.dart';
 import 'package:expensy_flutter/components/transactions_list.dart';
 import 'package:expensy_flutter/components/transactions_chart.dart';
 import 'package:expensy_flutter/components/expensy_drawer.dart';
+import 'package:expensy_flutter/components/transactions_chart_home_made.dart';
 
 // Helpers:
 import 'package:expensy_flutter/helpers/sound_helper.dart';
@@ -136,23 +137,27 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 // Transactions Bar Chart
+                // Expanded(
+                //   flex: isLandscape ? 4 : 3,
+                //   // flex: 4,
+                //   child: TransactionsChart(
+                //     touchCallbackHandler: _touchCallbackHandler,
+                //     touchedIndex: touchedIndex,
+                //     groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
+                //     biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
+                //     orientation: orientation,
+                //   ),
+                // ),
+
+                // Home Made Transactions Bar Chart
                 Expanded(
                   flex: isLandscape ? 4 : 3,
-                  // flex: 4,
-                  child: TransactionsChart(
-                    touchCallbackHandler: _touchCallbackHandler,
-                    touchedIndex: touchedIndex,
+                  child: TransactionsChartHomeMade(
                     groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
                     biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
                     orientation: orientation,
                   ),
                 ),
-
-                // Home Made Transactions Bar Chart
-                // TransactionsChartHomeMade(
-                //   groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
-                //   biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
-                // ),
 
                 // Transaction List:
                 Expanded(
