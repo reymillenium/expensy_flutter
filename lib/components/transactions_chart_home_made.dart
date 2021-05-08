@@ -24,6 +24,7 @@ import 'package:expensy_flutter/components/transaction_chart_bar_home_made.dart'
 
 // Helpers:
 import 'package:expensy_flutter/helpers/numeric_helper.dart';
+import 'package:expensy_flutter/helpers/device_helper.dart';
 
 // Utilities:
 import 'package:expensy_flutter/utilities/constants.dart';
@@ -44,8 +45,8 @@ class TransactionsChartHomeMade extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // AppData appData = Provider.of<AppData>(context, listen: true);
-    bool isLandscape = (orientation == NativeDeviceOrientation.landscapeRight || orientation == NativeDeviceOrientation.landscapeLeft);
-    bool isPortrait = (orientation == NativeDeviceOrientation.portraitDown || orientation == NativeDeviceOrientation.portraitUp);
+    // bool isLandscape = DeviceHelper.isLandscape(orientation);
+    bool isPortrait = DeviceHelper.isPortrait(orientation);
 
     List<Widget> getColumns() {
       return List.from(groupedAmountLastWeek.reversed).map((groupedAmountOnDay) {

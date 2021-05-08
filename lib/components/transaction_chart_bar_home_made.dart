@@ -23,6 +23,7 @@ import 'package:expensy_flutter/components/transactions_list.dart';
 
 // Helpers:
 import 'package:expensy_flutter/helpers/numeric_helper.dart';
+import 'package:expensy_flutter/helpers/device_helper.dart';
 
 // Utilities:
 import 'package:expensy_flutter/utilities/constants.dart';
@@ -33,6 +34,10 @@ class TransactionChartBarHomeMade extends StatelessWidget {
   final double biggestAmountLastWeek;
   final NativeDeviceOrientation orientation;
 
+  // Run time constants:
+  // final DateFormat formatter = DateFormat().add_yMMMMd();
+  final currencyFormat = new NumberFormat("#,##0.00", "en_US");
+
   // Constructor:
   TransactionChartBarHomeMade({
     this.groupedAmountOnDay,
@@ -42,11 +47,15 @@ class TransactionChartBarHomeMade extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppData appData = Provider.of<AppData>(context, listen: true);
+    Map currentCurrency = appData.currentCurrency;
+    final String amountLabel = '${currentCurrency['symbol']}${currencyFormat.format(groupedAmountOnDay['amount'])}';
+
     Color primaryColor = Theme.of(context).primaryColor;
     const backgroundColumnHeight = 120.0;
     double activeBarHeight = groupedAmountOnDay['amount'] == 0 ? 0 : NumericHelper.roundDouble((groupedAmountOnDay['amount'] / biggestAmountLastWeek) * (backgroundColumnHeight - 10), 2);
-    bool isLandscape = (orientation == NativeDeviceOrientation.landscapeRight || orientation == NativeDeviceOrientation.landscapeLeft);
-    bool isPortrait = (orientation == NativeDeviceOrientation.portraitDown || orientation == NativeDeviceOrientation.portraitUp);
+    // bool isLandscape = DeviceHelper.isLandscape(orientation);
+    bool isPortrait = DeviceHelper.isPortrait(orientation);
 
     return Column(
       children: [
@@ -69,7 +78,9 @@ class TransactionChartBarHomeMade extends StatelessWidget {
             alignment: AlignmentDirectional.bottomStart,
             children: <Widget>[
               Tooltip(
-                message: '${NumericHelper.roundDouble(groupedAmountOnDay['amount'], 2)}',
+                // message: '${NumericHelper.roundDouble(groupedAmountOnDay['amount'], 2)}',
+                message: amountLabel,
+
                 child: Container(
                   // height: backgroundColumnHeight,
                   width: 20,
@@ -81,7 +92,7 @@ class TransactionChartBarHomeMade extends StatelessWidget {
                 ),
               ),
               Tooltip(
-                message: '${NumericHelper.roundDouble(groupedAmountOnDay['amount'], 2)}',
+                message: amountLabel,
                 child: Container(
                   height: activeBarHeight,
                   width: 20,

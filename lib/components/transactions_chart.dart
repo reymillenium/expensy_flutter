@@ -23,6 +23,7 @@ import 'package:expensy_flutter/components/transactions_list.dart';
 
 // Helpers:
 import 'package:expensy_flutter/helpers/numeric_helper.dart';
+import 'package:expensy_flutter/helpers/device_helper.dart';
 
 // Utilities:
 import 'package:expensy_flutter/utilities/constants.dart';
@@ -57,8 +58,8 @@ class TransactionsChart extends StatelessWidget {
     // print(orientation);
     final Color primaryColor = Theme.of(context).primaryColor;
     final Color accentColor = Theme.of(context).accentColor;
-    bool isLandscape = (orientation == NativeDeviceOrientation.landscapeRight || orientation == NativeDeviceOrientation.landscapeLeft);
-    bool isPortrait = (orientation == NativeDeviceOrientation.portraitDown || orientation == NativeDeviceOrientation.portraitUp);
+    bool isLandscape = DeviceHelper.isLandscape(orientation);
+    bool isPortrait = DeviceHelper.isPortrait(orientation);
 
     return Card(
       elevation: 3,

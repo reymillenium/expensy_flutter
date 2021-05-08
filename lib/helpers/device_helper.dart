@@ -6,6 +6,7 @@ import 'package:intl/intl.dart'; // Allows to use: DateFormat
 import 'package:uuid/uuid.dart'; // Allows to use: Uuid
 import 'package:rflutter_alert/rflutter_alert.dart'; // Allows to use: Alert
 import 'package:faker/faker.dart'; // Allows to use: fake data generation (Fake)
+import 'package:native_device_orientation/native_device_orientation.dart';
 
 // Helpers:
 
@@ -30,5 +31,15 @@ class DeviceHelper {
   // Returns how much text output in the app should be scaled. Users can change this in their mobile phone / device settings.
   static double curScaleFactor(BuildContext context) {
     return MediaQuery.of(context).textScaleFactor;
+  }
+
+  // Returns if either the device is in Landscape position or not.
+  static bool isLandscape(NativeDeviceOrientation orientation) {
+    return (orientation == NativeDeviceOrientation.landscapeRight || orientation == NativeDeviceOrientation.landscapeLeft);
+  }
+
+  // Returns if either the device is in Portrait position or not.
+  static bool isPortrait(NativeDeviceOrientation orientation) {
+    return (orientation == NativeDeviceOrientation.portraitDown || orientation == NativeDeviceOrientation.portraitUp);
   }
 }
