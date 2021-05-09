@@ -16,6 +16,7 @@ import 'package:expensy_flutter/models/app_data.dart';
 // Components:
 import 'package:expensy_flutter/components/transactions_list.dart';
 import 'package:expensy_flutter/components/transactions_chart.dart';
+import 'package:expensy_flutter/components/expensy_drawer_switch.dart';
 
 // Helpers:
 import 'package:expensy_flutter/helpers/sound_helper.dart';
@@ -26,13 +27,17 @@ import 'package:tinycolor/tinycolor.dart';
 class ExpensyDrawer extends StatelessWidget {
   // Properties:
   final bool showChart;
+  // final bool showPortraitOnly;
   final Function onSwitchShowChart;
+  // final Function onSwitchPortraitOnLy;
 
   // Constructor:
   ExpensyDrawer({
     Key key,
     this.showChart,
+    // this.showPortraitOnly,
     this.onSwitchShowChart,
+    // this.onSwitchPortraitOnLy,
   }) : super(key: key);
 
   @override
@@ -62,6 +67,7 @@ class ExpensyDrawer extends StatelessWidget {
         // Important: Remove any padding from the ListView.
         padding: EdgeInsets.zero,
         children: <Widget>[
+          // Drawer Header:
           DrawerHeader(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -98,76 +104,8 @@ class ExpensyDrawer extends StatelessWidget {
               ],
             ),
           ),
-          // ExpansionTile(
-          //   leading: Icon(
-          //     Icons.palette,
-          //     color: Colors.black,
-          //   ),
-          //   title: Text(
-          //     'Theme color:',
-          //     style: TextStyle(
-          //       color: Colors.black,
-          //       fontSize: 20,
-          //       fontWeight: FontWeight.bold,
-          //     ),
-          //   ),
-          //   children: availableThemeColors.asMap().entries.map((entry) {
-          //     int index = entry.key;
-          //     Map value = entry.value;
-          //
-          //     return ListTile(
-          //       title: Text(
-          //         value['name'],
-          //         style: TextStyle(
-          //           color: value['theme']['primaryColor'],
-          //           fontSize: 16,
-          //           fontWeight: FontWeight.bold,
-          //         ),
-          //       ),
-          //       onTap: () {
-          //         // Update the state of the app.
-          //         setCurrentThemeColorHandler(index);
-          //         // Then close the drawer
-          //         Navigator.pop(context);
-          //       },
-          //     );
-          //   }).toList(),
-          // ),
-          // ExpansionTile(
-          //   leading: FaIcon(
-          //     FontAwesomeIcons.font,
-          //     color: Colors.black,
-          //   ),
-          //   title: Text(
-          //     'Theme font:',
-          //     style: TextStyle(
-          //       color: Colors.black,
-          //       fontSize: 20,
-          //       fontWeight: FontWeight.bold,
-          //     ),
-          //   ),
-          //   children: availableThemeFonts.asMap().entries.map((entry) {
-          //     int index = entry.key;
-          //     Map value = entry.value;
-          //
-          //     return ListTile(
-          //       title: Text(
-          //         value['name'],
-          //         style: TextStyle(
-          //           fontFamily: value['fontFamily'],
-          //           fontSize: 16,
-          //           fontWeight: FontWeight.bold,
-          //         ),
-          //       ),
-          //       onTap: () {
-          //         // Update the state of the app.
-          //         setCurrentFontFamilyHandler(index);
-          //         // Then close the drawer
-          //         Navigator.pop(context);
-          //       },
-          //     );
-          //   }).toList(),
-          // ),
+
+          // Drawer options: (Expansion Panels)
           ExpansionPanelList(
             expansionCallback: openOnePanelAndCloseTheRest,
             children: [
@@ -181,7 +119,7 @@ class ExpensyDrawer extends StatelessWidget {
                       color: Colors.black,
                     ),
                     title: Text(
-                      'Theme color:',
+                      'Theme:',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 20,
@@ -226,7 +164,7 @@ class ExpensyDrawer extends StatelessWidget {
                       color: Colors.black,
                     ),
                     title: Text(
-                      'Theme font:',
+                      'Font:',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 20,
@@ -312,37 +250,19 @@ class ExpensyDrawer extends StatelessWidget {
             ],
           ),
 
-          Padding(
-            padding: const EdgeInsets.only(left: 16, top: 16),
-            child: SizedBox(
-              // width: 30,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                // mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'Show chart',
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  FlutterSwitch(
-                    showOnOff: true,
-                    activeColor: primaryColor,
-                    activeTextColor: Colors.black,
-                    inactiveTextColor: Colors.blue[50],
-                    width: 55.0,
-                    height: 25.0,
-                    valueFontSize: 12.0,
-                    toggleSize: 18.0,
-                    value: showChart,
-                    onToggle: onSwitchShowChart,
-                  ),
-                ],
-              ),
-            ),
+          // Switchers:
+          ExpensyDrawerSwitch(
+            switchLabel: 'Show chart',
+            primaryColor: primaryColor,
+            showChart: showChart,
+            onToggle: onSwitchShowChart,
           ),
+          // ExpensyDrawerSwitch(
+          //   switchLabel: 'Portrait only',
+          //   primaryColor: primaryColor,
+          //   showChart: showPortraitOnly,
+          //   onToggle: onSwitchPortraitOnLy,
+          // ),
         ],
       ),
     );

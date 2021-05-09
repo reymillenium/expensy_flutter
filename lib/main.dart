@@ -21,11 +21,11 @@ import 'package:expensy_flutter/utilities/constants.dart';
 
 void main() {
   // Disables the Landscape mode:
-  WidgetsFlutterBinding.ensureInitialized(); // Without this it might not work in some devices:
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
+  // WidgetsFlutterBinding.ensureInitialized(); // Without this it might not work in some devices:
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  //   DeviceOrientation.portraitDown,
+  // ]);
 
   runApp(ChangeNotifierProvider(
     create: (context) => AppData(),

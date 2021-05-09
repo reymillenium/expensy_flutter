@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:native_device_orientation/native_device_orientation.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:flutter/services.dart';
 
 // Screens:
 import 'package:expensy_flutter/screens/new_transaction_screen.dart';
@@ -47,6 +48,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   TransactionsData transactionsData = TransactionsData();
   int touchedIndex;
   bool _showChart = false;
+  bool _showPortraitOnly = false;
 
   void _onAddTransactionHandler(String title, double amount, DateTime executionDate) {
     setState(() {
@@ -82,12 +84,27 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     });
   }
 
+  void onSwitchPortraitOnLy(bool choice) {
+    setState(() {
+      _showPortraitOnly = choice;
+    });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     dbHelper = DBHelper();
     refreshData();
+    // WidgetsFlutterBinding.ensureInitialized(); // Without this it might not work in some devices:
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.portraitUp,
+    //   DeviceOrientation.portraitDown,
+    //   if (!_showPortraitOnly) ...[
+    //     DeviceOrientation.landscapeLeft,
+    //     DeviceOrientation.landscapeRight,
+    //   ],
+    // ]);
   }
 
   void refreshData() {
@@ -119,6 +136,16 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     // print('appBarHeight: $appBarHeight');
     // print('availableHeight: ${DeviceHelper.availableHeight(context: context, appBarHeight: appBarHeight)}');
 
+    // WidgetsFlutterBinding.ensureInitialized(); // Without this it might not work in some devices:
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      // DeviceOrientation.portraitDown,
+      if (!_showPortraitOnly) ...[
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ],
+    ]);
+
     return Scaffold(
       appBar: appBar,
       onDrawerChanged: (isOpened) {
@@ -129,7 +156,9 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
       drawer: ExpensyDrawer(
         showChart: _showChart,
+        // showPortraitOnly: _showPortraitOnly,
         onSwitchShowChart: onSwitchShowChart,
+        // onSwitchPortraitOnLy: onSwitchPortraitOnLy,
       ),
 
       body: NativeDeviceOrientationReader(
