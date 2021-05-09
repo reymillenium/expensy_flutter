@@ -13,7 +13,6 @@ import 'package:faker/faker.dart'; // Allows to use: fake data generation (Fake)
 import 'package:expensy_flutter/models/transaction.dart';
 
 // Components:
-import 'package:expensy_flutter/components/transactions_list.dart';
 
 // Helpers:
 import 'package:expensy_flutter/helpers/_helpers.dart';

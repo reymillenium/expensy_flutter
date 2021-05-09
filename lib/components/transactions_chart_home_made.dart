@@ -19,8 +19,7 @@ import 'package:expensy_flutter/models/transactions_data.dart';
 import 'package:expensy_flutter/models/app_data.dart';
 
 // Components:
-import 'package:expensy_flutter/components/transactions_list.dart';
-import 'package:expensy_flutter/components/transaction_chart_bar_home_made.dart';
+import 'package:expensy_flutter/components/_components.dart';
 
 // Helpers:
 import 'package:expensy_flutter/helpers/_helpers.dart';

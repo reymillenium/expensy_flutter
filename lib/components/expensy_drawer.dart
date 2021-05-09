@@ -5,6 +5,7 @@ import 'package:flutter/gestures.dart'; // Allows: PointerExitEvent
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:tinycolor/tinycolor.dart';
 
 // Screens:
 import 'package:expensy_flutter/screens/new_transaction_screen.dart';
@@ -14,14 +15,11 @@ import 'package:expensy_flutter/models/transactions_data.dart';
 import 'package:expensy_flutter/models/app_data.dart';
 
 // Components:
-import 'package:expensy_flutter/components/transactions_list.dart';
-import 'package:expensy_flutter/components/transactions_chart.dart';
-import 'package:expensy_flutter/components/expensy_drawer_switch.dart';
+import 'package:expensy_flutter/components/_components.dart';
 
 // Helpers:
 
 // Utilities:
-import 'package:tinycolor/tinycolor.dart';
 
 class ExpensyDrawer extends StatelessWidget {
   // Properties:

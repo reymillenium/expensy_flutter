@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:expensy_flutter/models/transaction.dart';
 
 // Components:
-import 'package:expensy_flutter/components/transaction_tile.dart';
-import 'package:expensy_flutter/components/empty_widget.dart';
+import 'package:expensy_flutter/components/_components.dart';
 
 // Helpers:
 
