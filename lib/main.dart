@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:tinycolor/tinycolor.dart'; // Allows to light a color and many other things
+import 'package:flutter/services.dart';
 
 // Screens:
 import 'package:expensy_flutter/screens/transactions_screen.dart';
@@ -19,6 +20,13 @@ import 'package:expensy_flutter/models/transactions_data.dart';
 import 'package:expensy_flutter/utilities/constants.dart';
 
 void main() {
+  // Disables the Landscape mode:
+  WidgetsFlutterBinding.ensureInitialized(); // Without this it might not work in some devices:
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   runApp(ChangeNotifierProvider(
     create: (context) => AppData(),
     // child: MyApp(),

@@ -137,27 +137,27 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 // Transactions Bar Chart
-                // Expanded(
-                //   flex: isLandscape ? 4 : 3,
-                //   // flex: 4,
-                //   child: TransactionsChart(
-                //     touchCallbackHandler: _touchCallbackHandler,
-                //     touchedIndex: touchedIndex,
-                //     groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
-                //     biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
-                //     orientation: orientation,
-                //   ),
-                // ),
-
-                // Home Made Transactions Bar Chart
                 Expanded(
                   flex: isLandscape ? 4 : 3,
-                  child: TransactionsChartHomeMade(
+                  // flex: 4,
+                  child: TransactionsChart(
+                    touchCallbackHandler: _touchCallbackHandler,
+                    touchedIndex: touchedIndex,
                     groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
                     biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
                     orientation: orientation,
                   ),
                 ),
+
+                // Home Made Transactions Bar Chart
+                // Expanded(
+                //   flex: isLandscape ? 4 : 3,
+                //   child: TransactionsChartHomeMade(
+                //     groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
+                //     biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
+                //     orientation: orientation,
+                //   ),
+                // ),
 
                 // Transaction List:
                 Expanded(
