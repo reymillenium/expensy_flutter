@@ -18,6 +18,10 @@ class DateHelper {
     return DateTime.now();
   }
 
+  // ***********************************************************************************
+  // *                            * * *  R A N G E S  * * *                            *
+  // ***********************************************************************************
+
   // Returns a DateTime object a given amount of time ago:
   static DateTime timeAgo({
     int microseconds = 0,
@@ -103,6 +107,10 @@ class DateHelper {
       days: accumulatedDays,
     ));
   }
+
+  // ***********************************************************************************
+  // *                     * * *  A C Q U I S I T I O N S  * * *                       *
+  // ***********************************************************************************
 
   // Returns the current day of the week::
   static String weekDayNow() {
@@ -201,6 +209,10 @@ class DateHelper {
       years: years,
     ));
   }
+
+  // ***********************************************************************************
+  // *                   * * *  R A N D O M I Z A T I O N  * * *                       *
+  // ***********************************************************************************
 
   // Returns a random DateTime object localized on the last week:
   static DateTime randomDateTimeOnTheLastWeek() {

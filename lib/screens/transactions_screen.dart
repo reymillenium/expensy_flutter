@@ -167,8 +167,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
           // print('Received new orientation: $orientation');
           bool safeAreaLeft = orientation == NativeDeviceOrientation.landscapeLeft ? true : false;
           bool safeAreaRight = orientation == NativeDeviceOrientation.landscapeRight ? true : false;
-          bool isLandscape = (orientation == NativeDeviceOrientation.landscapeRight || orientation == NativeDeviceOrientation.landscapeLeft);
-          bool isPortrait = (orientation == NativeDeviceOrientation.portraitDown || orientation == NativeDeviceOrientation.portraitUp);
+          bool isLandscape = DeviceHelper.isLandscape(orientation);
+          bool isPortrait = DeviceHelper.isPortrait(orientation);
           return SafeArea(
             left: safeAreaLeft,
             right: safeAreaRight,

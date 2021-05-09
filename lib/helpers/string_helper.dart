@@ -12,12 +12,9 @@ import 'package:faker/faker.dart'; // Allows to use: fake data generation (Fake)
 // Utilities:
 
 class StringHelper {
-  // It generates an string with a provided length (ends with an '=' character in several cases)
-  static String getRandomString(int len) {
-    var random = Random.secure();
-    var values = List<int>.generate(len, (i) => random.nextInt(255));
-    return base64UrlEncode(values);
-  }
+// ***********************************************************************************
+// *               * * *  N U M B E R S  E X T R A C T I O N  * * *                  *
+// ***********************************************************************************
 
   // It returns 0 when:
   // FormatException: Invalid double => No number included, only a dot included or empty string
@@ -41,5 +38,16 @@ class StringHelper {
       result = 0;
     }
     return result;
+  }
+
+// ***********************************************************************************
+// *                   * * *  R A N D O M I Z A T I O N  * * *                       *
+// ***********************************************************************************
+
+  // It generates an string with a provided length (ends with an '=' character in several cases)
+  static String getRandomString(int len) {
+    var random = Random.secure();
+    var values = List<int>.generate(len, (i) => random.nextInt(255));
+    return base64UrlEncode(values);
   }
 }

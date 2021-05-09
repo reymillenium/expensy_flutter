@@ -13,6 +13,10 @@ import 'package:native_device_orientation/native_device_orientation.dart';
 // Utilities:
 
 class DeviceHelper {
+  // ***********************************************************************************
+  // *                * * *  D I S P L A Y  D I M E N T I O N S  * * *                 *
+  // ***********************************************************************************
+
   // Returns the total amount of pixels in the vertical axis of the device:
   static double totalVerticalHeight({BuildContext context}) {
     return MediaQuery.of(context).size.height;
@@ -28,18 +32,46 @@ class DeviceHelper {
     return MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top - appBarHeight;
   }
 
+  // ***********************************************************************************
+  // *                   * * *  D I S P L A Y  D E N S I T Y  * * *                    *
+  // ***********************************************************************************
+
   // Returns how much text output in the app should be scaled. Users can change this in their mobile phone / device settings.
   static double curScaleFactor(BuildContext context) {
     return MediaQuery.of(context).textScaleFactor;
   }
+
+  // ***********************************************************************************
+  // *                  * * *  D I S P L A Y  P O S I T I O N  * * *                   *
+  // ***********************************************************************************
 
   // Returns if either the device is in Landscape position or not.
   static bool isLandscape(NativeDeviceOrientation orientation) {
     return (orientation == NativeDeviceOrientation.landscapeRight || orientation == NativeDeviceOrientation.landscapeLeft);
   }
 
+  // Returns if the device is in LandscapeLeft position or not.
+  static bool isLandscapeLeft(NativeDeviceOrientation orientation) {
+    return (orientation == NativeDeviceOrientation.landscapeLeft);
+  }
+
+  // Returns if the device is in LandscapeRight position or not.
+  static bool isLandscapeRight(NativeDeviceOrientation orientation) {
+    return (orientation == NativeDeviceOrientation.landscapeRight);
+  }
+
   // Returns if either the device is in Portrait position or not.
   static bool isPortrait(NativeDeviceOrientation orientation) {
     return (orientation == NativeDeviceOrientation.portraitDown || orientation == NativeDeviceOrientation.portraitUp);
+  }
+
+  // Returns if the device is in PortraitUp position or not.
+  static bool isPortraitUp(NativeDeviceOrientation orientation) {
+    return (orientation == NativeDeviceOrientation.portraitUp);
+  }
+
+  // Returns if the device is in PortraitDown position or not.
+  static bool isPortraitDown(NativeDeviceOrientation orientation) {
+    return (orientation == NativeDeviceOrientation.portraitDown);
   }
 }

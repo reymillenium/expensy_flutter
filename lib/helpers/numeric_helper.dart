@@ -12,14 +12,22 @@ import 'package:faker/faker.dart'; // Allows to use: fake data generation (Fake)
 // Utilities:
 
 class NumericHelper {
-  // Returns a random double number, between two given doubles (both included):
-  static double randomDoubleInRange({double min = 0.0, double max = 1.0}) {
-    return (Random().nextDouble() * (max - min)) + min;
-  }
+  // ***********************************************************************************
+  // *                         * * *  I N T E G E R S  * * *                           *
+  // ***********************************************************************************
 
   // Returns a random integer number, between two given integers (both included):
   static int randomIntegerInRange({int min = 0, int max = 1}) {
     return Random().nextInt(max - min + 1) + min;
+  }
+
+  // ***********************************************************************************
+  // *                           * * *  D O U B L E S  * * *                           *
+  // ***********************************************************************************
+
+  // Returns a random double number, between two given doubles (both included):
+  static double randomDoubleInRange({double min = 0.0, double max = 1.0}) {
+    return (Random().nextDouble() * (max - min)) + min;
   }
 
   // Returns a rounded double number, given a not rounded double and the amount of places after the comma:

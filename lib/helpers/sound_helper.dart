@@ -7,7 +7,12 @@ import 'package:audioplayers/audio_cache.dart';
 // Utilities:
 
 class SoundHelper {
+  // Properties:
   final AudioCache player = AudioCache(prefix: 'assets/audio/');
+
+  // ***********************************************************************************
+  // *                * * *  S O U N D  R E P R O D U C T I O N  * * *                 *
+  // ***********************************************************************************
 
   // Plays a click sound:
   void playSmallButtonClick({double volume = 1.00}) {
