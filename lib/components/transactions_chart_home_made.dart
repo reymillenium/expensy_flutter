@@ -95,7 +95,7 @@ class TransactionsChartHomeMade extends StatelessWidget {
 
                   Expanded(
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: getColumns(),
                     ),
                   ),
