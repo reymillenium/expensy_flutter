@@ -19,7 +19,7 @@ import 'package:expensy_flutter/models/app_data.dart';
 import 'package:expensy_flutter/components/transactions_list.dart';
 
 // Helpers:
-import 'package:expensy_flutter/helpers/string_helper.dart';
+import 'package:expensy_flutter/helpers/_helpers.dart';
 
 // Utilities:
 

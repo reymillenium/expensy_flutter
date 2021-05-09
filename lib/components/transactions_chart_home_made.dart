@@ -23,8 +23,7 @@ import 'package:expensy_flutter/components/transactions_list.dart';
 import 'package:expensy_flutter/components/transaction_chart_bar_home_made.dart';
 
 // Helpers:
-import 'package:expensy_flutter/helpers/numeric_helper.dart';
-import 'package:expensy_flutter/helpers/device_helper.dart';
+import 'package:expensy_flutter/helpers/_helpers.dart';
 
 // Utilities:
 import 'package:expensy_flutter/utilities/constants.dart';

@@ -17,7 +17,6 @@ import 'package:expensy_flutter/components/transactions_list.dart';
 import 'package:expensy_flutter/components/transactions_chart.dart';
 
 // Helpers:
-import 'package:expensy_flutter/helpers/sound_helper.dart';
 
 // Utilities:
 import 'package:tinycolor/tinycolor.dart';
