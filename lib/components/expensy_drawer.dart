@@ -4,6 +4,7 @@ import 'package:fl_chart/fl_chart.dart'; // Allows to use the Bar Charts
 import 'package:flutter/gestures.dart'; // Allows: PointerExitEvent
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 
 // Screens:
 import 'package:expensy_flutter/screens/new_transaction_screen.dart';
@@ -24,10 +25,14 @@ import 'package:tinycolor/tinycolor.dart';
 
 class ExpensyDrawer extends StatelessWidget {
   // Properties:
+  final bool showChart;
+  final Function onSwitchShowChart;
 
   // Constructor:
   ExpensyDrawer({
     Key key,
+    this.showChart,
+    this.onSwitchShowChart,
   }) : super(key: key);
 
   @override
@@ -305,6 +310,38 @@ class ExpensyDrawer extends StatelessWidget {
                 isExpanded: expansionPanelListStatus[2]['isOpened'],
               ),
             ],
+          ),
+
+          Padding(
+            padding: const EdgeInsets.only(left: 16, top: 16),
+            child: SizedBox(
+              // width: 30,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Show chart',
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  FlutterSwitch(
+                    showOnOff: true,
+                    activeColor: primaryColor,
+                    activeTextColor: Colors.black,
+                    inactiveTextColor: Colors.blue[50],
+                    width: 55.0,
+                    height: 25.0,
+                    valueFontSize: 12.0,
+                    toggleSize: 18.0,
+                    value: showChart,
+                    onToggle: onSwitchShowChart,
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),

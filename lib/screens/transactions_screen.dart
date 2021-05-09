@@ -7,6 +7,7 @@ import 'package:flutter/gestures.dart'; // Allows: PointerExitEvent
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:native_device_orientation/native_device_orientation.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 
 // Screens:
 import 'package:expensy_flutter/screens/new_transaction_screen.dart';
@@ -45,6 +46,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   DBHelper dbHelper;
   TransactionsData transactionsData = TransactionsData();
   int touchedIndex;
+  bool _showChart = false;
 
   void _onAddTransactionHandler(String title, double amount, DateTime executionDate) {
     setState(() {
@@ -71,6 +73,12 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       } else {
         touchedIndex = -1;
       }
+    });
+  }
+
+  void onSwitchShowChart(bool choice) {
+    setState(() {
+      _showChart = choice;
     });
   }
 
@@ -119,7 +127,10 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
         }
       },
 
-      drawer: ExpensyDrawer(),
+      drawer: ExpensyDrawer(
+        showChart: _showChart,
+        onSwitchShowChart: onSwitchShowChart,
+      ),
 
       body: NativeDeviceOrientationReader(
         builder: (context) {
@@ -136,28 +147,30 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                // Transactions Bar Chart
-                Expanded(
-                  flex: isLandscape ? 4 : 3,
-                  // flex: 4,
-                  child: TransactionsChart(
-                    touchCallbackHandler: _touchCallbackHandler,
-                    touchedIndex: touchedIndex,
-                    groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
-                    biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
-                    orientation: orientation,
+                if (_showChart) ...[
+                  // Transactions Bar Chart
+                  Expanded(
+                    flex: isLandscape ? 4 : 3,
+                    // flex: 4,
+                    child: TransactionsChart(
+                      touchCallbackHandler: _touchCallbackHandler,
+                      touchedIndex: touchedIndex,
+                      groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
+                      biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
+                      orientation: orientation,
+                    ),
                   ),
-                ),
 
-                // Home Made Transactions Bar Chart
-                // Expanded(
-                //   flex: isLandscape ? 4 : 3,
-                //   child: TransactionsChartHomeMade(
-                //     groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
-                //     biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
-                //     orientation: orientation,
-                //   ),
-                // ),
+                  // Home Made Transactions Bar Chart
+                  // Expanded(
+                  //   flex: isLandscape ? 4 : 3,
+                  //   child: TransactionsChartHomeMade(
+                  //     groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
+                  //     biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
+                  //     orientation: orientation,
+                  //   ),
+                  // ),
+                ],
 
                 // Transaction List:
                 Expanded(
