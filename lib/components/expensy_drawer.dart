@@ -4,10 +4,8 @@ import 'package:expensy_flutter/_inner_packages.dart';
 import 'package:expensy_flutter/_external_packages.dart';
 
 // Screens:
-import 'package:expensy_flutter/screens/new_transaction_screen.dart';
 
 // Models:
-import 'package:expensy_flutter/models/transactions_data.dart';
 import 'package:expensy_flutter/models/app_data.dart';
 
 // Components:

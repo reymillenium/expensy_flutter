@@ -5,7 +5,6 @@ import 'package:expensy_flutter/_external_packages.dart';
 // Screens:
 
 // Models:
-import 'package:expensy_flutter/models/transactions_data.dart';
 import 'package:expensy_flutter/models/app_data.dart';
 
 // Components:
