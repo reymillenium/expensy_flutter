@@ -151,7 +151,9 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       body: NativeDeviceOrientationReader(
         builder: (context) {
           final orientation = NativeDeviceOrientationReader.orientation(context);
-          // print('Received new orientation: $orientation');
+          final orientation2 = MediaQuery.of(context).orientation;
+          print('Received new orientation: $orientation');
+          print('Received new orientation2: $orientation2');
           bool safeAreaLeft = orientation == NativeDeviceOrientation.landscapeLeft ? true : false;
           bool safeAreaRight = orientation == NativeDeviceOrientation.landscapeRight ? true : false;
           bool isLandscape = DeviceHelper.isLandscape(orientation);

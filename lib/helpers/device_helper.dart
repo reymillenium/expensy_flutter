@@ -39,6 +39,11 @@ class DeviceHelper {
   // *                  * * *  D I S P L A Y  P O S I T I O N  * * *                   *
   // ***********************************************************************************
 
+  // Returns if either the device is in Landscape position or not (the usual way).
+  static bool isSimpleLandscape(BuildContext context) {
+    return MediaQuery.of(context).orientation == Orientation.landscape;
+  }
+
   // Returns if either the device is in Landscape position or not.
   static bool isLandscape(NativeDeviceOrientation orientation) {
     return (orientation == NativeDeviceOrientation.landscapeRight || orientation == NativeDeviceOrientation.landscapeLeft);
@@ -52,6 +57,11 @@ class DeviceHelper {
   // Returns if the device is in LandscapeRight position or not.
   static bool isLandscapeRight(NativeDeviceOrientation orientation) {
     return (orientation == NativeDeviceOrientation.landscapeRight);
+  }
+
+  // Returns if either the device is in Portrait position or not (the usual way).
+  static bool isSimplePortrait(BuildContext context) {
+    return MediaQuery.of(context).orientation == Orientation.portrait;
   }
 
   // Returns if either the device is in Portrait position or not.
