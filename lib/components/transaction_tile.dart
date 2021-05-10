@@ -179,33 +179,39 @@ class TransactionTile extends StatelessWidget {
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              IconButton(
-                icon: Icon(
-                  Icons.delete,
-                  color: Colors.black,
+              Tooltip(
+                message: 'Delete',
+                child: IconButton(
+                  icon: Icon(
+                    Icons.delete,
+                    color: Colors.black,
+                  ),
+                  onPressed: onDeleteTransactionHandler,
                 ),
-                onPressed: onDeleteTransactionHandler,
               ),
-              IconButton(
-                icon: Icon(
-                  Icons.edit,
-                  color: Colors.black,
+              Tooltip(
+                message: 'Edit',
+                child: IconButton(
+                  icon: Icon(
+                    Icons.edit,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    showModalBottomSheet(
+                      backgroundColor: Colors.transparent,
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (context) => EditTransactionScreen(
+                        id: id,
+                        index: index,
+                        title: transaction.title,
+                        amount: transaction.amount,
+                        executionDate: transaction.executionDate,
+                        onUpdateTransactionHandler: onUpdateTransactionHandler,
+                      ),
+                    );
+                  },
                 ),
-                onPressed: () {
-                  showModalBottomSheet(
-                    backgroundColor: Colors.transparent,
-                    isScrollControlled: true,
-                    context: context,
-                    builder: (context) => EditTransactionScreen(
-                      id: id,
-                      index: index,
-                      title: transaction.title,
-                      amount: transaction.amount,
-                      executionDate: transaction.executionDate,
-                      onUpdateTransactionHandler: onUpdateTransactionHandler,
-                    ),
-                  );
-                },
               ),
             ],
           ),

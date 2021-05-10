@@ -247,7 +247,7 @@ class ExpensyDrawer extends StatelessWidget {
                 isExpanded: expansionPanelListStatus[2]['isOpened'],
               ),
 
-              // Expansion Panel # 4: Type of Weekly Charts
+              // Expansion Panel # 4: Type of Weekly Chart
               ExpansionPanel(
                 canTapOnHeader: true,
                 headerBuilder: (BuildContext context, bool isExpanded) {
