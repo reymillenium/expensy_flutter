@@ -17,8 +17,10 @@ import 'package:expensy_flutter/components/_components.dart';
 class ExpensyDrawer extends StatelessWidget {
   // Properties:
   final bool showChart;
+
   // final bool showPortraitOnly;
   final Function onSwitchShowChart;
+
   // final Function onSwitchPortraitOnLy;
 
   // Constructor:
@@ -33,21 +35,28 @@ class ExpensyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppData appData = Provider.of<AppData>(context, listen: true);
+
     List<Map> availableThemeColors = appData.availableThemeColors;
     Map currentThemeColors = appData.currentThemeColors;
+    Function setCurrentThemeColorHandler = (themeColorIndex) => appData.setCurrentThemeColor(themeColorIndex);
+
     List<Map> availableThemeFonts = appData.availableThemeFonts;
     Map currentThemeFont = appData.currentThemeFont;
+    Function setCurrentFontFamilyHandler = (themeFontIndex) => appData.setCurrentFontFamily(themeFontIndex);
+
     List<Map> availableCurrencies = appData.availableCurrencies;
     Map currentCurrency = appData.currentCurrency;
-
-    Color primaryColor = Theme.of(context).primaryColor;
-    Color accentColor = Theme.of(context).accentColor;
-    Function setCurrentThemeColorHandler = (themeColorIndex) => appData.setCurrentThemeColor(themeColorIndex);
-    Function setCurrentFontFamilyHandler = (themeFontIndex) => appData.setCurrentFontFamily(themeFontIndex);
     Function setCurrentCurrencyHandler = (currencyIndex) => appData.setCurrentCurrency(currencyIndex);
+
+    List<Map> availableWeeklyCharts = appData.availableWeeklyCharts;
+    Map currentWeeklyChart = appData.currentWeeklyChart;
+    Function setCurrentWeeklyChart = (weeklyChartIndex) => appData.setCurrentWeeklyChart(weeklyChartIndex);
 
     List<Map> expansionPanelListStatus = appData.expansionPanelListStatus;
     Function openOnePanelAndCloseTheRest = appData.openOnePanelAndCloseTheRest;
+
+    Color primaryColor = Theme.of(context).primaryColor;
+    Color accentColor = Theme.of(context).accentColor;
 
     return Drawer(
       // Add a ListView to the drawer. This ensures the user can scroll
@@ -236,6 +245,55 @@ class ExpensyDrawer extends StatelessWidget {
                   }).toList(),
                 ),
                 isExpanded: expansionPanelListStatus[2]['isOpened'],
+              ),
+
+              // Expansion Panel # 4: Type of Weekly Charts
+              ExpansionPanel(
+                canTapOnHeader: true,
+                headerBuilder: (BuildContext context, bool isExpanded) {
+                  return ListTile(
+                    leading: FaIcon(
+                      FontAwesomeIcons.solidChartBar,
+                      color: Colors.black,
+                    ),
+                    title: Text(
+                      'Chart:',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  );
+                },
+                body: Column(
+                  children: availableWeeklyCharts.asMap().entries.map((entry) {
+                    int index = entry.key;
+                    Map value = entry.value;
+                    // Each Currency List Tile:
+                    return ListTile(
+                      leading: FaIcon(
+                        value['icon'],
+                        color: Colors.black,
+                      ),
+                      title: Text(
+                        value['name'],
+                        style: TextStyle(
+                          fontFamily: currentThemeFont['fontFamily'],
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onTap: () {
+                        setCurrentWeeklyChart(index);
+                        // closeAllThePanels();
+                        // Navigator.pop(context);
+                      },
+                      tileColor: _getActiveTileColor(currentWeeklyChart['code'], value['code']),
+                    );
+                  }).toList(),
+                ),
+                isExpanded: expansionPanelListStatus[3]['isOpened'],
               ),
             ],
           ),

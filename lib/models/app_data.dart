@@ -153,6 +153,21 @@ class AppData extends ChangeNotifier {
     {'isOpened': false},
     {'isOpened': false},
     {'isOpened': false},
+    {'isOpened': false},
+  ];
+
+  int _weeklyChartIndex = 0;
+  List<Map> _availableWeeklyCharts = [
+    {
+      'name': 'Weekly Home made',
+      'code': 'weekly_home_made',
+      'icon': FontAwesomeIcons.chartBar,
+    },
+    {
+      'name': 'Weekly FL Chart',
+      'code': 'weekly_fl_chart',
+      'icon': FontAwesomeIcons.chartArea,
+    },
   ];
 
   // Constructor:
@@ -215,6 +230,22 @@ class AppData extends ChangeNotifier {
     return _expansionPanelListStatus;
   }
 
+  get weeklyChartIndex {
+    return _weeklyChartIndex;
+  }
+
+  UnmodifiableListView<Map> get availableWeeklyCharts {
+    return UnmodifiableListView(_availableWeeklyCharts);
+  }
+
+  get currentWeeklyChart {
+    return _availableWeeklyCharts[_weeklyChartIndex];
+  }
+
+  get isWeeklyFlChart {
+    return _availableWeeklyCharts[_weeklyChartIndex]['code'] == 'weekly_fl_chart';
+  }
+
   // Public methods:
   void setCurrentThemeColor(int themeColorIndex) {
     _themeColorIndex = themeColorIndex;
@@ -248,6 +279,11 @@ class AppData extends ChangeNotifier {
 
   void setCurrentCurrency(int currencyIndex) {
     _currencyIndex = currencyIndex;
+    notifyListeners();
+  }
+
+  void setCurrentWeeklyChart(int weeklyChartIndex) {
+    _weeklyChartIndex = weeklyChartIndex;
     notifyListeners();
   }
 

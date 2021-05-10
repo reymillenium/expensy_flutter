@@ -109,6 +109,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   Widget build(BuildContext context) {
     AppData appData = Provider.of<AppData>(context, listen: true);
     Function closeAllThePanels = appData.closeAllThePanels; // Drawer related:
+    Map currentWeeklyChart = appData.currentWeeklyChart;
+    bool isWeeklyFlChart = appData.isWeeklyFlChart;
 
     ExpensyAppBar appBar = ExpensyAppBar(
       title: widget.title,
@@ -162,28 +164,30 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 if (_showChart) ...[
-                  // Transactions Bar Chart
-                  Expanded(
-                    flex: isLandscape ? 4 : 3,
-                    // flex: 4,
-                    child: TransactionsChart(
-                      touchCallbackHandler: _touchCallbackHandler,
-                      touchedIndex: touchedIndex,
-                      groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
-                      biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
-                      orientation: orientation,
+                  if (isWeeklyFlChart) ...[
+                    // Transactions Bar Chart
+                    Expanded(
+                      flex: isLandscape ? 4 : 3,
+                      // flex: 4,
+                      child: TransactionsChart(
+                        touchCallbackHandler: _touchCallbackHandler,
+                        touchedIndex: touchedIndex,
+                        groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
+                        biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
+                        orientation: orientation,
+                      ),
                     ),
-                  ),
-
-                  // Home Made Transactions Bar Chart
-                  // Expanded(
-                  //   flex: isLandscape ? 4 : 3,
-                  //   child: TransactionsChartHomeMade(
-                  //     groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
-                  //     biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
-                  //     orientation: orientation,
-                  //   ),
-                  // ),
+                  ] else ...[
+                    // Home Made Transactions Bar Chart
+                    Expanded(
+                      flex: isLandscape ? 4 : 3,
+                      child: TransactionsChartHomeMade(
+                        groupedAmountLastWeek: transactionsData.groupedAmountLastWeek(),
+                        biggestAmountLastWeek: transactionsData.biggestAmountLastWeek(),
+                        orientation: orientation,
+                      ),
+                    ),
+                  ],
                 ],
 
                 // Transaction List:
