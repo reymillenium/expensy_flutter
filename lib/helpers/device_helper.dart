@@ -1,12 +1,6 @@
 // Packages:
-import 'package:flutter/material.dart';
-import 'dart:math'; // Allows to use: random
-import 'dart:convert'; // Allows to use: base64UrlEncode
-import 'package:intl/intl.dart'; // Allows to use: DateFormat
-import 'package:uuid/uuid.dart'; // Allows to use: Uuid
-import 'package:rflutter_alert/rflutter_alert.dart'; // Allows to use: Alert
-import 'package:faker/faker.dart'; // Allows to use: fake data generation (Fake)
-import 'package:native_device_orientation/native_device_orientation.dart';
+import 'package:expensy_flutter/_inner_packages.dart';
+import 'package:expensy_flutter/_external_packages.dart';
 
 // Helpers:
 

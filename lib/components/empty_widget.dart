@@ -1,6 +1,6 @@
 // Packages:
-import 'package:flutter/material.dart';
-import 'package:empty_widget/empty_widget.dart';
+import 'package:expensy_flutter/_inner_packages.dart';
+import 'package:expensy_flutter/_external_packages.dart';
 
 // Screens:
 

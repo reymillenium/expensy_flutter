@@ -1,9 +1,7 @@
 // Packages:
-import 'dart:async';
-import 'dart:io' as io;
-import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:path_provider/path_provider.dart';
+
+import 'package:expensy_flutter/_inner_packages.dart';
+import 'package:expensy_flutter/_external_packages.dart';
 
 // Models:
 import 'package:expensy_flutter/models/transaction.dart';
@@ -34,7 +32,7 @@ class DBHelper {
   }
 
   initDb() async {
-    io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, DB_NAME);
     // deleteDatabase(path);
     var db = await openDatabase(path, version: 1, onCreate: _onCreate);

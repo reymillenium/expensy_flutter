@@ -1,14 +1,6 @@
 // Packages:
-import 'package:flutter/material.dart';
-import 'dart:math'; // Allows to use: random
-import 'dart:convert'; // Allows to use: base64UrlEncode
-import 'package:intl/intl.dart'; // Allows to use: DateFormat
-import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
-import 'package:fl_chart/fl_chart.dart'; // Allows to use the Bar Charts
-import 'package:flutter/gestures.dart'; // Allows: PointerExitEvent
-import 'package:tinycolor/tinycolor.dart'; // Allows to light a color and many other things
-import 'package:provider/provider.dart';
-import 'package:native_device_orientation/native_device_orientation.dart';
+import 'package:expensy_flutter/_inner_packages.dart';
+import 'package:expensy_flutter/_external_packages.dart';
 
 // Screens:
 import 'package:expensy_flutter/screens/new_transaction_screen.dart';

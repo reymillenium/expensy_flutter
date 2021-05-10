@@ -1,9 +1,6 @@
 // Packages:
-import 'package:flutter/material.dart';
-import 'dart:math'; // Allows to use: random
-import 'dart:convert'; // Allows to use: base64UrlEncode
-import 'package:intl/intl.dart'; // Allows to use: DateFormat
-import 'package:provider/provider.dart';
+import 'package:expensy_flutter/_inner_packages.dart';
+import 'package:expensy_flutter/_external_packages.dart';
 
 // Screens:
 import 'package:expensy_flutter/screens/edit_transaction_screen.dart';

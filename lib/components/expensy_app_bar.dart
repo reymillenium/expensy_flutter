@@ -1,12 +1,8 @@
 // Packages:
-import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart'; // Allows to use the Bar Charts
-import 'package:flutter/gestures.dart'; // Allows: PointerExitEvent
-import 'package:provider/provider.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:expensy_flutter/_inner_packages.dart';
+import 'package:expensy_flutter/_external_packages.dart';
 
 // Screens:
-import 'package:expensy_flutter/screens/new_transaction_screen.dart';
 
 // Models:
 import 'package:expensy_flutter/models/transactions_data.dart';
@@ -17,7 +13,6 @@ import 'package:expensy_flutter/models/app_data.dart';
 // Helpers:
 
 // Utilities:
-import 'package:tinycolor/tinycolor.dart';
 import 'package:expensy_flutter/utilities/constants.dart';
 
 class ExpensyAppBar extends StatelessWidget with PreferredSizeWidget {

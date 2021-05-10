@@ -1,14 +1,7 @@
 // Packages:
-import 'package:expensy_flutter/components/expensy_app_bar.dart';
-import 'package:expensy_flutter/models/transaction.dart';
-import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart'; // Allows to use the Bar Charts
-import 'package:flutter/gestures.dart'; // Allows: PointerExitEvent
-import 'package:provider/provider.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:native_device_orientation/native_device_orientation.dart';
-import 'package:flutter_switch/flutter_switch.dart';
-import 'package:flutter/services.dart';
+
+import 'package:expensy_flutter/_inner_packages.dart';
+import 'package:expensy_flutter/_external_packages.dart';
 
 // Screens:
 import 'package:expensy_flutter/screens/new_transaction_screen.dart';
@@ -16,6 +9,7 @@ import 'package:expensy_flutter/screens/new_transaction_screen.dart';
 // Models:
 import 'package:expensy_flutter/models/transactions_data.dart';
 import 'package:expensy_flutter/models/app_data.dart';
+import 'package:expensy_flutter/models/transaction.dart';
 
 // Components:
 import 'package:expensy_flutter/components/_components.dart';

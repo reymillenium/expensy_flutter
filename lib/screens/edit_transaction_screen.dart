@@ -1,11 +1,6 @@
 // Packages:
-import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
-import 'package:flutter/material.dart';
-import 'dart:math'; // Allows to use: random
-import 'dart:convert'; // Allows to use: base64UrlEncode
-import 'package:intl/intl.dart'; // Allows to use: DateFormat
-import 'package:date_time_picker/date_time_picker.dart';
-import 'package:provider/provider.dart';
+import 'package:expensy_flutter/_inner_packages.dart';
+import 'package:expensy_flutter/_external_packages.dart';
 
 // Screens:
 

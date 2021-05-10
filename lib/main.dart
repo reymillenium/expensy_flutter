@@ -1,9 +1,6 @@
 // Packages:
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:splashscreen/splashscreen.dart';
-import 'package:tinycolor/tinycolor.dart'; // Allows to light a color and many other things
-import 'package:flutter/services.dart';
+import 'package:expensy_flutter/_inner_packages.dart';
+import 'package:expensy_flutter/_external_packages.dart';
 
 // Screens:
 import 'package:expensy_flutter/screens/transactions_screen.dart';

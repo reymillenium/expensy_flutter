@@ -1,8 +1,7 @@
 // Packages:
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'dart:collection'; // Allows to use UnmodifiableListView
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'package:expensy_flutter/_inner_packages.dart';
+import 'package:expensy_flutter/_external_packages.dart';
 
 // Screens:
 
