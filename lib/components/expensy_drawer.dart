@@ -301,8 +301,8 @@ class ExpensyDrawer extends StatelessWidget {
           // Switchers:
           ExpensyDrawerSwitch(
             switchLabel: 'Show chart',
-            primaryColor: primaryColor,
-            showChart: showChart,
+            activeColor: accentColor,
+            switchValue: showChart,
             onToggle: onSwitchShowChart,
           ),
           // ExpensyDrawerSwitch(

@@ -16,14 +16,14 @@ class ExpensyDrawerSwitch extends StatelessWidget {
   const ExpensyDrawerSwitch({
     Key key,
     @required this.switchLabel,
-    @required this.primaryColor,
-    @required this.showChart,
+    @required this.activeColor,
+    @required this.switchValue,
     @required this.onToggle,
   }) : super(key: key);
 
   final String switchLabel;
-  final Color primaryColor;
-  final bool showChart;
+  final Color activeColor;
+  final bool switchValue;
   final Function onToggle;
 
   @override
@@ -45,14 +45,14 @@ class ExpensyDrawerSwitch extends StatelessWidget {
             ),
             FlutterSwitch(
               showOnOff: true,
-              activeColor: primaryColor,
+              activeColor: activeColor,
               activeTextColor: Colors.black,
               inactiveTextColor: Colors.blue[50],
               width: 55.0,
               height: 25.0,
               valueFontSize: 12.0,
               toggleSize: 18.0,
-              value: showChart,
+              value: switchValue,
               onToggle: onToggle,
             ),
           ],
