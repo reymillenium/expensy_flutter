@@ -13,7 +13,6 @@ import 'package:expensy_flutter/components/_components.dart';
 import 'package:expensy_flutter/helpers/_helpers.dart';
 
 // Utilities:
-import 'package:expensy_flutter/utilities/constants.dart';
 
 class TransactionsChartHomeMade extends StatelessWidget {
   // Properties:

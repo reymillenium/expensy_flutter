@@ -1,12 +1,11 @@
 // Packages:
-
 import 'package:expensy_flutter/_inner_packages.dart';
 import 'package:expensy_flutter/_external_packages.dart';
 
 // Screens:
 
 // Models:
-import 'package:expensy_flutter/models/app_data.dart';
+import 'package:expensy_flutter/models/_models.dart';
 
 // Components:
 import 'package:expensy_flutter/components/_components.dart';

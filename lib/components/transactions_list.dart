@@ -4,7 +4,7 @@ import 'package:expensy_flutter/_inner_packages.dart';
 // Screens:
 
 // Models:
-import 'package:expensy_flutter/models/transaction.dart';
+import 'package:expensy_flutter/models/_models.dart';
 
 // Components:
 import 'package:expensy_flutter/components/_components.dart';

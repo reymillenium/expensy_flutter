@@ -1,8 +1,6 @@
 // Packages:
 import 'package:expensy_flutter/_inner_packages.dart';
 
-// Screens:
-
 // Models:
 
 // Components:
