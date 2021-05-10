@@ -66,7 +66,8 @@ class DeviceHelper {
 
   // Returns if either the device is in Portrait position or not.
   static bool isPortrait(NativeDeviceOrientation orientation) {
-    return (orientation == NativeDeviceOrientation.portraitDown || orientation == NativeDeviceOrientation.portraitUp);
+    // return (orientation == NativeDeviceOrientation.portraitDown || orientation == NativeDeviceOrientation.portraitUp);
+    return [NativeDeviceOrientation.portraitDown, NativeDeviceOrientation.portraitUp].contains(orientation);
   }
 
   // Returns if the device is in PortraitUp position or not.
@@ -77,5 +78,49 @@ class DeviceHelper {
   // Returns if the device is in PortraitDown position or not.
   static bool isPortraitDown(NativeDeviceOrientation orientation) {
     return (orientation == NativeDeviceOrientation.portraitDown);
+  }
+
+// ***********************************************************************************
+// *                      * * *  P L A T F O R M  * * *                              *
+// ***********************************************************************************
+
+  // Returns if the device runs on IOS or not:
+  static bool deviceIsIOS(BuildContext context) {
+    return Theme.of(context).platform == TargetPlatform.iOS;
+  }
+
+  // Returns if the device runs on MacOS or not:
+  static bool deviceIsMacOS(BuildContext context) {
+    return Theme.of(context).platform == TargetPlatform.macOS;
+  }
+
+  // Returns if the device runs on MacOS or not:
+  static bool deviceIsAppleMade(BuildContext context) {
+    return [TargetPlatform.iOS, TargetPlatform.macOS].contains(Theme.of(context).platform);
+  }
+
+  // Returns if the device runs on Android or not:
+  static bool deviceIsAndroid(BuildContext context) {
+    return Theme.of(context).platform == TargetPlatform.android;
+  }
+
+  // Returns if the device runs on Windows or not:
+  static bool deviceIsWindows(BuildContext context) {
+    return Theme.of(context).platform == TargetPlatform.windows;
+  }
+
+  // Returns if the device runs on Linux or not:
+  static bool deviceIsLinux(BuildContext context) {
+    return Theme.of(context).platform == TargetPlatform.linux;
+  }
+
+  // Returns if the device runs on Fuchsia or not:
+  static bool deviceIsFuchsia(BuildContext context) {
+    return Theme.of(context).platform == TargetPlatform.fuchsia;
+  }
+
+  // Returns if the device runs on Fuchsia or not:
+  static bool deviceIsAnyOf(BuildContext context, List<TargetPlatform> platformsList) {
+    return platformsList.contains(Theme.of(context).platform);
   }
 }

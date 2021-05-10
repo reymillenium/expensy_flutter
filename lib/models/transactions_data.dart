@@ -205,7 +205,7 @@ class TransactionsData {
   }
 
   // Public methods:
-  void addTransaction(String title, double amount, DateTime executionDate) async {
+  Future<void> addTransaction(String title, double amount, DateTime executionDate) async {
     DateTime now = DateTime.now();
     var uuid = Uuid();
     MonetaryTransaction newTransaction = MonetaryTransaction(
@@ -222,7 +222,7 @@ class TransactionsData {
     refreshTransactionList();
   }
 
-  void updateTransaction(int id, String title, double amount, DateTime executionDate) async {
+  Future<void> updateTransaction(int id, String title, double amount, DateTime executionDate) async {
     DateTime now = DateTime.now();
     // MonetaryTransaction updatingTransaction = _transactions[index];
     MonetaryTransaction updatingTransaction = _transactions.firstWhere((transaction) => id == transaction.id);
@@ -236,7 +236,7 @@ class TransactionsData {
     refreshTransactionList();
   }
 
-  void deleteTransactionWithConfirm(int id, BuildContext context) {
+  Future<void> deleteTransactionWithConfirm(int id, BuildContext context) {
     // createAlert(id: id, context: context).show().then((value) {
     //   (context as Element).reassemble();
     // });
