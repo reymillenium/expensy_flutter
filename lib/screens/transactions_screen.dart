@@ -94,10 +94,10 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
   void refreshData() {
     dbHelper.getMonetaryTransactions().then((transactions) {
-      for (MonetaryTransaction temp in transactions) {
-        // if (temp.type == "student") data.add(temp);
-        // transactionsData.addOneSingleTransaction(temp);
-      }
+      // for (MonetaryTransaction temp in transactions) {
+      // if (temp.type == "student") data.add(temp);
+      // transactionsData.addOneSingleTransaction(temp);
+      // }
       // since you have already added the results to data
       // setState can have an empty function body
       setState(() {});
@@ -109,7 +109,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   Widget build(BuildContext context) {
     AppData appData = Provider.of<AppData>(context, listen: true);
     Function closeAllThePanels = appData.closeAllThePanels; // Drawer related:
-    Map currentWeeklyChart = appData.currentWeeklyChart;
+    // Map currentWeeklyChart = appData.currentWeeklyChart;
     bool isWeeklyFlChart = appData.isWeeklyFlChart;
     bool deviceIsIOS = DeviceHelper.deviceIsIOS(context);
 
@@ -118,7 +118,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       showModalNewTransaction: () => _showModalNewTransaction(context),
     );
 
-    double appBarHeight = appBar.preferredSize.height;
+    // double appBarHeight = appBar.preferredSize.height;
     // print('totalVerticalHeight: ${DeviceHelper.totalVerticalHeight(context: context)}');
     // print('statusBarTopPadding: ${DeviceHelper.statusBarTopPadding(context: context)}');
     // print('appBarHeight: $appBarHeight');
@@ -152,13 +152,13 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       body: NativeDeviceOrientationReader(
         builder: (context) {
           final orientation = NativeDeviceOrientationReader.orientation(context);
-          final orientation2 = MediaQuery.of(context).orientation;
+          // final orientation2 = MediaQuery.of(context).orientation;
           // print('Received new orientation: $orientation');
           // print('Received new orientation2: $orientation2');
           bool safeAreaLeft = orientation == NativeDeviceOrientation.landscapeLeft ? true : false;
           bool safeAreaRight = orientation == NativeDeviceOrientation.landscapeRight ? true : false;
           bool isLandscape = DeviceHelper.isLandscape(orientation);
-          bool isPortrait = DeviceHelper.isPortrait(orientation);
+          // bool isPortrait = DeviceHelper.isPortrait(orientation);
           return SafeArea(
             left: safeAreaLeft,
             right: safeAreaRight,
