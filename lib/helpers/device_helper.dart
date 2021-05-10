@@ -119,7 +119,7 @@ class DeviceHelper {
     return Theme.of(context).platform == TargetPlatform.fuchsia;
   }
 
-  // Returns if the device runs on Fuchsia or not:
+  // Returns if the device's OS is either included in a given list of TargetPlatform objects (OS list) or not:
   static bool deviceIsAnyOf(BuildContext context, List<TargetPlatform> platformsList) {
     return platformsList.contains(Theme.of(context).platform);
   }

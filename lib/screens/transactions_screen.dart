@@ -111,6 +111,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     Function closeAllThePanels = appData.closeAllThePanels; // Drawer related:
     Map currentWeeklyChart = appData.currentWeeklyChart;
     bool isWeeklyFlChart = appData.isWeeklyFlChart;
+    bool deviceIsIOS = DeviceHelper.deviceIsIOS(context);
 
     ExpensyAppBar appBar = ExpensyAppBar(
       title: widget.title,
@@ -222,12 +223,15 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       ),
 
       // FAB
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'Add Transaction',
-        child: Icon(Icons.add),
-        onPressed: () => _showModalNewTransaction(context),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButton: deviceIsIOS
+          ? null
+          : FloatingActionButton(
+              tooltip: 'Add Transaction',
+              child: Icon(Icons.add),
+              onPressed: () => _showModalNewTransaction(context),
+            ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButtonLocation: deviceIsIOS ? null : FloatingActionButtonLocation.endDocked,
     );
   }
 
