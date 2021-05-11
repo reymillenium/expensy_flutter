@@ -11,6 +11,7 @@ import 'package:expensy_flutter/models/_models.dart';
 
 // Helpers:
 import 'package:expensy_flutter/helpers/_helpers.dart';
+import 'package:flutter/cupertino.dart';
 
 // Utilities:
 
@@ -166,26 +167,45 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                 // Add button:
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 30.0),
-                  child: Material(
-                    color: _hasValidData() ? primaryColor : Colors.grey,
-                    // borderRadius: BorderRadius.circular(12.0),
-                    elevation: 5,
-                    child: MaterialButton(
-                      disabledColor: Colors.grey,
-                      onPressed: !_hasValidData() ? null : () => _submitData(context),
-                      // minWidth: 300.0,
-                      minWidth: double.infinity,
-                      height: 42.0,
-                      child: Text(
-                        'Add',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
-                          color: Colors.white,
+                  child: DeviceHelper.deviceIsIOS(context)
+                      ? Container(
+                          color: Colors.transparent,
+                          height: 48.0,
+                          width: double.infinity,
+                          child: CupertinoButton(
+                            color: primaryColor,
+                            disabledColor: Colors.grey,
+                            onPressed: !_hasValidData() ? null : () => _submitData(context),
+                            child: Text(
+                              'Add',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Material(
+                          color: _hasValidData() ? primaryColor : Colors.grey,
+                          // borderRadius: BorderRadius.circular(12.0),
+                          elevation: 5,
+                          child: MaterialButton(
+                            disabledColor: Colors.grey,
+                            onPressed: !_hasValidData() ? null : () => _submitData(context),
+                            // minWidth: 300.0,
+                            minWidth: double.infinity,
+                            height: 42.0,
+                            child: Text(
+                              'Add',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
                 ),
               ],
             ),
