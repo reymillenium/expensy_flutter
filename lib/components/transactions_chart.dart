@@ -42,7 +42,6 @@ class TransactionsChart extends StatelessWidget {
     // List<Map> availableThemeFonts = appData.availableThemeFonts;
     Map currentThemeFont = appData.currentThemeFont;
 
-    // print(orientation);
     final Color primaryColor = Theme.of(context).primaryColor;
     final Color accentColor = Theme.of(context).accentColor;
     bool isLandscape = DeviceHelper.isLandscape(orientation);
