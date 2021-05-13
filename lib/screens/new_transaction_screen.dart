@@ -17,10 +17,10 @@ import 'package:flutter/cupertino.dart';
 
 class NewTransactionScreen extends StatefulWidget {
   // Properties:
-  final Function onAddTransactionHandler;
+  // final Function onAddTransactionHandler;
 
   // Constructor:
-  NewTransactionScreen({this.onAddTransactionHandler});
+  // NewTransactionScreen({this.onAddTransactionHandler});
 
   @override
   _NewTransactionScreenState createState() => _NewTransactionScreenState();
@@ -31,23 +31,18 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
   String _title = '';
   double _amount = 0;
   DateTime _executionDate = DateTime.now();
-  Function _onAddTransactionHandler;
 
   // Run time constants:
   final _oneHundredYearsAgo = DateHelper.timeAgo(years: 100);
   final _oneHundredYearsFromNow = DateHelper.timeFromNow(years: 100);
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _onAddTransactionHandler = widget.onAddTransactionHandler;
-  }
-
-  @override
   Widget build(BuildContext context) {
     AppData appData = Provider.of<AppData>(context, listen: true);
     Map currentCurrency = appData.currentCurrency;
+
+    TransactionsData transactionsData = Provider.of<TransactionsData>(context, listen: true);
+    Function onAddTransactionHandler = (title, amount, executionDate) => transactionsData.addTransaction(title, amount, executionDate);
 
     Color primaryColor = Theme.of(context).primaryColor;
     Color accentColor = Theme.of(context).accentColor;
@@ -110,7 +105,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                       _title = newText;
                     });
                   },
-                  onSubmitted: !_hasValidData() ? null : (_) => () => _submitData(context),
+                  onSubmitted: !_hasValidData() ? null : (_) => () => _submitData(context, onAddTransactionHandler),
                 ),
 
                 // Amount Input
@@ -130,7 +125,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                       _amount = StringHelper.extractDoubleOrZero(newAmountText);
                     });
                   },
-                  onSubmitted: !_hasValidData() ? null : (_) => () => _submitData(context),
+                  onSubmitted: !_hasValidData() ? null : (_) => () => _submitData(context, onAddTransactionHandler),
                 ),
 
                 // DateTime picker
@@ -175,7 +170,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                           child: CupertinoButton(
                             color: primaryColor,
                             disabledColor: Colors.grey,
-                            onPressed: !_hasValidData() ? null : () => _submitData(context),
+                            onPressed: !_hasValidData() ? null : () => _submitData(context, onAddTransactionHandler),
                             child: Text(
                               'Add',
                               style: TextStyle(
@@ -192,7 +187,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                           elevation: 5,
                           child: MaterialButton(
                             disabledColor: Colors.grey,
-                            onPressed: !_hasValidData() ? null : () => _submitData(context),
+                            onPressed: !_hasValidData() ? null : () => _submitData(context, onAddTransactionHandler),
                             // minWidth: 300.0,
                             minWidth: double.infinity,
                             height: 42.0,
@@ -223,9 +218,9 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
     return result;
   }
 
-  void _submitData(BuildContext context) {
+  void _submitData(BuildContext context, Function onAddTransactionHandler) {
     if (_title.isNotEmpty && _amount != 0) {
-      _onAddTransactionHandler(_title, _amount, _executionDate);
+      onAddTransactionHandler(_title, _amount, _executionDate);
     }
     Navigator.pop(context);
   }

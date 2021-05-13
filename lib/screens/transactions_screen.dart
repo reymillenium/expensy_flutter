@@ -73,13 +73,12 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     ]);
 
     TransactionsData transactionsData = Provider.of<TransactionsData>(context, listen: true);
-    Function _onAddTransactionHandler = (title, amount, executionDate) => transactionsData.addTransaction(title, amount, executionDate);
     Function _onUpdateTransactionHandler = (id, title, amount, executionDate) => transactionsData.updateTransaction(id, title, amount, executionDate);
     Function _onDeleteTransactionHandler = (id, context) => transactionsData.deleteTransactionWithConfirm(id, context);
 
     ExpensyAppBar appBar = ExpensyAppBar(
       title: widget.title,
-      showModalNewTransaction: () => _showModalNewTransaction(context, _onAddTransactionHandler),
+      showModalNewTransaction: () => _showModalNewTransaction(context),
     );
 
     // double appBarHeight = appBar.preferredSize.height;
@@ -148,7 +147,6 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                 Expanded(
                   flex: 5,
                   child: TransactionsList(
-                    transactions: transactionsData.transactions,
                     onUpdateTransactionHandler: _onUpdateTransactionHandler,
                     onDeleteTransactionHandler: _onDeleteTransactionHandler,
                   ),
@@ -179,7 +177,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
           : FloatingActionButton(
               tooltip: 'Add Transaction',
               child: Icon(Icons.add),
-              onPressed: () => _showModalNewTransaction(context, _onAddTransactionHandler),
+              onPressed: () => _showModalNewTransaction(context),
             ),
       // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButtonLocation: deviceIsIOS ? null : FloatingActionButtonLocation.endDocked,
@@ -187,15 +185,13 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   }
 
   // It shows the AddTransactionScreen widget as a modal:
-  void _showModalNewTransaction(BuildContext context, Function _onAddTransactionHandler) {
+  void _showModalNewTransaction(BuildContext context) {
     SoundHelper().playSmallButtonClick();
     showModalBottomSheet(
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
       context: context,
-      builder: (context) => NewTransactionScreen(
-        onAddTransactionHandler: _onAddTransactionHandler,
-      ),
+      builder: (context) => NewTransactionScreen(),
     );
   }
 }

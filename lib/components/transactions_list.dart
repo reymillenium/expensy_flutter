@@ -1,5 +1,6 @@
 // Packages:
 import 'package:expensy_flutter/_inner_packages.dart';
+import 'package:expensy_flutter/_external_packages.dart';
 
 // Screens:
 
@@ -15,34 +16,22 @@ import 'package:expensy_flutter/components/_components.dart';
 
 class TransactionsList extends StatelessWidget {
   // Properties:
-  final List<MonetaryTransaction> transactions;
+  // final List<MonetaryTransaction> transactions;
   final _listViewScrollController = ScrollController();
   final Function onUpdateTransactionHandler;
   final Function onDeleteTransactionHandler;
 
   // Constructor:
   TransactionsList({
-    this.transactions,
+    // this.transactions,
     this.onUpdateTransactionHandler,
     this.onDeleteTransactionHandler,
   });
 
-  List<TransactionTile> getTransactionList2() {
-    return transactions.map((transaction) {
-      return TransactionTile(
-        transaction: transaction,
-        onUpdateTransactionHandler: onUpdateTransactionHandler,
-        onDeleteTransactionHandler: onDeleteTransactionHandler,
-      );
-    }).toList();
-  }
-
   @override
   Widget build(BuildContext context) {
-    // return ListView(
-    //   padding: const EdgeInsets.only(left: 0, top: 20, right: 0),
-    //   children: getTransactionList2(),
-    // );
+    TransactionsData transactionsData = Provider.of<TransactionsData>(context, listen: true);
+    List<MonetaryTransaction> transactions = transactionsData.transactions;
 
     return Container(
       child: transactions.isEmpty
