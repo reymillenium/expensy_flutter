@@ -19,8 +19,7 @@ class TransactionTile extends StatelessWidget {
   final MonetaryTransaction transaction;
   final int id;
   final int index;
-  final Function onUpdateTransactionHandler;
-  final Function onDeleteTransactionHandler;
+  // final Function onUpdateTransactionHandler;
 
   // Run time constants:
   // final DateFormat formatter = DateFormat('MM/dd/yyyy').add_jm();
@@ -32,14 +31,16 @@ class TransactionTile extends StatelessWidget {
     this.transaction,
     this.id,
     this.index,
-    this.onUpdateTransactionHandler,
-    this.onDeleteTransactionHandler,
+    // this.onUpdateTransactionHandler,
   });
 
   @override
   Widget build(BuildContext context) {
     AppData appData = Provider.of<AppData>(context, listen: true);
     Map currentCurrency = appData.currentCurrency;
+
+    TransactionsData transactionsData = Provider.of<TransactionsData>(context, listen: true);
+    Function onDeleteTransactionHandler = (id, context) => transactionsData.deleteTransactionWithConfirm(id, context);
 
     final String formattedDate = formatter.format(transaction.executionDate);
     final String amountLabel = '${currentCurrency['symbol']}${currencyFormat.format(transaction.amount)}';
@@ -112,7 +113,7 @@ class TransactionTile extends StatelessWidget {
                     Icons.delete,
                     color: Colors.black,
                   ),
-                  onPressed: onDeleteTransactionHandler,
+                  onPressed: () => onDeleteTransactionHandler(transaction.id, context),
                 ),
               ),
               Tooltip(
@@ -133,7 +134,6 @@ class TransactionTile extends StatelessWidget {
                         title: transaction.title,
                         amount: transaction.amount,
                         executionDate: transaction.executionDate,
-                        onUpdateTransactionHandler: onUpdateTransactionHandler,
                       ),
                     );
                   },

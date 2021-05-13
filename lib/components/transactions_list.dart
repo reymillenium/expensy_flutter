@@ -16,17 +16,9 @@ import 'package:expensy_flutter/components/_components.dart';
 
 class TransactionsList extends StatelessWidget {
   // Properties:
-  // final List<MonetaryTransaction> transactions;
   final _listViewScrollController = ScrollController();
-  final Function onUpdateTransactionHandler;
-  final Function onDeleteTransactionHandler;
 
   // Constructor:
-  TransactionsList({
-    // this.transactions,
-    this.onUpdateTransactionHandler,
-    this.onDeleteTransactionHandler,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +40,6 @@ class TransactionsList extends StatelessWidget {
                   id: transactions[index].id,
                   index: index,
                   transaction: transactions[index],
-                  onUpdateTransactionHandler: onUpdateTransactionHandler,
-                  // onDeleteTransactionHandler: () => onDeleteTransactionHandler(transactions[index].id),
-                  onDeleteTransactionHandler: () => onDeleteTransactionHandler(transactions[index].id, context),
                 );
               },
               itemCount: transactions.length,

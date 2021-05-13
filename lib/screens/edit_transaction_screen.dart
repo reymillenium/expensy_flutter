@@ -44,7 +44,6 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
   String _title;
   double _amount;
   DateTime _executionDate;
-  Function _onUpdateTransactionHandler;
 
   // Run time constants:
   DateTime now = DateTime.now();
@@ -61,7 +60,6 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
     _title = widget.title;
     _amount = widget.amount;
     _executionDate = widget.executionDate;
-    _onUpdateTransactionHandler = widget.onUpdateTransactionHandler;
   }
 
   @override
@@ -69,7 +67,9 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
     AppData appData = Provider.of<AppData>(context, listen: true);
     Map currentCurrency = appData.currentCurrency;
 
-    // final String initialAmountLabel = 'USD(\$) ${_currencyFormat.format(_amount)}';
+    TransactionsData transactionsData = Provider.of<TransactionsData>(context, listen: true);
+    Function onUpdateTransactionHandler = (id, title, amount, executionDate) => transactionsData.updateTransaction(id, title, amount, executionDate);
+
     final String initialAmountLabel = '${currentCurrency['code']}(${currentCurrency['symbol']}) ${_currencyFormat.format(_amount)}';
     Color primaryColor = Theme.of(context).primaryColor;
     Color accentColor = Theme.of(context).accentColor;
@@ -134,7 +134,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
                       _title = newText;
                     });
                   },
-                  onFieldSubmitted: _hasValidData() ? (_) => () => _updateData(context) : null,
+                  onFieldSubmitted: _hasValidData() ? (_) => () => _updateData(context, onUpdateTransactionHandler) : null,
                 ),
 
                 // Amount Input
@@ -157,7 +157,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
                       _amount = StringHelper.extractDoubleOrZero(amountText);
                     });
                   },
-                  onFieldSubmitted: _hasValidData() ? (_) => () => _updateData(context) : null,
+                  onFieldSubmitted: _hasValidData() ? (_) => () => _updateData(context, onUpdateTransactionHandler) : null,
                 ),
 
                 // DateTime picker
@@ -199,7 +199,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
                     elevation: 5.0,
                     child: MaterialButton(
                       disabledColor: Colors.grey,
-                      onPressed: _hasValidData() ? () => _updateData(context) : null,
+                      onPressed: _hasValidData() ? () => _updateData(context, onUpdateTransactionHandler) : null,
                       // minWidth: 300.0,
                       minWidth: double.infinity,
                       height: 42.0,
@@ -230,9 +230,9 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
     return result;
   }
 
-  void _updateData(BuildContext context) {
+  void _updateData(BuildContext context, Function onUpdateTransactionHandler) {
     if (_title.isNotEmpty && _amount != 0) {
-      _onUpdateTransactionHandler(_id, _title, _amount, _executionDate);
+      onUpdateTransactionHandler(_id, _title, _amount, _executionDate);
     }
     Navigator.pop(context);
   }

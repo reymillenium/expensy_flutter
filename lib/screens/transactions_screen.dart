@@ -73,8 +73,6 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     ]);
 
     TransactionsData transactionsData = Provider.of<TransactionsData>(context, listen: true);
-    Function _onUpdateTransactionHandler = (id, title, amount, executionDate) => transactionsData.updateTransaction(id, title, amount, executionDate);
-    Function _onDeleteTransactionHandler = (id, context) => transactionsData.deleteTransactionWithConfirm(id, context);
 
     ExpensyAppBar appBar = ExpensyAppBar(
       title: widget.title,
@@ -146,10 +144,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                 // Transaction List:
                 Expanded(
                   flex: 5,
-                  child: TransactionsList(
-                    onUpdateTransactionHandler: _onUpdateTransactionHandler,
-                    onDeleteTransactionHandler: _onDeleteTransactionHandler,
-                  ),
+                  child: TransactionsList(),
                 ),
               ],
             ),

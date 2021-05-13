@@ -16,18 +16,12 @@ import 'package:flutter/cupertino.dart';
 // Utilities:
 
 class NewTransactionScreen extends StatefulWidget {
-  // Properties:
-  // final Function onAddTransactionHandler;
-
-  // Constructor:
-  // NewTransactionScreen({this.onAddTransactionHandler});
-
   @override
   _NewTransactionScreenState createState() => _NewTransactionScreenState();
 }
 
 class _NewTransactionScreenState extends State<NewTransactionScreen> {
-  // State Properties:
+  // Local State Properties:
   String _title = '';
   double _amount = 0;
   DateTime _executionDate = DateTime.now();
