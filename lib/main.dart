@@ -23,8 +23,26 @@ void main() {
   //   DeviceOrientation.portraitDown,
   // ]);
 
-  runApp(ChangeNotifierProvider(
-    create: (context) => AppData(),
+  // With one single provider:
+  // runApp(ChangeNotifierProvider(
+  //   create: (context) => AppData(),
+  //   // child: MyApp(),
+  //   child: InitialSplashScreen(),
+  // ));
+
+  // With several providers:
+  runApp(MultiProvider(
+    providers: [
+      // Config about the app:
+      ChangeNotifierProvider<AppData>(
+        create: (context) => AppData(),
+      ),
+
+      // Data related to the MonetaryTransaction objects: (sqlite)
+      ChangeNotifierProvider<TransactionsData>(
+        create: (context) => TransactionsData(),
+      ),
+    ],
     // child: MyApp(),
     child: InitialSplashScreen(),
   ));

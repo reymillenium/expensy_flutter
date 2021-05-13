@@ -30,28 +30,28 @@ class TransactionsScreen extends StatefulWidget {
 class _TransactionsScreenState extends State<TransactionsScreen> {
   // State Properties:
   DBHelper dbHelper;
-  TransactionsData transactionsData = TransactionsData();
+  // TransactionsData transactionsData = TransactionsData();
   int touchedIndex;
   bool _showChart = false;
   bool _showPortraitOnly = false;
 
-  void _onAddTransactionHandler(String title, double amount, DateTime executionDate) {
-    setState(() {
-      transactionsData.addTransaction(title, amount, executionDate);
-    });
-  }
+  // void _onAddTransactionHandler(String title, double amount, DateTime executionDate) {
+  //   setState(() {
+  //     transactionsData.addTransaction(title, amount, executionDate);
+  //   });
+  // }
 
-  void _onUpdateTransactionHandler(int id, String title, double amount, DateTime executionDate) {
-    setState(() {
-      transactionsData.updateTransaction(id, title, amount, executionDate);
-    });
-  }
+  // void _onUpdateTransactionHandler(int id, String title, double amount, DateTime executionDate) {
+  //   setState(() {
+  //     transactionsData.updateTransaction(id, title, amount, executionDate);
+  //   });
+  // }
 
-  void _onDeleteTransactionHandler(int id) async {
-    setState(() {
-      transactionsData.deleteTransactionWithConfirm(id, this.context);
-    });
-  }
+  // void _onDeleteTransactionHandler(int id) async {
+  //   setState(() {
+  //     transactionsData.deleteTransactionWithConfirm(id, this.context);
+  //   });
+  // }
 
   void _touchCallbackHandler(BarTouchResponse barTouchResponse) {
     setState(() {
@@ -113,17 +113,6 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     bool isWeeklyFlChart = appData.isWeeklyFlChart;
     bool deviceIsIOS = DeviceHelper.deviceIsIOS(context);
 
-    ExpensyAppBar appBar = ExpensyAppBar(
-      title: widget.title,
-      showModalNewTransaction: () => _showModalNewTransaction(context),
-    );
-
-    // double appBarHeight = appBar.preferredSize.height;
-    // print('totalVerticalHeight: ${DeviceHelper.totalVerticalHeight(context: context)}');
-    // print('statusBarTopPadding: ${DeviceHelper.statusBarTopPadding(context: context)}');
-    // print('appBarHeight: $appBarHeight');
-    // print('availableHeight: ${DeviceHelper.availableHeight(context: context, appBarHeight: appBarHeight)}');
-
     // WidgetsFlutterBinding.ensureInitialized(); // Without this it might not work in some devices:
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -133,6 +122,22 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
         DeviceOrientation.landscapeRight,
       ],
     ]);
+
+    TransactionsData transactionsData = Provider.of<TransactionsData>(context, listen: true);
+    Function _onAddTransactionHandler = (title, amount, executionDate) => transactionsData.addTransaction(title, amount, executionDate);
+    Function _onUpdateTransactionHandler = (id, title, amount, executionDate) => transactionsData.updateTransaction(id, title, amount, executionDate);
+    Function _onDeleteTransactionHandler = (id, context) => transactionsData.deleteTransactionWithConfirm(id, context);
+
+    ExpensyAppBar appBar = ExpensyAppBar(
+      title: widget.title,
+      showModalNewTransaction: () => _showModalNewTransaction(context, _onAddTransactionHandler),
+    );
+
+    // double appBarHeight = appBar.preferredSize.height;
+    // print('totalVerticalHeight: ${DeviceHelper.totalVerticalHeight(context: context)}');
+    // print('statusBarTopPadding: ${DeviceHelper.statusBarTopPadding(context: context)}');
+    // print('appBarHeight: $appBarHeight');
+    // print('availableHeight: ${DeviceHelper.availableHeight(context: context, appBarHeight: appBarHeight)}');
 
     return Scaffold(
       appBar: appBar,
@@ -228,7 +233,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
           : FloatingActionButton(
               tooltip: 'Add Transaction',
               child: Icon(Icons.add),
-              onPressed: () => _showModalNewTransaction(context),
+              onPressed: () => _showModalNewTransaction(context, _onAddTransactionHandler),
             ),
       // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButtonLocation: deviceIsIOS ? null : FloatingActionButtonLocation.endDocked,
@@ -236,7 +241,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   }
 
   // It shows the AddTransactionScreen widget as a modal:
-  void _showModalNewTransaction(BuildContext context) {
+  void _showModalNewTransaction(BuildContext context, Function _onAddTransactionHandler) {
     SoundHelper().playSmallButtonClick();
     showModalBottomSheet(
       backgroundColor: Colors.transparent,

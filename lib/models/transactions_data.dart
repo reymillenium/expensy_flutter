@@ -15,7 +15,7 @@ import 'package:expensy_flutter/helpers/_helpers.dart';
 
 // Utilities:
 
-class TransactionsData {
+class TransactionsData with ChangeNotifier {
   // Properties:
   List<MonetaryTransaction> _transactions = [];
   DBHelper dbHelper;
@@ -220,6 +220,8 @@ class TransactionsData {
 
     await dbHelper.saveTransaction(newTransaction);
     refreshTransactionList();
+    notifyListeners();
+    notifyListeners();
   }
 
   Future<void> updateTransaction(int id, String title, double amount, DateTime executionDate) async {
@@ -234,6 +236,7 @@ class TransactionsData {
 
     await dbHelper.updateTransaction(updatingTransaction);
     refreshTransactionList();
+    notifyListeners();
   }
 
   Future<void> deleteTransactionWithConfirm(int id, BuildContext context) {
@@ -244,11 +247,13 @@ class TransactionsData {
     _showDialogPlus(id, context).then((value) {
       (context as Element).reassemble();
       refreshTransactionList();
+      notifyListeners();
     });
   }
 
   void deleteTransactionWithoutConfirm(int id) {
     _removeTransactionWhere(id);
+    notifyListeners();
   }
 
   List<Map> groupedAmountLastWeek() {
