@@ -102,6 +102,7 @@ class TransactionsData with ChangeNotifier {
     // dbHelper.getMonetaryTransactions().then((result) {
     //   _transactions = result;
     // });
+    notifyListeners();
   }
 
   Future<void> _showDialogPlus(int id, BuildContext context) async {
@@ -220,8 +221,7 @@ class TransactionsData with ChangeNotifier {
 
     await dbHelper.saveTransaction(newTransaction);
     refreshTransactionList();
-    notifyListeners();
-    notifyListeners();
+    // notifyListeners();
   }
 
   Future<void> updateTransaction(int id, String title, double amount, DateTime executionDate) async {
@@ -236,7 +236,7 @@ class TransactionsData with ChangeNotifier {
 
     await dbHelper.updateTransaction(updatingTransaction);
     refreshTransactionList();
-    notifyListeners();
+    // notifyListeners();
   }
 
   Future<void> deleteTransactionWithConfirm(int id, BuildContext context) {
@@ -247,13 +247,14 @@ class TransactionsData with ChangeNotifier {
     _showDialogPlus(id, context).then((value) {
       (context as Element).reassemble();
       refreshTransactionList();
-      notifyListeners();
+      // notifyListeners();
     });
   }
 
   void deleteTransactionWithoutConfirm(int id) {
     _removeTransactionWhere(id);
-    notifyListeners();
+    refreshTransactionList();
+    // notifyListeners();
   }
 
   List<Map> groupedAmountLastWeek() {

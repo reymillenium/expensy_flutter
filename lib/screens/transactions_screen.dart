@@ -109,7 +109,6 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   Widget build(BuildContext context) {
     AppData appData = Provider.of<AppData>(context, listen: true);
     Function closeAllThePanels = appData.closeAllThePanels; // Drawer related:
-    // Map currentWeeklyChart = appData.currentWeeklyChart;
     bool isWeeklyFlChart = appData.isWeeklyFlChart;
     bool deviceIsIOS = DeviceHelper.deviceIsIOS(context);
 
@@ -157,13 +156,10 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       body: NativeDeviceOrientationReader(
         builder: (context) {
           final orientation = NativeDeviceOrientationReader.orientation(context);
-          // final orientation2 = MediaQuery.of(context).orientation;
-          // print('Received new orientation: $orientation');
-          // print('Received new orientation2: $orientation2');
-          bool safeAreaLeft = orientation == NativeDeviceOrientation.landscapeLeft ? true : false;
-          bool safeAreaRight = orientation == NativeDeviceOrientation.landscapeRight ? true : false;
+          bool safeAreaLeft = DeviceHelper.isLandscapeLeft(orientation);
+          bool safeAreaRight = DeviceHelper.isLandscapeRight(orientation);
           bool isLandscape = DeviceHelper.isLandscape(orientation);
-          // bool isPortrait = DeviceHelper.isPortrait(orientation);
+
           return SafeArea(
             left: safeAreaLeft,
             right: safeAreaRight,
