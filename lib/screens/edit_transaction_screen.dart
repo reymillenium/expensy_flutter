@@ -185,7 +185,6 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
                     });
                   },
                   validator: (val) {
-                    // print(val);
                     return null;
                   },
                   // onSaved: (val) => print(val),
