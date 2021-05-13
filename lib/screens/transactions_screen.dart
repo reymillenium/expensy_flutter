@@ -29,29 +29,9 @@ class TransactionsScreen extends StatefulWidget {
 
 class _TransactionsScreenState extends State<TransactionsScreen> {
   // State Properties:
-  DBHelper dbHelper;
-  // TransactionsData transactionsData = TransactionsData();
   int touchedIndex;
   bool _showChart = false;
   bool _showPortraitOnly = false;
-
-  // void _onAddTransactionHandler(String title, double amount, DateTime executionDate) {
-  //   setState(() {
-  //     transactionsData.addTransaction(title, amount, executionDate);
-  //   });
-  // }
-
-  // void _onUpdateTransactionHandler(int id, String title, double amount, DateTime executionDate) {
-  //   setState(() {
-  //     transactionsData.updateTransaction(id, title, amount, executionDate);
-  //   });
-  // }
-
-  // void _onDeleteTransactionHandler(int id) async {
-  //   setState(() {
-  //     transactionsData.deleteTransactionWithConfirm(id, this.context);
-  //   });
-  // }
 
   void _touchCallbackHandler(BarTouchResponse barTouchResponse) {
     setState(() {
@@ -73,36 +53,6 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     setState(() {
       _showPortraitOnly = choice;
     });
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    dbHelper = DBHelper();
-    refreshData();
-    // WidgetsFlutterBinding.ensureInitialized(); // Without this it might not work in some devices:
-    // SystemChrome.setPreferredOrientations([
-    //   DeviceOrientation.portraitUp,
-    //   DeviceOrientation.portraitDown,
-    //   if (!_showPortraitOnly) ...[
-    //     DeviceOrientation.landscapeLeft,
-    //     DeviceOrientation.landscapeRight,
-    //   ],
-    // ]);
-  }
-
-  void refreshData() {
-    dbHelper.getMonetaryTransactions().then((transactions) {
-      // for (MonetaryTransaction temp in transactions) {
-      // if (temp.type == "student") data.add(temp);
-      // transactionsData.addOneSingleTransaction(temp);
-      // }
-      // since you have already added the results to data
-      // setState can have an empty function body
-      setState(() {});
-    });
-    // setState(() {});
   }
 
   @override
