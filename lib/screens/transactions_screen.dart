@@ -27,11 +27,32 @@ class TransactionsScreen extends StatefulWidget {
   _TransactionsScreenState createState() => _TransactionsScreenState();
 }
 
-class _TransactionsScreenState extends State<TransactionsScreen> {
+class _TransactionsScreenState extends State<TransactionsScreen> with WidgetsBindingObserver {
   // State Properties:
   int touchedIndex;
   bool _showChart = false;
   bool _showPortraitOnly = false;
+
+  // @override
+  // void initState() {
+  //   WidgetsBinding.instance.addObserver(this);
+  //   super.initState();
+  // }
+  //
+  // @override
+  // void didChangeAppLifecycleState(AppLifecycleState state) {
+  //   // TODO: implement didChangeAppLifecycleState
+  //   // super.didChangeAppLifecycleState(state);
+  //   print('didChangeAppLifecycleState. state = $state');
+  // }
+  //
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   print('dispose');
+  //   WidgetsBinding.instance.removeObserver(this);
+  //   super.dispose();
+  // }
 
   void _touchCallbackHandler(BarTouchResponse barTouchResponse) {
     setState(() {
