@@ -19,20 +19,18 @@ class TransactionTile extends StatelessWidget {
   final MonetaryTransaction transaction;
   final int id;
   final int index;
-  // final Function onUpdateTransactionHandler;
-
-  // Run time constants:
-  // final DateFormat formatter = DateFormat('MM/dd/yyyy').add_jm();
-  final DateFormat formatter = DateFormat().add_yMMMMd();
-  final currencyFormat = new NumberFormat("#,##0.00", "en_US");
 
   // Constructor:
   TransactionTile({
+    Key key,
     this.transaction,
     this.id,
     this.index,
-    // this.onUpdateTransactionHandler,
-  });
+  }) : super(key: key);
+
+  // Runtime constants:
+  final DateFormat formatter = DateFormat().add_yMMMMd();
+  final currencyFormat = new NumberFormat("#,##0.00", "en_US");
 
   @override
   Widget build(BuildContext context) {
