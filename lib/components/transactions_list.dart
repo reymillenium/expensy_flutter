@@ -32,17 +32,50 @@ class TransactionsList extends StatelessWidget {
               title: 'We are sorry',
               subTitle: 'There is no transactions',
             )
-          : ListView.builder(
+
+          // Not preserving the local state after an item removal:
+          // : ListView.builder(
+          //     padding: const EdgeInsets.only(left: 0, top: 0, right: 0),
+          //     controller: _listViewScrollController,
+          //     itemBuilder: (context, index) {
+          //       return TransactionTile(
+          //         key: ValueKey(transactions[index].id),
+          //         id: transactions[index].id,
+          //         index: index,
+          //         transaction: transactions[index],
+          //       );
+          //     },
+          //     itemCount: transactions.length,
+          //   ),
+
+          // Preserving the local state:
+          : ListView.custom(
               padding: const EdgeInsets.only(left: 0, top: 0, right: 0),
               controller: _listViewScrollController,
-              itemBuilder: (context, index) {
-                return TransactionTile(
-                  id: transactions[index].id,
-                  index: index,
-                  transaction: transactions[index],
-                );
-              },
-              itemCount: transactions.length,
+              childrenDelegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return TransactionTile(
+                    key: ValueKey(transactions[index].id),
+                    id: transactions[index].id,
+                    index: index,
+                    transaction: transactions[index],
+                  );
+                },
+                childCount: transactions.length,
+
+                // This callback method is what allows to preserve the state:
+                findChildIndexCallback: (Key key) {
+                  final ValueKey valueKey = key as ValueKey;
+                  final int id = valueKey.value;
+                  MonetaryTransaction monetaryTransaction;
+                  try {
+                    monetaryTransaction = transactions.firstWhere((transaction) => id == transaction.id);
+                  } catch (e) {
+                    return null;
+                  }
+                  return transactions.indexOf(monetaryTransaction);
+                },
+              ),
             ),
     );
   }
