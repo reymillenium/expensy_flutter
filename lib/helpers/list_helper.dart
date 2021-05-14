@@ -8,7 +8,7 @@ import 'package:expensy_flutter/_external_packages.dart';
 
 class ListHelper {
   // Returns a random object from a given List:
-  dynamic randomFromList(List<dynamic> list) {
+  static dynamic randomFromList(List<dynamic> list) {
     return list[Random().nextInt(list.length)];
   }
 }
