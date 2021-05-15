@@ -2,7 +2,7 @@
 
 # Expensy 💵
 
-This is an answering questions app, using Flutter. It is a single screen app with a simple functionality but with full-on custom styling.
+This is an expenses listing app, using Flutter. It is a single screen app with a simple functionality but with a full-on custom styling.
 
 ## Extra Dependencies
 
