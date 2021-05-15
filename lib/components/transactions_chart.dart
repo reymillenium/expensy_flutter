@@ -46,6 +46,7 @@ class TransactionsChart extends StatelessWidget {
     final Color accentColor = Theme.of(context).accentColor;
     bool isLandscape = DeviceHelper.isLandscape(orientation);
     bool isPortrait = DeviceHelper.isPortrait(orientation);
+    final int amountTransactionsLastWeek = groupedAmountLastWeek.length;
 
     return Card(
       elevation: 3,
@@ -67,7 +68,7 @@ class TransactionsChart extends StatelessWidget {
               children: <Widget>[
                 if (isPortrait) ...[
                   Text(
-                    'Last Week Transactions',
+                    'Last Week Transactions ($amountTransactionsLastWeek)',
                     style: TextStyle(
                       // color: const Color(0xff379982),
                       color: Colors.black,

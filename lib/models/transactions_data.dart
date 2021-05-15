@@ -17,6 +17,7 @@ import 'package:expensy_flutter/helpers/_helpers.dart';
 
 class TransactionsData with ChangeNotifier {
   // Properties:
+  final int _maxAmountDummyData = 32;
   List<MonetaryTransaction> _transactions = [];
   DBHelper dbHelper;
 
@@ -29,13 +30,8 @@ class TransactionsData with ChangeNotifier {
 
   // Getters:
   get transactions {
-    // refreshTransactionList();
     return _transactions;
   }
-
-  // Future<List<MonetaryTransaction>> getMonetaryTransactions() async {
-  //   return await dbHelper.getMonetaryTransactions();
-  // }
 
   get lastWeekTransactions {
     final DateTime now = DateTime.now();
@@ -45,49 +41,18 @@ class TransactionsData with ChangeNotifier {
     }).toList();
   }
 
-  // void addOneSingleTransaction(MonetaryTransaction monetaryTransaction) {
-  //   _transactions.add(monetaryTransaction);
-  // }
-
   // Private methods:
   void _generateDummyData() async {
-    // final DateTime now = DateTime.now();
-    // final uuid = Uuid();
-
-    // transactions = List<Transaction>.generate(20, (index) {
-    //   var uuid = Uuid();
-    //   DateTime onTheLastWeek = now.subtract(new Duration(days: NumericHelper.randomIntegerInRange(min: 0, max: 6)));
-    //
-    //   return Transaction(
-    //     id: '${uuid.v4()}',
-    //     title: faker.food.dish(),
-    //     amount: NumericHelper.roundDouble(NumericHelper.randomDoubleInRange(min: 0.99, max: 10.00), 2),
-    //     executionDate: onTheLastWeek,
-    //     createdAt: now,
-    //     updatedAt: now,
-    //   );
-    // });
-
-    // for (int i = 0; i < 20; i++) {
-    //   DateTime onTheLastWeek = DateHelper.randomDateTimeOnTheLastWeek();
-    //
-    //   MonetaryTransaction newTransaction = MonetaryTransaction(
-    //     // id: '${uuid.v4()}',
-    //     title: faker.food.dish(),
-    //     amount: NumericHelper.roundRandomDoubleInRange(min: 0.99, max: 10.00, places: 2),
-    //     executionDate: onTheLastWeek,
-    //     createdAt: now,
-    //     updatedAt: now,
-    //   );
-    //   _transactions.add(newTransaction);
-    // }
-
-    // List<MonetaryTransaction> monetaryTransactions = await dbHelper.getMonetaryTransactions();
-    // for (int i = 0; i < monetaryTransactions.length; i++) {
-    //   MonetaryTransaction newTransaction = monetaryTransactions[i];
-    //   // print(newTransaction.title);
-    //   _transactions.add(newTransaction);
-    // }
+    final List<MonetaryTransaction> monetaryTransactions = await dbHelper.getMonetaryTransactions();
+    final int currentLength = monetaryTransactions.length;
+    if (currentLength < _maxAmountDummyData) {
+      for (int i = 0; i < (_maxAmountDummyData - currentLength); i++) {
+        String title = faker.food.dish();
+        double amount = NumericHelper.roundRandomDoubleInRange(min: 0.99, max: 10.00, places: 2);
+        DateTime executionDate = DateHelper.randomDateTimeOnTheLastWeek();
+        await addTransaction(title, amount, executionDate);
+      }
+    }
   }
 
   void _removeTransactionWhere(int id) async {
@@ -208,7 +173,7 @@ class TransactionsData with ChangeNotifier {
   // Public methods:
   Future<void> addTransaction(String title, double amount, DateTime executionDate) async {
     DateTime now = DateTime.now();
-    var uuid = Uuid();
+    // var uuid = Uuid();
     MonetaryTransaction newTransaction = MonetaryTransaction(
       // id: uuid.v1(),
       title: title,

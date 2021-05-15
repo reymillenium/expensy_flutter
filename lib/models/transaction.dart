@@ -20,7 +20,7 @@ class MonetaryTransaction {
 
   // Constructors:
   MonetaryTransaction({
-    @required this.id,
+    this.id,
     @required this.title,
     @required this.amount,
     @required this.executionDate,

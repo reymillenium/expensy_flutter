@@ -25,7 +25,7 @@ This is an answering questions app, using Flutter. It is a single screen app wit
   
 ## Screen Shots
 
-### Loading screen (temporal)
+### Splash screen (temporal)
 ![Welcome screen](https://github.com/reymillenium/images/blob/master/my_projects/16_BitCoinTicker/loading_screen.png)
 
 ### Questions screen

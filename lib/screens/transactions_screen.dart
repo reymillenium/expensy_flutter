@@ -94,6 +94,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> with WidgetsBin
     ]);
 
     TransactionsData transactionsData = Provider.of<TransactionsData>(context, listen: true);
+    int amountTotalTransactions = transactionsData.transactions.length;
 
     ExpensyAppBar appBar = ExpensyAppBar(
       title: widget.title,
@@ -178,6 +179,15 @@ class _TransactionsScreenState extends State<TransactionsScreen> with WidgetsBin
         child: Row(
           children: [
             IconButton(icon: Icon(null), onPressed: () {}),
+            Text(
+              'Total: $amountTotalTransactions transactions',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
+                // fontSize: amountFontSize,
+                color: Colors.white,
+              ),
+            ),
             // Spacer(),
             // IconButton(icon: Icon(Icons.search), onPressed: () {}),
             // IconButton(icon: Icon(Icons.more_vert), onPressed: () {}),
