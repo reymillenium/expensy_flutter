@@ -26,10 +26,31 @@ This is an answering questions app, using Flutter. It is a single screen app wit
 ## Screen Shots
 
 ### Splash screen (temporal)
-![Welcome screen](https://github.com/reymillenium/images/blob/master/my_projects/16_BitCoinTicker/loading_screen.png)
+![Transactions screen](https://github.com/reymillenium/images/blob/master/my_projects/18_Expensy/splash_screen.png)
 
-### Questions screen
+### Transactions screen
+![Transactions screen](https://github.com/reymillenium/images/blob/master/my_projects/18_Expensy/transactions_screen.png)
+
+### New screen
+![Transactions screen](https://github.com/reymillenium/images/blob/master/my_projects/18_Expensy/new_transaction_screen.png)
+
+### Update screen
+![Transactions screen](https://github.com/reymillenium/images/blob/master/my_projects/18_Expensy/update_transaction_screen.png)
+
+## App Settings:
+
+### Theme
+![Transactions screen](https://github.com/reymillenium/images/blob/master/my_projects/18_Expensy/drawer_theme_config.png)
+
+### Font
+![Transactions screen](https://github.com/reymillenium/images/blob/master/my_projects/18_Expensy/drawer_font_config.png)
+
+### Currency
+![Transactions screen](https://github.com/reymillenium/images/blob/master/my_projects/18_Expensy/drawer_currency_config.png)
+
+### Chart
+![Transactions screen](https://github.com/reymillenium/images/blob/master/my_projects/18_Expensy/drawer_chart_config.png)
 
 ***
 ## Contact
-Created by [Reinier Garcia](https://reiniergarcia.dev/) - feel free to contact me!
+Created by [Reinier Garcia](https://reiniergarcia.dev/) 2021 - feel free to contact me!
