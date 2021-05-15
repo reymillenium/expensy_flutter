@@ -18,8 +18,6 @@ class TransactionsList extends StatelessWidget {
   // Properties:
   final _listViewScrollController = ScrollController();
 
-  // Constructor:
-
   @override
   Widget build(BuildContext context) {
     TransactionsData transactionsData = Provider.of<TransactionsData>(context, listen: true);
@@ -64,19 +62,22 @@ class TransactionsList extends StatelessWidget {
                 childCount: transactions.length,
 
                 // This callback method is what allows to preserve the state:
-                findChildIndexCallback: (Key key) {
-                  final ValueKey valueKey = key as ValueKey;
-                  final int id = valueKey.value;
-                  MonetaryTransaction monetaryTransaction;
-                  try {
-                    monetaryTransaction = transactions.firstWhere((transaction) => id == transaction.id);
-                  } catch (e) {
-                    return null;
-                  }
-                  return transactions.indexOf(monetaryTransaction);
-                },
+                findChildIndexCallback: (Key key) => findChildIndexCallback(key, transactions),
               ),
             ),
     );
+  }
+
+  // This callback method is what allows to preserve the state:
+  int findChildIndexCallback(Key key, List<MonetaryTransaction> transactions) {
+    final ValueKey valueKey = key as ValueKey;
+    final int id = valueKey.value;
+    MonetaryTransaction monetaryTransaction;
+    try {
+      monetaryTransaction = transactions.firstWhere((transaction) => id == transaction.id);
+    } catch (e) {
+      return null;
+    }
+    return transactions.indexOf(monetaryTransaction);
   }
 }

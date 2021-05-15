@@ -30,7 +30,7 @@ class TransactionsScreen extends StatefulWidget {
 class _TransactionsScreenState extends State<TransactionsScreen> with WidgetsBindingObserver {
   // State Properties:
   int touchedIndex;
-  bool _showChart = false;
+  bool _showChart = true;
   bool _showPortraitOnly = false;
 
   // @override
