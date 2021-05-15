@@ -1,8 +1,8 @@
 ![Rey Millenium Banner](https://github.com/reymillenium/images/blob/master/reymillenium_banner_800x200.png)
 
-# Expensy ❓
+# Expensy 💵
 
-This is an answering questions app, using Flutter. It is a single screen app with a simple functionality but full-on custom styling.
+This is an answering questions app, using Flutter. It is a single screen app with a simple functionality but with full-on custom styling.
 
 ## Extra Dependencies
 
